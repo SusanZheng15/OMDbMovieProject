@@ -2,20 +2,45 @@
 //  ViewController.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/2/16.
+//  Created by Susan Zheng on 9/2/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+    var collectionView: UICollectionView!
+    var movieArray : [String] = []
+
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        OMDbSearchAPI.OMDbSearchAPIcall("love") { (dictionary) in
+            
+            let movieDictionary = dictionary as? NSDictionary
+            
+            if let unwrappedMovieDictionary = movieDictionary
+            {
+                let array = unwrappedMovieDictionary["Search"] as? [String]
+                
+                if let unwrappedArray = array
+                {
+                    self.movieArray = unwrappedArray
+                }
+            }
+            
+         
+        }
+        
     }
 
-    override func didReceiveMemoryWarning() {
+
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

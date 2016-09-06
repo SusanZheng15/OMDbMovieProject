@@ -1,25 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="12n-PM-9Q4">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OMDbMovieProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="N7X-Az-ihS"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="jdO-QN-ybn" id="qTR-ZM-w8O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="6EH-Fr-PS9">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="8Tt-sI-DD7"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="Ndy-5V-hFQ"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="BQh-Yg-A2u"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="39c-fz-vgn"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="VKR-qN-0nn">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="M8n-Qt-Shp"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="BbP-Dc-qNu"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="L37-Ca-Y0E"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="ydd-Pw-L0H"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="cNk-LX-WJG">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="Zcw-w8-dof"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="ym4-Vh-14g"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="fwv-L6-Z8X"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="pMR-eO-Qu0"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="kUp-9t-f4p">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="aGC-9f-i9m"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="SKm-RZ-0ww"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="Xlh-ID-Bzv"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="vuR-Rv-RF7"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="jdO-QN-ybn">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="hPB-ct-4yi"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="C0G-6e-DL2"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="1UK-bS-QMK"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="XHC-Zg-4Jh"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
+            <point key="canvasLocation" x="1251.5" y="244.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tt3-hH-1dg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="12n-PM-9Q4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8eX-3g-7gl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="eLo-Nf-2aa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="glf-0a-z72" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="529" y="245"/>
         </scene>
     </scenes>
 </document>
