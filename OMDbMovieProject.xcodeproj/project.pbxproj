@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B3C84EE1D7F3FD60029D7DA /* SearchMovieTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C84ED1D7F3FD60029D7DA /* SearchMovieTableViewController.swift */; };
-		1B3C84F01D7F6A420029D7DA /* movieDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C84EF1D7F6A420029D7DA /* movieDataStore.swift */; };
 		1BE963B71D79DD990060A5C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE963B61D79DD990060A5C0 /* AppDelegate.swift */; };
 		1BE963BC1D79DD990060A5C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE963BA1D79DD990060A5C0 /* Main.storyboard */; };
 		1BE963BE1D79DD990060A5C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE963BD1D79DD990060A5C0 /* Assets.xcassets */; };
@@ -19,7 +18,6 @@
 
 /* Begin PBXFileReference section */
 		1B3C84ED1D7F3FD60029D7DA /* SearchMovieTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMovieTableViewController.swift; sourceTree = "<group>"; };
-		1B3C84EF1D7F6A420029D7DA /* movieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movieDataStore.swift; sourceTree = "<group>"; };
 		1BE963B31D79DD990060A5C0 /* OMDbMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OMDbMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE963B61D79DD990060A5C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE963BB1D79DD990060A5C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 				1BE963B61D79DD990060A5C0 /* AppDelegate.swift */,
 				1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */,
 				1BE963CA1D7F0C940060A5C0 /* OMDBMovie.swift */,
-				1B3C84EF1D7F6A420029D7DA /* movieDataStore.swift */,
 				1BE963BA1D79DD990060A5C0 /* Main.storyboard */,
 				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
 				1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */,
@@ -146,7 +143,6 @@
 			files = (
 				1B3C84EE1D7F3FD60029D7DA /* SearchMovieTableViewController.swift in Sources */,
 				1BE963CB1D7F0C940060A5C0 /* OMDBMovie.swift in Sources */,
-				1B3C84F01D7F6A420029D7DA /* movieDataStore.swift in Sources */,
 				1BE963B71D79DD990060A5C0 /* AppDelegate.swift in Sources */,
 				1BE963C91D79E0130060A5C0 /* OMDbAPIClient.swift in Sources */,
 			);
