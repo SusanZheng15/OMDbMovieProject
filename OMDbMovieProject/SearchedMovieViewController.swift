@@ -56,13 +56,18 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        print("did selected")
+        let meh = self.omdbMovie.movieArray[indexPath.row].imdbID
+        //print(meh)
+        self.omdbMovie.getMovieDetailAPICallWithID(meh) { (dictionary) in
+            print(dictionary)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
     {
         if indexPath.row == self.omdbMovie.movieArray.count - 1
         {
+            //self.omdbMovie.movieArray.removeAll()
             if let searchText = moviesSearchBar.text
             {
                 self.omdbMovie.OMDbSearchAPIcall(searchText, completion: { (array) in

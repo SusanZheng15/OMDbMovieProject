@@ -70,6 +70,35 @@ class OMDbAPIClient
         
         }
     
+    func getMovieDetailAPICallWithID(id: String, completion: (NSDictionary)-> ())
+    {
+        let urlString = "http://www.omdbapi.com/?i=\(id)"
+        let url = NSURL(string: urlString)
+        
+        guard let unwrappedURL = url else {return}
+        
+        let session = NSURLSession.sharedSession()
+        
+        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+            
+            guard let unwrappedData = data else {return}
+            
+            do{
+                let movieDetails = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                
+                if let movieDetailDictionary = movieDetails
+                {
+                    completion(movieDetailDictionary)
+                }
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        dataTask.resume()
+
+    }
     
     func getNextPage(searchText: String)
     {
