@@ -23,16 +23,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
     
+        moviesSearchBar.showsCancelButton = true
         super.viewDidLoad()
         
-        omdbMovie.OMDbSearchAPIcall("love") { (array) in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                self.movieCollectionView.reloadData()
-            })
-            
-        }
-    
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -43,11 +36,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
-        
-        if indexPath.row == self.omdbMovie.movieArray.count - 5
-        {
-            self.omdbMovie.getNextPage("batman")
-        }
+//        
+//        if indexPath.row == self.omdbMovie.movieArray.count - 5
+//        {
+//            if let searchResults = moviesSearchBar.text
+//            {
+//                self.omdbMovie.getNextPage(searchResults)
+//            }
+//            
+//        }
         
         let stringUrl = NSURL(string: self.omdbMovie.movieArray[indexPath.row].poster)
         
@@ -71,30 +68,51 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
+        
+        let searchResult = moviesSearchBar.text
+        guard let unwrappedSearch = searchResult else {return}
+        self.omdbMovie.movieArray.removeAll()
+        omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
+    
+            dispatch_async(dispatch_get_main_queue(),{
+    
+                self.movieCollectionView.reloadData()
+            })
+            
+        }
+        print("did u search?")
         self.moviesSearchBar.resignFirstResponder()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
-        
+        self.omdbMovie.movieArray.removeAll()
+        print("did u begin?")
     }
    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
         let searchResult = moviesSearchBar.text
         guard let unwrappedSearch = searchResult else {return}
-        
+        self.omdbMovie.movieArray.removeAll()
         omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
-            
-            dispatch_async(dispatch_get_main_queue(),{
-                self.movieCollectionView.reloadData()
-            })
-            
-        }
+                
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.movieCollectionView.reloadData()
+                })
+                
+            }
+        
+        
         print("it printed!")
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print("did u just cancel on me?")
+        self.moviesSearchBar.resignFirstResponder()
+    }
     
+   
     
     /*
     // MARK: - Navigation
