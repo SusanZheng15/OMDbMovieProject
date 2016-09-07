@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate, UISearchControllerDelegate
+class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate
 {
     
     @IBOutlet weak var moviesSearchBar: UISearchBar!
@@ -37,19 +37,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
-//        
-//        if indexPath.row == self.omdbMovie.movieArray.count - 5
-//        {
-//            if let searchResults = moviesSearchBar.text
-//            {
-//                self.omdbMovie.getNextPage(searchResults)
-//            }
-//            
-//        }
         
-        let stringUrl = NSURL(string: self.omdbMovie.movieArray[indexPath.row].poster)
+        let stringPosterUrl = NSURL(string: self.omdbMovie.movieArray[indexPath.row].poster)
         
-        if let url = stringUrl
+        if let url = stringPosterUrl
         {
             let dtinternet = NSData(contentsOfURL: url)
             
@@ -67,6 +58,25 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     {
         print("did selected")
     }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    {
+        if indexPath.row == self.omdbMovie.movieArray.count - 1
+        {
+            if let searchText = moviesSearchBar.text
+            {
+                self.omdbMovie.OMDbSearchAPIcall(searchText, completion: { (array) in
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.omdbMovie.getNextPage(searchText)
+                        self.movieCollectionView.reloadData()
+                        
+                    })
+
+                })
+            }
+        }
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         
@@ -84,6 +94,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
         self.moviesSearchBar.resignFirstResponder()
     }
+
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {

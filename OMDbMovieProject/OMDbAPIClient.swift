@@ -31,6 +31,7 @@ class OMDbAPIClient
     
     func OMDbSearchAPIcall(searchedResult: String, completion: (NSArray)->())
     {
+    
         let urlString = "https://www.omdbapi.com/?s=\(searchedResult)&page=\(pageNumber)"
         let url = NSURL(string: urlString)
         
