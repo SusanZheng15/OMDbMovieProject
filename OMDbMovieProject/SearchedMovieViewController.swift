@@ -22,6 +22,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         moviesSearchBar.delegate = self
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
+        movieCollectionView.backgroundColor = UIColor(white: 0.5, alpha: 0.2)
     
         moviesSearchBar.showsCancelButton = true
         super.viewDidLoad()
@@ -72,6 +73,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         let searchResult = moviesSearchBar.text
         guard let unwrappedSearch = searchResult else {return}
         self.omdbMovie.movieArray.removeAll()
+        
         omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
     
             dispatch_async(dispatch_get_main_queue(),{
@@ -80,35 +82,45 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             })
             
         }
-        print("did u search?")
         self.moviesSearchBar.resignFirstResponder()
     }
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
         self.omdbMovie.movieArray.removeAll()
-        print("did u begin?")
     }
    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
         let searchResult = moviesSearchBar.text
         guard let unwrappedSearch = searchResult else {return}
-        self.omdbMovie.movieArray.removeAll()
-        omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
-                
+        
+        if unwrappedSearch == ""
+        {
+            self.omdbMovie.movieArray.removeAll()
+            
+            dispatch_async(dispatch_get_main_queue(),{
+                self.movieCollectionView.reloadData()
+            })
+
+        }
+        else
+        {
+            self.omdbMovie.movieArray.removeAll()
+            
+            omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
                 dispatch_async(dispatch_get_main_queue(),{
                     self.movieCollectionView.reloadData()
                 })
                 
             }
+
+        }
         
-        
-        print("it printed!")
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        print("did u just cancel on me?")
+    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
         self.moviesSearchBar.resignFirstResponder()
     }
     
