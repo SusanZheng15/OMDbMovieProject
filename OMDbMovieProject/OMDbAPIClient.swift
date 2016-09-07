@@ -16,18 +16,6 @@ class OMDbAPIClient
     var movieArray : [OMDBMovie] = []
     var pageNumber = 1
     
-    var pageString: String
-    {
-        if pageNumber == 1
-        {
-            return ""
-        }
-        else
-        {
-            return "page=\(pageNumber)&"
-        }
-        
-    }
     
     func OMDbSearchAPIcall(searchedResult: String, completion: (NSArray)->())
     {

@@ -15,16 +15,16 @@ class OMDBMovie
     var type: String
     var year: String
     var imdbID: String
-        
+//    var plot: String
     init(dictionary: NSDictionary)
     {
         guard let
-        movieTitle = dictionary["Title"] as? String,
-        moviePoster = dictionary["Poster"] as? String,
-        movieType = dictionary["Type"] as? String,
-        movieYear = dictionary["Year"] as? String,
-        movieID = dictionary["imdbID"] as? String
-            
+            movieTitle = dictionary["Title"] as? String,
+            moviePoster = dictionary["Poster"] as? String,
+            movieType = dictionary["Type"] as? String,
+            movieYear = dictionary["Year"] as? String,
+            movieID = dictionary["imdbID"] as? String
+        
         else { fatalError("Could not create object from supplied dictionary") }
         
         self.title = movieTitle
@@ -34,7 +34,17 @@ class OMDBMovie
         self.imdbID = movieID
         
     }
-        
+//    convenience init(detailDictionary: NSDictionary)
+//    {
+//        
+//        guard let
+//        moviePlot = detailDictionary["Plot"] as? String
+//        
+//        else { fatalError("Could not create object from supplied dictionary") }
+//        
+//      //  self.plot = moviePlot
+//    }
+    
     
     
 }

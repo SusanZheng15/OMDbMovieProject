@@ -13,6 +13,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
+    
+    var movieID: String = ""
 
 
     var omdbMovie = OMDbAPIClient.sharedInstance
@@ -49,6 +51,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
             }
         }
+        if self.omdbMovie.movieArray[indexPath.row].poster == "N/A"
+        {
+            cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
+        }
         
         return cell
 
@@ -56,18 +62,18 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        let meh = self.omdbMovie.movieArray[indexPath.row].imdbID
-        //print(meh)
-        self.omdbMovie.getMovieDetailAPICallWithID(meh) { (dictionary) in
+        self.movieID = self.omdbMovie.movieArray[indexPath.row].imdbID
+        self.omdbMovie.getMovieDetailAPICallWithID(self.movieID) { (dictionary) in
             print(dictionary)
         }
+        
+        
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
     {
         if indexPath.row == self.omdbMovie.movieArray.count - 1
         {
-            //self.omdbMovie.movieArray.removeAll()
             if let searchText = moviesSearchBar.text
             {
                 self.omdbMovie.OMDbSearchAPIcall(searchText, completion: { (array) in
@@ -140,16 +146,16 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         self.moviesSearchBar.resignFirstResponder()
     }
     
-   
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let destinationVC = segue.destinationViewController as! MovieDetailsViewController
+        
+        destinationVC.plot = self.movieID
     }
-    */
+
 
 }
