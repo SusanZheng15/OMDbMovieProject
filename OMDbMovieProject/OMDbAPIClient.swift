@@ -31,7 +31,6 @@ class OMDbAPIClient
             do{
                 let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
                 
-                
                 let moviesArray = movieSearched["Search"] as? NSArray
             
                 guard let unwrappedMovies = moviesArray else {return}
@@ -55,6 +54,8 @@ class OMDbAPIClient
         dataTask.resume()
         
         }
+    
+    
         
     }
     
