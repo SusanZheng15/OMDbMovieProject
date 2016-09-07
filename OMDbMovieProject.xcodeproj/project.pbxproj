@@ -60,12 +60,12 @@
 		1BE963B51D79DD990060A5C0 /* OMDbMovieProject */ = {
 			isa = PBXGroup;
 			children = (
-				1BE963B61D79DD990060A5C0 /* AppDelegate.swift */,
+				1B8AA3651D7F9C8300C77D60 /* SearchedMovieCollectionViewCell.swift */,
 				1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */,
 				1BE963CA1D7F0C940060A5C0 /* OMDBMovie.swift */,
-				1BE963BA1D79DD990060A5C0 /* Main.storyboard */,
-				1B8AA3651D7F9C8300C77D60 /* SearchedMovieCollectionViewCell.swift */,
+				1BE963B61D79DD990060A5C0 /* AppDelegate.swift */,
 				1B3C84F11D7F76140029D7DA /* SearchedMovieViewController.swift */,
+				1BE963BA1D79DD990060A5C0 /* Main.storyboard */,
 				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
 				1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */,
 				1BE963C21D79DD990060A5C0 /* Info.plist */,

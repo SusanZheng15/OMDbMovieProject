@@ -2,7 +2,7 @@
 //  OMDbSearchAPI.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/2/16.
+//  Created by Susan Zheng on 9/2/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
@@ -14,10 +14,24 @@ class OMDbAPIClient
     static let sharedInstance = OMDbAPIClient()
     
     var movieArray : [OMDBMovie] = []
+    var pageNumber = 1
+    
+    var pageString: String
+    {
+        if pageNumber == 1
+        {
+            return ""
+        }
+        else
+        {
+            return "page=\(pageNumber)&"
+        }
+        
+    }
     
     func OMDbSearchAPIcall(searchedResult: String, completion: (NSArray)->())
     {
-        let urlString = "https://www.omdbapi.com/?s=\(searchedResult)"
+        let urlString = "https://www.omdbapi.com/?s=\(searchedResult)&page=\(pageNumber)"
         let url = NSURL(string: urlString)
         
         guard let unwrappedURL = url else {return}
@@ -44,7 +58,7 @@ class OMDbAPIClient
                 {
                     completion(unwrappedMovies)
                 }
-
+                
             }
             catch
             {
@@ -56,6 +70,9 @@ class OMDbAPIClient
         }
     
     
-        
+    func getNextPage(searchText: String)
+    {
+        pageNumber += 1
     }
+}
     

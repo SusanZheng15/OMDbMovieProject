@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Searched Movie View Controller-->
@@ -18,47 +17,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search movies here" translatesAutoresizingMaskIntoConstraints="NO" id="0fS-Xf-pnA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ht4-4S-gzo">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qoe-wE-De9">
-                                    <size key="itemSize" width="180" height="270"/>
+                                    <size key="itemSize" width="150" height="270"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="30" minY="10" maxX="30" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="yuR-b2-Pn0" customClass="SearchedMovieCollectionViewCell" customModule="OMDbMovieProject" customModuleProvider="target">
-                                        <rect key="frame" x="88" y="74" width="200" height="270"/>
+                                        <rect key="frame" x="30" y="10" width="150" height="270"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="270"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YoO-j0-qCS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="200" height="270"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="270"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8i6-fw-fMw">
-                                                    <rect key="frame" x="8" y="227" width="192" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="YoO-j0-qCS" secondAttribute="trailing" id="FaV-H3-bW1"/>
-                                            <constraint firstItem="8i6-fw-fMw" firstAttribute="leading" secondItem="yuR-b2-Pn0" secondAttribute="leadingMargin" id="K60-yy-EYE"/>
-                                            <constraint firstItem="YoO-j0-qCS" firstAttribute="top" secondItem="yuR-b2-Pn0" secondAttribute="top" id="WAN-5Z-kfy"/>
-                                            <constraint firstAttribute="bottom" secondItem="YoO-j0-qCS" secondAttribute="bottom" id="Y2S-fc-Wl3"/>
-                                            <constraint firstItem="8i6-fw-fMw" firstAttribute="centerX" secondItem="YoO-j0-qCS" secondAttribute="centerX" constant="4" id="lhG-kN-w7v"/>
-                                            <constraint firstItem="8i6-fw-fMw" firstAttribute="bottom" secondItem="yuR-b2-Pn0" secondAttribute="bottomMargin" constant="-14" id="lle-JM-EH9"/>
-                                            <constraint firstItem="YoO-j0-qCS" firstAttribute="leading" secondItem="yuR-b2-Pn0" secondAttribute="leading" id="srn-wm-8xr"/>
+                                            <constraint firstItem="YoO-j0-qCS" firstAttribute="leading" secondItem="yuR-b2-Pn0" secondAttribute="leading" id="Byw-Ve-Huk"/>
+                                            <constraint firstAttribute="bottom" secondItem="YoO-j0-qCS" secondAttribute="bottom" id="MlH-6W-Mrw"/>
+                                            <constraint firstItem="YoO-j0-qCS" firstAttribute="top" secondItem="yuR-b2-Pn0" secondAttribute="top" id="Sni-XH-fTv"/>
+                                            <constraint firstAttribute="trailing" secondItem="YoO-j0-qCS" secondAttribute="trailing" id="i82-Cw-I9i"/>
                                         </constraints>
-                                        <size key="customSize" width="200" height="270"/>
+                                        <size key="customSize" width="150" height="270"/>
                                         <connections>
                                             <outlet property="moviePosterImageView" destination="YoO-j0-qCS" id="pUo-na-EgK"/>
-                                            <outlet property="movieTitleLabel" destination="8i6-fw-fMw" id="91E-Ti-1Q5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -70,7 +63,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ht4-4S-gzo" firstAttribute="top" secondItem="sGH-TB-wCO" secondAttribute="top" id="ZcJ-DH-s8H"/>
+                            <constraint firstItem="0fS-Xf-pnA" firstAttribute="top" secondItem="Hj8-o3-1zf" secondAttribute="bottom" id="AXD-Zh-Whl"/>
+                            <constraint firstItem="0fS-Xf-pnA" firstAttribute="leading" secondItem="Ht4-4S-gzo" secondAttribute="leading" id="Ekx-Nq-xrx"/>
+                            <constraint firstItem="0fS-Xf-pnA" firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="OvD-4m-JV1"/>
+                            <constraint firstItem="Ht4-4S-gzo" firstAttribute="top" secondItem="sGH-TB-wCO" secondAttribute="top" constant="108" id="ZcJ-DH-s8H"/>
                             <constraint firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="Zn0-2d-Oqm"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="bottom" secondItem="SEU-sW-Uu0" secondAttribute="top" id="o40-gG-O59"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="leading" secondItem="sGH-TB-wCO" secondAttribute="leading" id="vW8-FL-Va9"/>
@@ -80,9 +76,19 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="Ht4-4S-gzo" id="HOc-JQ-l4Q"/>
+                        <outlet property="moviesSearchBar" destination="0fS-Xf-pnA" id="9ap-yn-i1X"/>
+                        <outlet property="searchDisplayController" destination="9Zr-2n-a9O" id="iSZ-Jm-zLH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOH-9k-gWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="9Zr-2n-a9O">
+                    <connections>
+                        <outlet property="delegate" destination="plm-nj-G1G" id="lEW-Xi-238"/>
+                        <outlet property="searchContentsController" destination="plm-nj-G1G" id="XHC-lD-Yex"/>
+                        <outlet property="searchResultsDataSource" destination="plm-nj-G1G" id="Vyt-Hm-K1M"/>
+                        <outlet property="searchResultsDelegate" destination="plm-nj-G1G" id="RcW-qF-Bkz"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2663.5" y="258.5"/>
         </scene>
