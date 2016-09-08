@@ -88,6 +88,36 @@ class OMDbAPIClient
 
     }
     
+    func getMovieFullPlot(id: String, completion: (NSDictionary)->())
+    {
+        let urlString = "https://www.omdbapi.com/?i=\(id)&plot=full"
+        
+        let url = NSURL(string: urlString)
+        
+        guard let unwrappedURL = url else {return}
+        
+        let session = NSURLSession.sharedSession()
+        
+        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+            
+            guard let unwrappedData = data else {return}
+            
+            do{
+                let movieDetailsFull = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                
+                if let movieDetailDictionary = movieDetailsFull
+                {
+                    completion(movieDetailDictionary)
+                }
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        dataTask.resume()
+    }
+    
     func getNextPage(searchText: String)
     {
         pageNumber += 1

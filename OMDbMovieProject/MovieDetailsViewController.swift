@@ -11,6 +11,8 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     
     var plot: String = ""
+    var movieImbdID = ""
+    
     let omdbMovie = OMDbAPIClient.sharedInstance
     
     @IBOutlet weak var moviePlot: UILabel!
@@ -38,6 +40,12 @@ class MovieDetailsViewController: UIViewController {
                 self.starsLabel.text = dictionary["Actors"] as? String
                 self.imbdScoreLabel.text = dictionary["imdbRating"] as? String
                 self.metaScoreLabel.text = dictionary["Metascore"] as? String
+                let movieid = dictionary["imdbID"] as? String
+             
+                if let unwrappedMovieID = movieid
+                {
+                    self.movieImbdID = unwrappedMovieID
+                }
                 
                 //        let stringPosterUrl = NSURL(string: (dictionary["Poster"] as! String))
                 //
@@ -59,16 +67,25 @@ class MovieDetailsViewController: UIViewController {
     }
 
     
+    @IBAction func plotDescriptionButton(sender: AnyObject)
+    {
+      //  self.performSegueWithIdentifier("movieDetailSegue", sender: self.movieImbdID)
+    }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "movieDetailSegue"
+        {
+            let destinationFullPlotVC = segue.destinationViewController as? FullPlotViewController
+            
+            destinationFullPlotVC?.fullPlotString = self.movieImbdID
+        }
+        
+        
     }
-    */
+    
 
 }

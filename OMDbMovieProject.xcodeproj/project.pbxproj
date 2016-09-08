@@ -17,6 +17,7 @@
 		1BE963CB1D7F0C940060A5C0 /* OMDBMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE963CA1D7F0C940060A5C0 /* OMDBMovie.swift */; };
 		1BF9B68D1D808F1A00366B04 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF9B68C1D808F1A00366B04 /* MovieDetailsViewController.swift */; };
 		1BF9B6911D80D43300366B04 /* pikachu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BF9B6901D80D43300366B04 /* pikachu.png */; };
+		1BF9B6931D80FE1900366B04 /* FullPlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF9B6921D80FE1900366B04 /* FullPlotViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		1BE963CA1D7F0C940060A5C0 /* OMDBMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMDBMovie.swift; sourceTree = "<group>"; };
 		1BF9B68C1D808F1A00366B04 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		1BF9B6901D80D43300366B04 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pikachu.png; sourceTree = "<group>"; };
+		1BF9B6921D80FE1900366B04 /* FullPlotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPlotViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				1BE963B61D79DD990060A5C0 /* AppDelegate.swift */,
 				1B3C84F11D7F76140029D7DA /* SearchedMovieViewController.swift */,
 				1BF9B68C1D808F1A00366B04 /* MovieDetailsViewController.swift */,
+				1BF9B6921D80FE1900366B04 /* FullPlotViewController.swift */,
 				1BE963BA1D79DD990060A5C0 /* Main.storyboard */,
 				1BF9B6901D80D43300366B04 /* pikachu.png */,
 				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE963CB1D7F0C940060A5C0 /* OMDBMovie.swift in Sources */,
+				1BF9B6931D80FE1900366B04 /* FullPlotViewController.swift in Sources */,
 				1BE963B71D79DD990060A5C0 /* AppDelegate.swift in Sources */,
 				1BF9B68D1D808F1A00366B04 /* MovieDetailsViewController.swift in Sources */,
 				1BE963C91D79E0130060A5C0 /* OMDbAPIClient.swift in Sources */,
