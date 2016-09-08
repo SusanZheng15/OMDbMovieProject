@@ -15,7 +15,8 @@ class OMDBMovie
     var type: String
     var year: String
     var imdbID: String
-//    var plot: String
+ 
+    
     init(dictionary: NSDictionary)
     {
         guard let
@@ -44,7 +45,6 @@ class OMDBMovie
 //        
 //      //  self.plot = moviePlot
 //    }
-    
     
     
 }

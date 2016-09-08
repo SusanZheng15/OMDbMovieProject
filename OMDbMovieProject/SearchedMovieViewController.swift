@@ -63,10 +63,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
         self.movieID = self.omdbMovie.movieArray[indexPath.row].imdbID
-        self.omdbMovie.getMovieDetailAPICallWithID(self.movieID) { (dictionary) in
-            print(dictionary)
-        }
         
+        self.performSegueWithIdentifier("movieDetailSegue", sender: self.movieID)
         
     }
     
@@ -152,9 +150,14 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        let destinationVC = segue.destinationViewController as! MovieDetailsViewController
+        if segue.identifier == "movieDetailSegue"
+        {
+            let destinationVC = segue.destinationViewController as!MovieDetailsViewController
+            
+            destinationVC.plot = self.movieID
+        }
         
-        destinationVC.plot = self.movieID
+        
     }
 
 
