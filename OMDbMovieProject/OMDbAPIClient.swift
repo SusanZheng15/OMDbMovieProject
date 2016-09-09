@@ -12,14 +12,17 @@ class OMDbAPIClient
 {
     
     static let sharedInstance = OMDbAPIClient()
-    
-    var movieArray : [OMDBMovie] = []
+
     var pageNumber = 1
     
+    func getNextPage()
+    {
+        pageNumber += 1
+    }
     
     func OMDbSearchAPIcall(searchedResult: String, completion: (NSArray)->())
     {
-    
+        
         let urlString = "https://www.omdbapi.com/?s=\(searchedResult)&page=\(pageNumber)"
         let url = NSURL(string: urlString)
         
@@ -35,18 +38,10 @@ class OMDbAPIClient
                 let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
                 
                 let moviesArray = movieSearched["Search"] as? NSArray
-            
+        
                 guard let unwrappedMovies = moviesArray else {return}
                 
-                for movie in unwrappedMovies
-                {
-                    let movieDict = OMDBMovie.init(dictionary: movie as! NSDictionary)
-                    self.movieArray.append(movieDict)
-                }
-                if self.movieArray.count > 0
-                {
-                    completion(unwrappedMovies)
-                }
+                completion(unwrappedMovies)
                 
             }
             catch
@@ -118,9 +113,5 @@ class OMDbAPIClient
         dataTask.resume()
     }
     
-    func getNextPage(searchText: String)
-    {
-        pageNumber += 1
-    }
 }
     

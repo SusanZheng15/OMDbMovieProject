@@ -15,9 +15,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     var movieID: String = ""
-
-
-    var omdbMovie = OMDbAPIClient.sharedInstance
+    var movie : Movie?
+    
+     let store = MovieDataStore.sharedInstance
+     
     
     override func viewDidLoad()
     {
@@ -25,22 +26,27 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor(white: 0.5, alpha: 0.2)
-    
         moviesSearchBar.showsCancelButton = true
-        super.viewDidLoad()
         
+        super.viewDidLoad()
+        navBarUI()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return self.omdbMovie.movieArray.count
+        return self.store.movieArray.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
         
-        let stringPosterUrl = NSURL(string: self.omdbMovie.movieArray[indexPath.row].poster)
+        if self.store.movieArray[indexPath.row].poster == "N/A"
+        {
+            cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
+        }
+        
+        let stringPosterUrl = NSURL(string: self.store.movieArray[indexPath.row].poster)
         
         if let url = stringPosterUrl
         {
@@ -48,92 +54,82 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
             if let unwrappedImage = dtinternet
             {
-                cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
+                // TO DO: Needs to happen on the main queue
+                 dispatch_async(dispatch_get_main_queue(),{
+                    cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
+                    })
+                
             }
+            cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
         }
-        if self.omdbMovie.movieArray[indexPath.row].poster == "N/A"
-        {
-            cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
-        }
-        
+
+    
         return cell
 
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
-    {
-        self.movieID = self.omdbMovie.movieArray[indexPath.row].imdbID
 
-    }
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    // if bottom of collection view is reached, get more
+    func scrollViewDidScroll(scrollView: UIScrollView)
     {
-        if indexPath.row == self.omdbMovie.movieArray.count - 1
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height
         {
-            if let searchText = moviesSearchBar.text
+            
+           if let searchText = moviesSearchBar.text
             {
-                self.omdbMovie.OMDbSearchAPIcall(searchText, completion: { (array) in
+                self.store.api.getNextPage()
+                self.store.getMovieRepositories(searchText, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
-                        self.omdbMovie.getNextPage(searchText)
+                        
                         self.movieCollectionView.reloadData()
+                        print(self.store.movieArray.count)
                         
                     })
-
                 })
+             
             }
+            
+            print("Reached the end of collection view")
+            
         }
+        
     }
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         
-        let searchResult = moviesSearchBar.text
-        guard let unwrappedSearch = searchResult else {return}
-        self.omdbMovie.movieArray.removeAll()
-        
-        omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
-    
-            dispatch_async(dispatch_get_main_queue(),{
-    
-                self.movieCollectionView.reloadData()
-            })
-            
-        }
         self.moviesSearchBar.resignFirstResponder()
     }
 
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        self.omdbMovie.movieArray.removeAll()
-    }
    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
         let searchResult = moviesSearchBar.text
         guard let unwrappedSearch = searchResult else {return}
         
+        print(store.movieArray.count)
+
         if unwrappedSearch == ""
         {
-            self.omdbMovie.movieArray.removeAll()
-            
+            self.store.movieArray.removeAll()
+           
             dispatch_async(dispatch_get_main_queue(),{
                 self.movieCollectionView.reloadData()
             })
-
+        
         }
         else
         {
-            self.omdbMovie.movieArray.removeAll()
-            
-            omdbMovie.OMDbSearchAPIcall(unwrappedSearch) { (array) in
+            self.store.movieArray.removeAll()
+            self.store.getMovieRepositories(searchText, completion: {
                 dispatch_async(dispatch_get_main_queue(),{
                     self.movieCollectionView.reloadData()
                 })
-                
-            }
-
+            })
+            
         }
+        
         
     }
     
@@ -142,19 +138,31 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         self.moviesSearchBar.resignFirstResponder()
     }
     
+    func navBarUI()
+    {
+        let navBarColor = navigationController!.navigationBar
+        
+        navBarColor.backgroundColor = UIColor.blueColor()
+        navBarColor.barTintColor = UIColor.whiteColor()
+        navBarColor.alpha = 0.5
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
+        
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 19)!], forState: UIControlState.Normal)
+        
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieDetailSegue"
         {
-            let destinationVC = segue.destinationViewController as!MovieDetailsViewController
+            let destinationVC = segue.destinationViewController as! MovieDetailsViewController
             
             let indexPath = movieCollectionView.indexPathForCell(sender as! UICollectionViewCell)
             
             if let unwrappedIndex = indexPath
             {
-                self.movieID = self.omdbMovie.movieArray[unwrappedIndex.row].imdbID
-                destinationVC.plot = self.movieID
+                let movieID = self.store.movieArray[unwrappedIndex.row]
+                destinationVC.movie = movieID
             }
             
         }

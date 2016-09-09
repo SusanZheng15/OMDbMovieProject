@@ -8,9 +8,12 @@
 
 import UIKit
 
-class FullPlotViewController: UIViewController {
-
-    var fullPlotString = ""
+class FullPlotViewController: UIViewController
+{
+    var movie: Movie?
+    
+    let omdbMovie = MovieDataStore.sharedInstance
+    
     
     @IBOutlet weak var fullPlotSummaryTextField: UITextView!
     var ombdMovieStore = OMDbAPIClient.sharedInstance
@@ -18,10 +21,13 @@ class FullPlotViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-            
-        self.ombdMovieStore.getMovieFullPlot(self.fullPlotString) { (dictionary) in
+        
+        guard let unwrappedMovie = movie else {return}
+        
+        self.omdbMovie.getFullSummary(unwrappedMovie)
+        {
             dispatch_async(dispatch_get_main_queue(),{
-            self.fullPlotSummaryTextField.text = dictionary["Plot"] as? String
+                self.fullPlotSummaryTextField.text = self.movie?.fullSummary
             })
         }
 

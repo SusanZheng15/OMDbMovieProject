@@ -10,10 +10,9 @@ import UIKit
 
 class MovieDetailsViewController: UIViewController {
     
-    var plot: String = ""
-    var movieImbdID = ""
+    var movie: Movie?
     
-    let omdbMovie = OMDbAPIClient.sharedInstance
+    let omdbMovie = MovieDataStore.sharedInstance
     
     @IBOutlet weak var moviePlot: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
@@ -28,25 +27,21 @@ class MovieDetailsViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        self.omdbMovie.getMovieDetailAPICallWithID(self.plot) { (dictionary) in
-                
-        dispatch_async(dispatch_get_main_queue(),{
-                    
-            self.moviePlot.text = dictionary["Plot"] as? String
-            self.releasedLabel.text = dictionary["Released"] as? String
-            self.directorLabel.text = dictionary["Director"] as? String
-            self.writerLabel.text = dictionary["Writer"] as? String
-            self.starsLabel.text = dictionary["Actors"] as? String
-            self.imbdScoreLabel.text = dictionary["imdbRating"] as? String
-            self.metaScoreLabel.text = dictionary["Metascore"] as? String
-            let movieid = dictionary["imdbID"] as? String
-                    
-            if let unwrappedMovieID = movieid
-            {
-                self.movieImbdID = unwrappedMovieID
-            }
-                    
-            let imageString = dictionary["Poster"] as? String
+        guard let unwrappedMovie = movie else {return}
+        self.omdbMovie.getDetailsFor(unwrappedMovie)
+        {
+            dispatch_async(dispatch_get_main_queue(),{
+            
+            self.moviePlot.text = self.movie?.plot
+            self.releasedLabel.text = self.movie?.released
+            self.directorLabel.text = self.movie?.director
+            self.writerLabel.text = self.movie?.writer
+            self.starsLabel.text = self.movie?.actors
+            self.imbdScoreLabel.text = self.movie?.imdbRating
+            self.metaScoreLabel.text = self.movie?.metaScore
+            
+            
+            let imageString = self.movie?.poster
             
             if let unwrappedString = imageString
             {
@@ -54,42 +49,40 @@ class MovieDetailsViewController: UIViewController {
                 if let url = stringPosterUrl
                 {
                     let dtinternet = NSData(contentsOfURL: url)
-                            
+            
                     if let unwrappedImage = dtinternet
                     {
                         self.posterImageView.image = UIImage.init(data: unwrappedImage)
                     }
                 }
-                        
+                                    
             }
-                    
+                                
             })
-            
-                
+                            
         }
-       
 
-        
     }
 
-    
     @IBAction func plotDescriptionButton(sender: AnyObject)
     {
-        //segues
+        //segue
     }
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if segue.identifier == "movieDetailSegue"
+        if segue.identifier == "fullSummarySegue"
         {
             let destinationFullPlotVC = segue.destinationViewController as? FullPlotViewController
             
-            destinationFullPlotVC?.fullPlotString = self.movieImbdID
+            if let unwrappedMovie = movie
+            {
+                destinationFullPlotVC?.movie = unwrappedMovie
+            }
+            
         }
         
-        
     }
-    
 
 }
