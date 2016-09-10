@@ -14,7 +14,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
-    var movieID: String = ""
     var movie : Movie?
     
      let store = MovieDataStore.sharedInstance
@@ -25,11 +24,12 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         moviesSearchBar.delegate = self
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        movieCollectionView.backgroundColor = UIColor(white: 0.5, alpha: 0.2)
+        movieCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
         moviesSearchBar.showsCancelButton = true
         
         super.viewDidLoad()
         navBarUI()
+        self.title = "Movie Search"
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -46,6 +46,12 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
         }
         
+//        self.movie?.convertPosterUrlToImage(self.store.movieArray[indexPath.row].poster, completion: { (success) in
+//            if success
+//            {
+//                cell.moviePosterImageView.image = self.movie?.posterImage
+//            }
+//        })
         let stringPosterUrl = NSURL(string: self.store.movieArray[indexPath.row].poster)
         
         if let url = stringPosterUrl
@@ -79,6 +85,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
            if let searchText = moviesSearchBar.text
             {
+                
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories(searchText, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
@@ -122,11 +129,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         else
         {
             self.store.movieArray.removeAll()
-            self.store.getMovieRepositories(searchText, completion: {
-                dispatch_async(dispatch_get_main_queue(),{
-                    self.movieCollectionView.reloadData()
+            let hi = unwrappedSearch.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).lowercaseString
+           // let newString = unwrappedSearch.stringByReplacingOccurrencesOfString(" " , withString: "").lowercaseString
+                self.store.getMovieRepositories(unwrappedSearch, completion: {
+                    dispatch_async(dispatch_get_main_queue(),{
+                        self.movieCollectionView.reloadData()
+                    })
                 })
-            })
+            
+           
             
         }
         
@@ -142,11 +153,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     {
         let navBarColor = navigationController!.navigationBar
         
-        navBarColor.backgroundColor = UIColor.blueColor()
-        navBarColor.barTintColor = UIColor.whiteColor()
-        navBarColor.alpha = 0.5
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
-        
+        navBarColor.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(1.0)
+      
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
+       
         navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 19)!], forState: UIControlState.Normal)
         
     }

@@ -27,6 +27,10 @@ class MovieDetailsViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        navBarUI()
+        
+        self.title = movie?.title
+        
         guard let unwrappedMovie = movie else {return}
         self.omdbMovie.getDetailsFor(unwrappedMovie)
         {
@@ -63,7 +67,19 @@ class MovieDetailsViewController: UIViewController {
         }
 
     }
-
+    
+    func navBarUI()
+    {
+        let navBarColor = navigationController!.navigationBar
+        
+        navBarColor.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(1.0)
+    
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
+    
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 19)!], forState: UIControlState.Normal)
+        
+    }
+    
     @IBAction func plotDescriptionButton(sender: AnyObject)
     {
         //segue

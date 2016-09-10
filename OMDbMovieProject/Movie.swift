@@ -23,6 +23,7 @@ class Movie
     var imdbRating: String?
     var metaScore: String?
     var fullSummary: String?
+   // var posterImage: uiim
  
     
     init(dictionary: NSDictionary)
@@ -62,5 +63,28 @@ class Movie
         self.fullSummary = dictionary["Plot"] as? String
         completion(true)
     }
+//    
+//    func convertPosterUrlToImage(urlString: String, completion: (Bool)->())
+//    {
+//         dispatch_async(dispatch_get_main_queue(),{
+//            let stringPosterUrl = NSURL(string: self.poster)
+//            
+//            if self.poster == "N/A"
+//            {
+//                self.posterImage = UIImage.init(named: "pikachu.png")
+//            }
+//            if let url = stringPosterUrl
+//            {
+//                let dtinternet = NSData(contentsOfURL: url)
+//            
+//                if let unwrappedImage = dtinternet
+//                {
+//                    self.posterImage = UIImage.init(data: unwrappedImage)
+//                    completion(true)
+//                }
+//            }
+//        })
+//        
+//    }
 
 }
