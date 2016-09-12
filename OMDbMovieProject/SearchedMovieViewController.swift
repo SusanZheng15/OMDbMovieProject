@@ -14,6 +14,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
+    @IBOutlet weak var noResultsLabel: UILabel!
     var movie : Movie?
     
     let store = MovieDataStore.sharedInstance
@@ -31,6 +32,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         navBarUI()
+        noResultsLabel.hidden = true
         self.title = "Movie Search"
     }
     
@@ -48,12 +50,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
         }
         
-//        self.movie?.convertPosterUrlToImage(self.store.movieArray[indexPath.row].poster, completion: { (success) in
-//            if success
-//            {
-//                cell.moviePosterImageView.image = self.movie?.posterImage
-//            }
-//        })
+
         let stringPosterUrl = NSURL(string: self.store.movieArray[indexPath.row].poster)
         
         if let url = stringPosterUrl
@@ -62,13 +59,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
             if let unwrappedImage = dtinternet
             {
-                // TO DO: Needs to happen on the main queue
                  dispatch_async(dispatch_get_main_queue(),{
                     cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
                     })
                 
             }
             cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
+            self.noResultsLabel.hidden = true
         }
 
     
@@ -117,6 +114,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         guard let unwrappedSearch = searchResult else {return}
         
         print(store.movieArray.count)
+    
 
         if unwrappedSearch.isEmpty == true
         {
@@ -130,9 +128,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         else
         {
             self.store.movieArray.removeAll()
-            
+    
             let search = unwrappedSearch.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
-            
             self.store.getMovieRepositories(search, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView.reloadData()
@@ -140,6 +137,17 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 })
             
             
+        }
+        if store.movieArray.count == 0
+        {
+            dispatch_async(dispatch_get_main_queue(),{
+                self.movieCollectionView.reloadData()
+                self.noResultsLabel.hidden = false
+            })
+        }
+        else if store.movieArray.count > 0
+        {
+            self.noResultsLabel.hidden = true
         }
         
         

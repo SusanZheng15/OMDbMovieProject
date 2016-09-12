@@ -46,7 +46,7 @@ class OMDbAPIClient
             }
             catch
             {
-                print(error)
+                print("did i crash?")
             }
         }
         dataTask.resume()
