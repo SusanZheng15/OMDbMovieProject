@@ -2,7 +2,7 @@
 //  MovieDataStore.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/8/16.
+//  Created by Susan Zheng on 9/8/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
@@ -21,7 +21,6 @@ class MovieDataStore
     
     func getMovieRepositories(searched: String, completion: ()->())
     {
-
         api.OMDbSearchAPIcall(searched) { (array) in
             
             for dictionary in array

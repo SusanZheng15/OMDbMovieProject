@@ -59,7 +59,7 @@ class MovieDetailsViewController: UIViewController {
                         self.posterImageView.image = UIImage.init(data: unwrappedImage)
                     }
                 }
-                                    
+                
             }
                                 
             })

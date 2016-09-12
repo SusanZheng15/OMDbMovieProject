@@ -16,7 +16,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     var movie : Movie?
     
-     let store = MovieDataStore.sharedInstance
+    let store = MovieDataStore.sharedInstance
      
     
     override func viewDidLoad()
@@ -26,8 +26,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
         moviesSearchBar.showsCancelButton = true
+        moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
         
         super.viewDidLoad()
+        
         navBarUI()
         self.title = "Movie Search"
     }
@@ -85,9 +87,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
            if let searchText = moviesSearchBar.text
             {
-                
+                let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
                 self.store.api.getNextPage()
-                self.store.getMovieRepositories(searchText, completion: {
+                self.store.getMovieRepositories(search, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.movieCollectionView.reloadData()
@@ -105,7 +107,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
-        
         self.moviesSearchBar.resignFirstResponder()
     }
 
@@ -117,7 +118,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         print(store.movieArray.count)
 
-        if unwrappedSearch == ""
+        if unwrappedSearch.isEmpty == true
         {
             self.store.movieArray.removeAll()
            
@@ -129,15 +130,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         else
         {
             self.store.movieArray.removeAll()
-            let hi = unwrappedSearch.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).lowercaseString
-           // let newString = unwrappedSearch.stringByReplacingOccurrencesOfString(" " , withString: "").lowercaseString
-                self.store.getMovieRepositories(unwrappedSearch, completion: {
+            
+            let search = unwrappedSearch.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+            
+            self.store.getMovieRepositories(search, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView.reloadData()
                     })
                 })
             
-           
             
         }
         
