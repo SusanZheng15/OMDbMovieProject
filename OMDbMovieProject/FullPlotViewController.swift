@@ -11,12 +11,10 @@ import UIKit
 class FullPlotViewController: UIViewController
 {
     var movie: Movie?
-    
     let omdbMovie = MovieDataStore.sharedInstance
     
-    
     @IBOutlet weak var fullPlotSummaryTextField: UITextView!
-    var ombdMovieStore = OMDbAPIClient.sharedInstance
+ 
     
     override func viewDidLoad()
     {

@@ -10,7 +10,7 @@ import Foundation
 
 class OMDbAPIClient
 {
-    
+
     static let sharedInstance = OMDbAPIClient()
 
     var pageNumber = 1

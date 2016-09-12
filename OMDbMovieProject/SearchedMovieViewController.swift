@@ -13,8 +13,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
-    
     @IBOutlet weak var noResultsLabel: UILabel!
+    
     var movie : Movie?
     
     let store = MovieDataStore.sharedInstance
@@ -28,6 +28,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
         moviesSearchBar.showsCancelButton = true
         moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
+        
         
         super.viewDidLoad()
         
@@ -130,6 +131,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.store.movieArray.removeAll()
     
             let search = unwrappedSearch.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+            self.store.api.pageNumber = 1
             self.store.getMovieRepositories(search, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         self.movieCollectionView.reloadData()
@@ -144,12 +146,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 self.movieCollectionView.reloadData()
                 self.noResultsLabel.hidden = false
             })
-        }
-        else if store.movieArray.count > 0
-        {
-            self.noResultsLabel.hidden = true
-        }
-        
+        }        
         
     }
     
@@ -162,11 +159,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     {
         let navBarColor = navigationController!.navigationBar
         
-        navBarColor.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(1.0)
+        navBarColor.backgroundColor = UIColor.blueColor()
+        navBarColor.alpha = 1.0
       
         navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
-       
-        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 19)!], forState: UIControlState.Normal)
+    
         
     }
     
