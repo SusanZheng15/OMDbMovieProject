@@ -11,6 +11,7 @@ import UIKit
 class FavoritesMovieTableViewCell: UITableViewCell
 {
 
+    @IBOutlet weak var favMoviePosterImage: UIImageView!
     @IBOutlet weak var favMovieTitleLabel: UILabel!
     @IBOutlet weak var favReleasedLabel: UILabel!
     @IBOutlet weak var favDirectorLabel: UILabel!

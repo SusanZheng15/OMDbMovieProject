@@ -36,6 +36,12 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         noResultsLabel.hidden = true
         self.title = "Movie Search"
+        
+       self.store.getMovieRepositories("pokemon") {
+        NSOperationQueue.mainQueue().addOperationWithBlock({ 
+            self.movieCollectionView.reloadData()
+        })
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
@@ -87,6 +93,22 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
            if let searchText = moviesSearchBar.text
            {
                 let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+            
+            if search == ""
+            {
+                self.store.api.getNextPage()
+                self.store.getMovieRepositories("pokemon", completion: { 
+                    dispatch_async(dispatch_get_main_queue(),{
+                        
+                        self.movieCollectionView.reloadData()
+                        print(self.store.movieArray.count)
+                        
+                    })
+
+                })
+            }
+            else
+            {
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories(search, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
@@ -96,13 +118,17 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                         
                     })
                 })
-             
             }
             
+        }
             print("Reached the end of collection view")
             
         }
         
+    }
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        self.store.movieArray.removeAll()
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {

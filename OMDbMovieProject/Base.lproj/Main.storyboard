@@ -210,6 +210,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="favDirectorLabel" destination="7nA-54-5dS" id="2d0-Mj-rhp"/>
+                                    <outlet property="favMoviePosterImage" destination="oHx-hr-9Ub" id="mGq-2z-MjL"/>
                                     <outlet property="favMovieTitleLabel" destination="m38-sJ-Ruw" id="oCL-65-TXm"/>
                                     <outlet property="favReleasedLabel" destination="y2A-tB-ESV" id="YXq-Kr-GqG"/>
                                     <outlet property="favWriterLabel" destination="3nD-O8-I9X" id="aLs-Q1-dav"/>
@@ -248,7 +249,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="biq-Jr-fAh">
+                            <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="biq-Jr-fAh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

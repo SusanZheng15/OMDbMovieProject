@@ -28,8 +28,10 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = movie?.title
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie)) //change action to save later on
-       // navBarUI()
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+       // self.view.backgroundColor = UIColor.blackColor().
+        //self.po
         
         guard let unwrappedMovie = movie else {return}
         self.omdbMovie.getDetailsFor(unwrappedMovie)
