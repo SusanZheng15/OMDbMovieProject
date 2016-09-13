@@ -33,6 +33,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         navBarUI()
+        
         noResultsLabel.hidden = true
         self.title = "Movie Search"
     }
@@ -84,7 +85,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         {
             
            if let searchText = moviesSearchBar.text
-            {
+           {
                 let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories(search, completion: {
