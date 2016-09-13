@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Movie Search-->
+        <!--Searched Movie View Controller-->
         <scene sceneID="gXE-U8-KC9">
             <objects>
                 <viewController id="plm-nj-G1G" customClass="SearchedMovieViewController" customModule="OMDbMovieProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -93,7 +93,7 @@
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="leading" secondItem="sGH-TB-wCO" secondAttribute="leading" id="vW8-FL-Va9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Search" id="4ao-AP-MZj"/>
+                    <navigationItem key="navigationItem" id="4ao-AP-MZj"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="Ht4-4S-gzo" id="HOc-JQ-l4Q"/>
@@ -414,6 +414,8 @@
                             <constraint firstItem="biq-Jr-fAh" firstAttribute="leading" secondItem="9Vz-PO-DYp" secondAttribute="leading" id="zKk-bv-viX"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="directorLabel" destination="m4P-zM-hL4" id="Pjl-9t-nWf"/>

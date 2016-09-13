@@ -28,8 +28,8 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = movie?.title
-      //  self.view.backgroundColor = UIColor.blackColor()
-
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie)) //change action to save later on
+       // navBarUI()
         
         guard let unwrappedMovie = movie else {return}
         self.omdbMovie.getDetailsFor(unwrappedMovie)
@@ -74,6 +74,10 @@ class MovieDetailsViewController: UIViewController {
         //segue
     }
     
+    func saveMovie()
+    {
+        print("save")
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {

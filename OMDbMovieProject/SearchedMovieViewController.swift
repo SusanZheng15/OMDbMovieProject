@@ -163,7 +163,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         navBarColor.backgroundColor = UIColor.blueColor()
         navBarColor.alpha = 1.0
       
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 20)!]
     
         
     }
