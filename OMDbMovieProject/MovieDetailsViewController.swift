@@ -28,6 +28,8 @@ class MovieDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = movie?.title
+      //  self.view.backgroundColor = UIColor.blackColor()
+
         
         guard let unwrappedMovie = movie else {return}
         self.omdbMovie.getDetailsFor(unwrappedMovie)
