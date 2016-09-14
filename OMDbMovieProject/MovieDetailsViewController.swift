@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailsViewController: UIViewController {
     
@@ -30,8 +31,7 @@ class MovieDetailsViewController: UIViewController {
         self.title = movie?.title
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
-       // self.view.backgroundColor = UIColor.blackColor().
-        //self.po
+
         
         guard let unwrappedMovie = movie else {return}
         self.omdbMovie.getDetailsFor(unwrappedMovie)
@@ -78,7 +78,24 @@ class MovieDetailsViewController: UIViewController {
     
     func saveMovie()
     {
-        print("save")
+        guard let savedMovieTitle = self.movie?.title else {return}
+        let saveAlert = UIAlertController.init(title: "Saved", message: "\(savedMovieTitle) has been saved to favorites", preferredStyle: .Alert)
+        
+        let okayAction = UIAlertAction.init(title: "Okay", style: .Cancel) { (action) in
+        }
+        saveAlert.addAction(okayAction)
+        self.presentViewController(saveAlert, animated: true){
+        }
+        
+        let context = omdbMovie.managedObjectContext
+        let addMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorites", inManagedObjectContext: context) as! Favorites
+        
+        guard let savedMovie = self.movie else {return}
+        addMovie.movies?.insert(savedMovie)
+        
+        print(addMovie.movies)
+        
+        omdbMovie.saveContext()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

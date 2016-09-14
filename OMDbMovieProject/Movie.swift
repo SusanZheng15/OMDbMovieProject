@@ -7,42 +7,29 @@
 //
 
 import Foundation
+import CoreData
 
-class Movie
+class Movie: NSManagedObject
 {
-    var title: String
-    var poster: String
-    var type: String
-    var year: String
-    var imdbID: String
-    var plot: String?
-    var released: String?
-    var director: String?
-    var writer: String?
-    var actors: String?
-    var imdbRating: String?
-    var metaScore: String?
-    var fullSummary: String?
-   // var posterImage: uiim
- 
     
-    init(dictionary: NSDictionary)
+    convenience init(dictionary: NSDictionary,entity: NSEntityDescription, managedObjectContext: NSManagedObjectContext)
     {
+        self.init(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+
         guard let
             movieTitle = dictionary["Title"] as? String,
             moviePoster = dictionary["Poster"] as? String,
-            movieType = dictionary["Type"] as? String,
             movieYear = dictionary["Year"] as? String,
             movieID = dictionary["imdbID"] as? String
         
-        else { fatalError("Could not create object from supplied dictionary") }
+            else { fatalError("Could not create object from supplied dictionary") }
         
-        self.title = movieTitle
-        self.poster = moviePoster
-        self.type = movieType
-        self.year = movieYear
-        self.imdbID = movieID
         
+            self.title = movieTitle
+            self.poster = moviePoster
+            self.year = movieYear
+            self.imdbID = movieID
+
     }
 
     func updateMovieDetailsFrom(dictionary: NSDictionary, completion:(Bool) -> ())
@@ -63,28 +50,5 @@ class Movie
         self.fullSummary = dictionary["Plot"] as? String
         completion(true)
     }
-//    
-//    func convertPosterUrlToImage(urlString: String, completion: (Bool)->())
-//    {
-//         dispatch_async(dispatch_get_main_queue(),{
-//            let stringPosterUrl = NSURL(string: self.poster)
-//            
-//            if self.poster == "N/A"
-//            {
-//                self.posterImage = UIImage.init(named: "pikachu.png")
-//            }
-//            if let url = stringPosterUrl
-//            {
-//                let dtinternet = NSData(contentsOfURL: url)
-//            
-//                if let unwrappedImage = dtinternet
-//                {
-//                    self.posterImage = UIImage.init(data: unwrappedImage)
-//                    completion(true)
-//                }
-//            }
-//        })
-//        
-//    }
-
+    
 }

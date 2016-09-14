@@ -53,33 +53,33 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
         
-        if self.store.movieArray[indexPath.row].poster == "N/A"
-        {
-            cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
-        }
         
-
-        let stringPosterUrl = NSURL(string: self.store.movieArray[indexPath.row].poster)
-        
-        if let url = stringPosterUrl
-        {
-            let dtinternet = NSData(contentsOfURL: url)
-            
-            if let unwrappedImage = dtinternet
+            if let unwrappedPoster = self.store.movieArray[indexPath.row].poster
             {
-                 dispatch_async(dispatch_get_main_queue(),{
-                    cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
-                    })
+                if unwrappedPoster == "N/A"
+                {
+                    cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
+                }
+            
+                let stringPosterURL = NSURL(string: unwrappedPoster)
                 
+                if let url = stringPosterURL
+                {
+                    let dtinternet = NSData(contentsOfURL: url)
+                    
+                    if let unwrappedImage = dtinternet
+                    {
+                        dispatch_async(dispatch_get_main_queue(),{
+                            cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
+                            cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
+                            self.noResultsLabel.hidden = true
+                        })
+                    }
+                }
             }
-            cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
-            self.noResultsLabel.hidden = true
+        
+            return cell
         }
-
-    
-        return cell
-
-    }
 
     
     // if bottom of collection view is reached, get more
@@ -94,7 +94,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
            {
                 let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
             
-            if search == ""
+            if search.isEmpty == true
             {
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories("pokemon", completion: { 
@@ -126,6 +126,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
         
     }
+    
+  
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
         self.store.movieArray.removeAll()

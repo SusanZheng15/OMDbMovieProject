@@ -8,9 +8,10 @@
 
 import UIKit
 
+
 class FavoritesMovieTableViewCell: UITableViewCell
 {
-
+    
     @IBOutlet weak var favMoviePosterImage: UIImageView!
     @IBOutlet weak var favMovieTitleLabel: UILabel!
     @IBOutlet weak var favReleasedLabel: UILabel!
@@ -20,7 +21,7 @@ class FavoritesMovieTableViewCell: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        // Initialization code
+    
     }
 
     override func setSelected(selected: Bool, animated: Bool)
