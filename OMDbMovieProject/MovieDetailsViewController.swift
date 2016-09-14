@@ -11,6 +11,8 @@ import CoreData
 
 class MovieDetailsViewController: UIViewController {
     
+    
+    
     var movie: Movie?
     
     let omdbMovie = MovieDataStore.sharedInstance
@@ -88,6 +90,7 @@ class MovieDetailsViewController: UIViewController {
         }
         
         let context = omdbMovie.managedObjectContext
+    
         let addMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorites", inManagedObjectContext: context) as! Favorites
         
         guard let savedMovie = self.movie else {return}

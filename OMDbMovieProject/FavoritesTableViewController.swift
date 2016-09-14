@@ -13,7 +13,8 @@ class FavoritesTableViewController: UITableViewController
 {
     
     let store = MovieDataStore.sharedInstance
-    var movies: Set<Movie> = []
+    
+    //var movies: Set<Movie> = []
     
     override func viewDidLoad()
     {
@@ -23,7 +24,10 @@ class FavoritesTableViewController: UITableViewController
         self.title = "Favorites"
         
         store.fetchData()
+        //print(self.store.favorites)
         self.tableView.reloadData()
+        
+        
     }
     
     override func viewWillAppear(animated: Bool)
@@ -32,6 +36,16 @@ class FavoritesTableViewController: UITableViewController
         
         store.fetchData()
         self.tableView.reloadData()
+        
+        for fav in store.favorites {
+            print("!!!!!!!! \(fav.movies)")
+            print("HAS \(fav.movies?.count) MOVIES IN IT")
+            let movies = fav.movies
+//            for movie in movies! {
+//                print("\(movie.title)")
+//            }
+            movies?.first?.title
+        }
     }
 
     
@@ -58,11 +72,14 @@ class FavoritesTableViewController: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("favoritesCell", forIndexPath: indexPath) as! FavoritesMovieTableViewCell
-//
-//       let movieArray = Array(movies)
-//       let eachMovie = movieArray[indexPath.row]
-//        
-//        cell.favMovieTitleLabel.text = movieArray[indexPath.row].title
+
+        let favMovie = store.favorites[indexPath.row].movies
+        
+        cell.favMovieTitleLabel.text = favMovie?.first?.title
+        cell.favDirectorLabel.text = favMovie?.first?.director
+        cell.favReleasedLabel.text = favMovie?.first?.released
+        cell.favWriterLabel.text = favMovie?.first?.writer
+        
         
       
 
