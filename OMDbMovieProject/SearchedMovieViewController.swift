@@ -40,28 +40,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         self.title = "Movie Search"
         noInternetConnectionAlert()
+        print(store.movieArray.count)
     
     }
-    
-    override func viewWillAppear(animated: Bool)
-    {
-        super.viewWillAppear(true)
-        
-        guard let search = moviesSearchBar.text else {return}
-        if search != ""
-        {
-           print("not empty")
-            self.store.getMovieRepositories(search, completion: {
-                dispatch_async(dispatch_get_main_queue(),{
-                    
-                    self.movieCollectionView.reloadData()
-                    print(self.store.movieArray.count)
-                    
-                })
-            })
-        }
-       
-    }
+
     
     func noInternetConnectionAlert()
     {
@@ -95,6 +77,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
         
+        guard self.store.movieArray.count > 0 else { return cell }
+        
         
             if let unwrappedPoster = self.store.movieArray[indexPath.row].poster
             {
@@ -123,8 +107,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             return cell
         }
 
+
     
-    // if bottom of collection view is reached, get more
+     //if bottom of collection view is reached, get more
     func scrollViewDidScroll(scrollView: UIScrollView)
     {
         let offsetY = scrollView.contentOffset.y
@@ -172,7 +157,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
   
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
-        self.store.movieArray.removeAll()
+        //self.store.movieArray.removeAll()
     }
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
