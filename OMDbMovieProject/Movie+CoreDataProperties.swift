@@ -2,7 +2,7 @@
 //  Movie+CoreDataProperties.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/13/16.
+//  Created by Susan Zheng on 9/13/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -27,6 +27,5 @@ extension Movie
     @NSManaged var imdbRating: String?
     @NSManaged var metaScore: String?
     @NSManaged var fullSummary: String?
-
 
 }

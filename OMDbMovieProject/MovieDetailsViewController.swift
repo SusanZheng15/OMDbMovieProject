@@ -9,14 +9,13 @@
 import UIKit
 import CoreData
 
-class MovieDetailsViewController: UIViewController {
-    
-    
-    
+class MovieDetailsViewController: UIViewController
+{
     var movie: Movie?
     
     let omdbMovie = MovieDataStore.sharedInstance
     
+    @IBOutlet weak var backColoring: UIView!
     @IBOutlet weak var moviePlot: UILabel!
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
@@ -30,6 +29,7 @@ class MovieDetailsViewController: UIViewController {
     {
         super.viewDidLoad()
         
+        self.backColoring.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         self.title = movie?.title
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
@@ -99,6 +99,8 @@ class MovieDetailsViewController: UIViewController {
         print(addMovie.movies)
         
         omdbMovie.saveContext()
+        
+       
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

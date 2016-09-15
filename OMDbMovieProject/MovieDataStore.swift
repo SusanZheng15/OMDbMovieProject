@@ -18,8 +18,7 @@ class MovieDataStore
     private init() {}
     
     var movieArray : [Movie] = []
-    var favorites: [Favorites] = []
-    
+    var favorites: [Favorites] = []    
     
     func getMovieRepositories(searched: String, completion: ()->())
     {
@@ -91,8 +90,6 @@ class MovieDataStore
         
         do{
             favorites = try managedObjectContext.executeFetchRequest(userRequest) as! [Favorites]
-          //  print("\(favorites)")
-            
         }
         catch
         {

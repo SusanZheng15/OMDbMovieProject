@@ -2,7 +2,7 @@
 //  Favorites.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/13/16.
+//  Created by Susan Zheng on 9/13/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 

@@ -18,6 +18,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     var movie : Movie?
     
     let store = MovieDataStore.sharedInstance
+    
+    deinit{
+        print("Im dead")
+    }
      
     
     override func viewDidLoad()
@@ -36,13 +40,30 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         noResultsLabel.hidden = true
         self.title = "Movie Search"
+        noInternetConnectionAlert()
         
        self.store.getMovieRepositories("pokemon") {
-        NSOperationQueue.mainQueue().addOperationWithBlock({ 
-            self.movieCollectionView.reloadData()
-        })
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.movieCollectionView.reloadData()
+            })
         }
     }
+    
+    func noInternetConnectionAlert()
+    {
+        
+        if Reachability.isConnectedToNetwork() == true
+        {
+            //nothing
+        }
+        else
+        {
+            let noInternetAlertController = UIAlertController(title: "No Wifi Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            noInternetAlertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(noInternetAlertController, animated: true, completion: nil)            
+        }
+    }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {

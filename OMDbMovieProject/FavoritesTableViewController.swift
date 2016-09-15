@@ -14,8 +14,6 @@ class FavoritesTableViewController: UITableViewController
     
     let store = MovieDataStore.sharedInstance
     
-    //var movies: Set<Movie> = []
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -24,10 +22,8 @@ class FavoritesTableViewController: UITableViewController
         self.title = "Favorites"
         
         store.fetchData()
-        //print(self.store.favorites)
         self.tableView.reloadData()
-        
-        
+    
     }
     
     override func viewWillAppear(animated: Bool)
@@ -37,15 +33,6 @@ class FavoritesTableViewController: UITableViewController
         store.fetchData()
         self.tableView.reloadData()
         
-        for fav in store.favorites {
-            print("!!!!!!!! \(fav.movies)")
-            print("HAS \(fav.movies?.count) MOVIES IN IT")
-            let movies = fav.movies
-//            for movie in movies! {
-//                print("\(movie.title)")
-//            }
-            movies?.first?.title
-        }
     }
 
     
@@ -56,21 +43,19 @@ class FavoritesTableViewController: UITableViewController
         navBarColor.backgroundColor = UIColor.blueColor()
         navBarColor.alpha = 1.0
         
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 25)!]
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 20)!]
         
     }
 
+    
     // MARK: - Table view data source
-
-
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return store.favorites.count
     }
 
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("favoritesCell", forIndexPath: indexPath) as! FavoritesMovieTableViewCell
 
         let favMovie = store.favorites[indexPath.row].movies
@@ -79,9 +64,30 @@ class FavoritesTableViewController: UITableViewController
         cell.favDirectorLabel.text = favMovie?.first?.director
         cell.favReleasedLabel.text = favMovie?.first?.released
         cell.favWriterLabel.text = favMovie?.first?.writer
-        
-        
       
+        let imageString = favMovie?.first?.poster
+        
+        if let unwrappedString = imageString
+        {
+            if unwrappedString == "N/A"
+            {
+                cell.favMoviePosterImage.image = UIImage.init(named: "pikachu.png")
+            }
+            let stringPosterUrl = NSURL(string: unwrappedString)
+            if let url = stringPosterUrl
+            {
+                let dtinternet = NSData(contentsOfURL: url)
+                
+                if let unwrappedImage = dtinternet
+                {
+                    cell.favMoviePosterImage.image = UIImage.init(data: unwrappedImage)
+                }
+            }
+            
+        }
+       
+        
+        
 
         return cell
     }
