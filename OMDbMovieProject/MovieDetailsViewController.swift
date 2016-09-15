@@ -32,7 +32,7 @@ class MovieDetailsViewController: UIViewController
         omdbMovie.fetchData()
         checkForData()
         
-        self.backColoring.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
+        self.backColoring.backgroundColor = UIColor.darkGrayColor()
         self.title = movie?.title
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save to favorites", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
@@ -51,9 +51,9 @@ class MovieDetailsViewController: UIViewController
             
             for movie in object
             {
-                guard let savedMovieTitle = movie.movies?.first?.title else {return}
+                guard let savedMovieID = movie.movies?.first?.imdbID else {return}
                 
-                if savedMovieTitle == movieObject.title
+                if savedMovieID == movieObject.imdbID
                 {
                     print("Has it")
                     self.moviePlot.text = movie.movies?.first?.plot

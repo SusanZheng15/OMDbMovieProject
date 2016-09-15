@@ -39,9 +39,9 @@ class FullPlotViewController: UIViewController
             
             for movies in object
             {
-                guard let savedMovieTitle = movies.movies?.first?.title else {return}
+                guard let savedMovieID = movies.movies?.first?.imdbID else {return}
                 
-                if savedMovieTitle == movieObject.title
+                if savedMovieID == movieObject.imdbID
                 {
                     print("Have summary")
                     self.fullPlotSummaryTextField.text = movies.movies?.first?.fullSummary
