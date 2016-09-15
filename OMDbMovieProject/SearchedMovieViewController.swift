@@ -43,6 +43,26 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     }
     
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(true)
+        
+        guard let search = moviesSearchBar.text else {return}
+        if search != ""
+        {
+           print("not empty")
+            self.store.getMovieRepositories(search, completion: {
+                dispatch_async(dispatch_get_main_queue(),{
+                    
+                    self.movieCollectionView.reloadData()
+                    print(self.store.movieArray.count)
+                    
+                })
+            })
+        }
+       
+    }
+    
     func noInternetConnectionAlert()
     {
         
@@ -116,7 +136,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
            {
                 let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
             
-            if search.isEmpty == true
+            if search == ""
             {
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories("who", completion: {
@@ -129,7 +149,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
 
                 })
             }
-            else
+            else if search != ""
             {
                 self.store.api.getNextPage()
                 self.store.getMovieRepositories(search, completion: {
@@ -168,7 +188,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         print(store.movieArray.count)
     
 
-        if unwrappedSearch.isEmpty == true
+        if unwrappedSearch == ""
         {
             self.store.movieArray.removeAll()
            
@@ -177,7 +197,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             })
         
         }
-        else
+        else if unwrappedSearch != ""
         {
             self.store.movieArray.removeAll()
     
