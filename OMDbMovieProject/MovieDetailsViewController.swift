@@ -29,47 +29,82 @@ class MovieDetailsViewController: UIViewController
     {
         super.viewDidLoad()
         
+        omdbMovie.fetchData()
+        checkForData()
+        
         self.backColoring.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         self.title = movie?.title
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
 
-        
-        guard let unwrappedMovie = movie else {return}
-        self.omdbMovie.getDetailsFor(unwrappedMovie)
-        {
-            dispatch_async(dispatch_get_main_queue(),{
+    }
+    
+    
+     func checkForData()
+     {
+        let userRequest = NSFetchRequest(entityName: "Favorites")
+     
+        do{
+            let object = try omdbMovie.managedObjectContext.executeFetchRequest(userRequest) as! [Favorites]
             
-            self.moviePlot.text = self.movie?.plot
-            self.releasedLabel.text = self.movie?.released
-            self.directorLabel.text = self.movie?.director
-            self.writerLabel.text = self.movie?.writer
-            self.starsLabel.text = self.movie?.actors
-            self.imbdScoreLabel.text = self.movie?.imdbRating
-            self.metaScoreLabel.text = self.movie?.metaScore
+            guard let movieObject = self.movie else {return}
             
-            
-            let imageString = self.movie?.poster
-            
-            if let unwrappedString = imageString
+            for movie in object
             {
-                let stringPosterUrl = NSURL(string: unwrappedString)
-                if let url = stringPosterUrl
-                {
-                    let dtinternet = NSData(contentsOfURL: url)
-            
-                    if let unwrappedImage = dtinternet
-                    {
-                        self.posterImageView.image = UIImage.init(data: unwrappedImage)
-                    }
-                }
+                guard let savedMovieTitle = movie.movies?.first?.title else {return}
                 
-            }
-                                
-            })
+                if savedMovieTitle == movieObject.title
+                {
+                    print("Has it")
+                    self.moviePlot.text = movie.movies?.first?.plot
+                    self.releasedLabel.text = movie.movies?.first?.released
+                    self.directorLabel.text = movie.movies?.first?.director
+                    self.writerLabel.text = movie.movies?.first?.writer
+                    self.starsLabel.text = movie.movies?.first?.actors
+                    self.imbdScoreLabel.text = movie.movies?.first?.imdbRating
+                    self.metaScoreLabel.text = movie.movies?.first?.metaScore
+                }
+                else
+                {
+                    print("doesnt have it")
+                    self.omdbMovie.getDetailsFor(movieObject)
+                    {
+                        dispatch_async(dispatch_get_main_queue(),{
+                            self.moviePlot.text = self.movie?.plot
+                            self.releasedLabel.text = self.movie?.released
+                            self.directorLabel.text = self.movie?.director
+                            self.writerLabel.text = self.movie?.writer
+                            self.starsLabel.text = self.movie?.actors
+                            self.imbdScoreLabel.text = self.movie?.imdbRating
+                            self.metaScoreLabel.text = self.movie?.metaScore
                             
-        }
-
+                            
+                            let imageString = self.movie?.poster
+                            
+                            if let unwrappedString = imageString
+                            {
+                                let stringPosterUrl = NSURL(string: unwrappedString)
+                                if let url = stringPosterUrl
+                                {
+                                    let dtinternet = NSData(contentsOfURL: url)
+                                    
+                                    if let unwrappedImage = dtinternet
+                                    {
+                                        self.posterImageView.image = UIImage.init(data: unwrappedImage)
+                                    }
+                                }
+                                
+                            }
+                            })
+                        }
+                    }
+                
+                }
+            
+            }
+            
+            catch{print("Error")}
+        
     }
     
     

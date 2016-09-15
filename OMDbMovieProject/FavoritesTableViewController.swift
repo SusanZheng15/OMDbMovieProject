@@ -86,22 +86,34 @@ class FavoritesTableViewController: UITableViewController
             
         }
        
-        
-        
-
         return cell
     }
+
     
-
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+   
+        if segue.identifier == "favoritesSegueToDetails"
+        {
+            let destinationVC = segue.destinationViewController as? MovieDetailsViewController
+            
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            
+            if let unwrappedIndex = indexPath
+            {
+                let movieID = self.store.favorites[unwrappedIndex.row].movies
+                guard let movieTitle = movieID?.first else {return}
+    
+                guard let destinationVC = destinationVC else {return}
+                destinationVC.movie = movieTitle
+                
+            }
+            
+        }
+       
     }
-    */
+    
 
 }
