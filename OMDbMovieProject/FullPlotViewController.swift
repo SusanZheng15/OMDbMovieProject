@@ -22,15 +22,13 @@ class FullPlotViewController: UIViewController
         super.viewDidLoad()
         omdbMovie.fetchData()
         
-        checkForData()
+        checkForFullSummary()
         
         self.title = "Full Plot Description"
 
     }
-
     
-    
-    func checkForData()
+    func checkForFullSummary()
     {
         let userRequest = NSFetchRequest(entityName: "Favorites")
         

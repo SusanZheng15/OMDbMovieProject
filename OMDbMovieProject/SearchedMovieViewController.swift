@@ -38,15 +38,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         navBarUI()
         
-        noResultsLabel.hidden = true
         self.title = "Movie Search"
         noInternetConnectionAlert()
-        
-       self.store.getMovieRepositories("pokemon") {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.movieCollectionView.reloadData()
-            })
-        }
+    
     }
     
     func noInternetConnectionAlert()
@@ -54,13 +48,20 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         if Reachability.isConnectedToNetwork() == true
         {
-            //nothing
+            noResultsLabel.hidden = true
+            self.store.getMovieRepositories("who") {
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    self.movieCollectionView.reloadData()
+                })
+            }
         }
         else
         {
             let noInternetAlertController = UIAlertController(title: "No Wifi Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
             noInternetAlertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(noInternetAlertController, animated: true, completion: nil)            
+            self.presentViewController(noInternetAlertController, animated: true, completion: nil)
+            self.noResultsLabel.text = "No Wifi Connection"
+          
         }
     }
     
@@ -118,7 +119,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             if search.isEmpty == true
             {
                 self.store.api.getNextPage()
-                self.store.getMovieRepositories("pokemon", completion: { 
+                self.store.getMovieRepositories("who", completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.movieCollectionView.reloadData()
@@ -212,7 +213,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         navBarColor.backgroundColor = UIColor.blueColor()
         navBarColor.alpha = 1.0
       
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 20)!]
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Bold", size: 20)!]
     
         
     }

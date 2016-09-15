@@ -43,7 +43,7 @@ class FavoritesTableViewController: UITableViewController
         navBarColor.backgroundColor = UIColor.blueColor()
         navBarColor.alpha = 1.0
         
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Light", size: 20)!]
+        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Bold", size: 20)!]
         
     }
 
@@ -87,6 +87,27 @@ class FavoritesTableViewController: UITableViewController
         }
        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            
+            let context = store.managedObjectContext
+            context.deleteObject(store.favorites[indexPath.row])
+            
+            store.favorites.removeAtIndex(indexPath.row)
+            store.saveContext()
+            
+            self.tableView.reloadData()
+        }
     }
 
     

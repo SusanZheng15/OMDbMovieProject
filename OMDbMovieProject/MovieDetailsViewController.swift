@@ -35,7 +35,7 @@ class MovieDetailsViewController: UIViewController
         self.backColoring.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.80)
         self.title = movie?.title
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save Movie", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save to favorites", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
 
     }
     
