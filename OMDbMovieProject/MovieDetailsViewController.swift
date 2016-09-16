@@ -35,7 +35,7 @@ class MovieDetailsViewController: UIViewController
         self.backColoring.backgroundColor = UIColor.darkGrayColor()
         self.title = movie?.title
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
     }
     
     
@@ -49,6 +49,7 @@ class MovieDetailsViewController: UIViewController
             
             if object.count == 0
             {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
                 print("theres nothing in core data")
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
@@ -74,6 +75,7 @@ class MovieDetailsViewController: UIViewController
                                 if let unwrappedImage = dtinternet
                                 {
                                     self.posterImageView.image = UIImage.init(data: unwrappedImage)
+                                    
                                 }
                             }
                             
@@ -89,6 +91,7 @@ class MovieDetailsViewController: UIViewController
                 
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
+                    self.navigationItem.rightBarButtonItem = nil
                     print("Has it")
                     self.moviePlot.text = movie.movies?.first?.plot
                     self.releasedLabel.text = movie.movies?.first?.released
@@ -115,8 +118,9 @@ class MovieDetailsViewController: UIViewController
                         
                     }
                 }
-                else if object.count != 0 && savedMovieID != movieObject.imdbID
+                else if savedMovieID != movieObject.imdbID
                 {
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
                     print("doesnt have it")
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
@@ -142,6 +146,7 @@ class MovieDetailsViewController: UIViewController
                                     if let unwrappedImage = dtinternet
                                     {
                                         self.posterImageView.image = UIImage.init(data: unwrappedImage)
+                                        
                                     }
                                 }
                                 

@@ -30,7 +30,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
-        moviesSearchBar.showsCancelButton = true
         moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
         
         
@@ -154,11 +153,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
-  
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        //self.store.movieArray.removeAll()
-    }
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
