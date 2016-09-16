@@ -465,7 +465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C0-Ci-EuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4572.5" y="263.5"/>
+            <point key="canvasLocation" x="4762.5" y="643.5"/>
         </scene>
         <!--Full Plot View Controller-->
         <scene sceneID="1fd-rL-fij">
@@ -514,7 +514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5WR-jS-nN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5080.5" y="258.5"/>
+            <point key="canvasLocation" x="5510.5" y="643.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WDr-RE-UBv">
