@@ -52,14 +52,14 @@ class FullPlotViewController: UIViewController
             {
                 guard let savedMovieID = movies.movies?.first?.imdbID else {return}
                 
-                if savedMovieID == movieObject.imdbID
+                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
                     print("\(movieObject.title) Have summary")
                     self.fullPlotSummaryTextField.text = movies.movies?.first?.fullSummary
                 }
-                else// if savedMovieID != movieObject.imdbID
+                else if object.count != 0 && savedMovieID != movieObject.imdbID
                 {
-                    print("\(movieObject.title) doesnt have summary")
+                    print("doesnt have summary")
                     
                     guard let unwrappedMovie = movie else {return}
                     

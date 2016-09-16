@@ -99,7 +99,7 @@ class FavoritesTableViewController: UITableViewController
     {
         if editingStyle == UITableViewCellEditingStyle.Delete
         {
-            
+
             let context = store.managedObjectContext
             context.deleteObject(store.favorites[indexPath.row])
             
