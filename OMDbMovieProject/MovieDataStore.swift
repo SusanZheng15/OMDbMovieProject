@@ -46,16 +46,6 @@ class MovieDataStore
     func getDetailsFor(movie: Movie, completion: ()->())
     {
         api.getMovieDetailAPICallWithID(movie.imdbID!) { (dictionary) in
-            
-            guard let repoDictionary = dictionary as? NSDictionary else { fatalError("Object in array is of non-dictionary type") }
-            
-            let movieEntity = NSEntityDescription.entityForName("Movie", inManagedObjectContext: self.managedObjectContext)
-            
-            guard let entity = movieEntity else {fatalError("entity not working")}
-            
-            let repo = Movie(dictionary: repoDictionary, entity:entity , managedObjectContext: self.managedObjectContext)
-            
-            self.movieArray.append(repo)
             movie.updateMovieDetailsFrom(dictionary, completion: { success in
                 if success {
                     completion()
