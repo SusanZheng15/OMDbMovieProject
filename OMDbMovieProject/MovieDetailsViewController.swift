@@ -24,6 +24,7 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var directorLabel: UILabel!
     @IBOutlet weak var imbdScoreLabel: UILabel!
     @IBOutlet weak var metaScoreLabel: UILabel!
+    @IBOutlet weak var posterImage: UIImageView!
     
     override func viewDidLoad()
     {
@@ -31,9 +32,12 @@ class MovieDetailsViewController: UIViewController
         
         omdbMovie.fetchData()
         checkForData()
-        
-        self.backColoring.backgroundColor = UIColor.darkGrayColor()
+    
         self.title = movie?.title
+         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        
         
     }
     
@@ -48,7 +52,6 @@ class MovieDetailsViewController: UIViewController
             
             if object.count == 0
             {
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
                 print("theres nothing in core data")
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
@@ -61,24 +64,7 @@ class MovieDetailsViewController: UIViewController
                         self.imbdScoreLabel.text = self.movie?.imdbRating
                         self.metaScoreLabel.text = self.movie?.metaScore
                         
-                        
-                        let imageString = self.movie?.poster
-                        
-                        if let unwrappedString = imageString
-                        {
-                            let stringPosterUrl = NSURL(string: unwrappedString)
-                            if let url = stringPosterUrl
-                            {
-                                let dtinternet = NSData(contentsOfURL: url)
-                                
-                                if let unwrappedImage = dtinternet
-                                {
-                                    self.posterImageView.image = UIImage.init(data: unwrappedImage)
-                                    
-                                }
-                            }
-                            
-                        }
+                        self.imageDisplay()
                     })
                 }
                 
@@ -90,7 +76,6 @@ class MovieDetailsViewController: UIViewController
                 
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
-                    self.navigationItem.rightBarButtonItem = nil
                     print("Has it")
                     self.moviePlot.text = movie.movies?.first?.plot
                     self.releasedLabel.text = movie.movies?.first?.released
@@ -99,27 +84,10 @@ class MovieDetailsViewController: UIViewController
                     self.starsLabel.text = movie.movies?.first?.actors
                     self.imbdScoreLabel.text = movie.movies?.first?.imdbRating
                     self.metaScoreLabel.text = movie.movies?.first?.metaScore
-                    
-                    let imageString = movie.movies?.first?.poster
-                    
-                    if let unwrappedString = imageString
-                    {
-                        let stringPosterUrl = NSURL(string: unwrappedString)
-                        if let url = stringPosterUrl
-                        {
-                            let dtinternet = NSData(contentsOfURL: url)
-                            
-                            if let unwrappedImage = dtinternet
-                            {
-                                self.posterImageView.image = UIImage.init(data: unwrappedImage)
-                            }
-                        }
-                        
-                    }
+                    self.imageDisplay()
                 }
                 else if savedMovieID != movieObject.imdbID
                 {
-                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
                     print("doesnt have it")
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
@@ -132,24 +100,8 @@ class MovieDetailsViewController: UIViewController
                             self.imbdScoreLabel.text = self.movie?.imdbRating
                             self.metaScoreLabel.text = self.movie?.metaScore
                             
+                            self.imageDisplay()
                             
-                            let imageString = self.movie?.poster
-                            
-                            if let unwrappedString = imageString
-                            {
-                                let stringPosterUrl = NSURL(string: unwrappedString)
-                                if let url = stringPosterUrl
-                                {
-                                    let dtinternet = NSData(contentsOfURL: url)
-                                    
-                                    if let unwrappedImage = dtinternet
-                                    {
-                                        self.posterImageView.image = UIImage.init(data: unwrappedImage)
-                                        
-                                    }
-                                }
-                                
-                            }
                             })
                         }
                     }
@@ -160,6 +112,35 @@ class MovieDetailsViewController: UIViewController
             
             catch{print("Error")}
         
+    }
+    
+    
+    func imageDisplay()
+    {
+        let imageString = self.movie?.poster
+        if let unwrappedString = imageString
+        {
+            let stringPosterUrl = NSURL(string: unwrappedString)
+            if let url = stringPosterUrl
+            {
+                let dtinternet = NSData(contentsOfURL: url)
+                
+                if let unwrappedImage = dtinternet
+                {
+                    self.posterImage.image = UIImage.init(data: unwrappedImage)
+                    self.posterImageView.image = UIImage.init(data: unwrappedImage)
+                    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                    blurEffectView.frame = self.posterImageView.bounds
+                    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+                    
+                    self.posterImageView.addSubview(blurEffectView)
+                    
+                    
+                }
+            }
+            
+        }
     }
     
     
@@ -176,6 +157,7 @@ class MovieDetailsViewController: UIViewController
         let okayAction = UIAlertAction.init(title: "Okay", style: .Cancel) { (action) in
         }
         saveAlert.addAction(okayAction)
+        self.navigationItem.rightBarButtonItem = nil
         self.presentViewController(saveAlert, animated: true){
         }
         
@@ -190,7 +172,7 @@ class MovieDetailsViewController: UIViewController
         
         omdbMovie.saveContext()
         
-       
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
