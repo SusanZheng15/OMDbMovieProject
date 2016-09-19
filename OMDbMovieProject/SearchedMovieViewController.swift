@@ -29,19 +29,50 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         moviesSearchBar.delegate = self
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
-        movieCollectionView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.8)
+      
         moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
         
         
         super.viewDidLoad()
         
-        navBarUI()
-        
+      
+        self.tabBarController?.navigationItem.title = "Movie Search"
         self.title = "Movie Search"
         noInternetConnectionAlert()
         print(store.movieArray.count)
+        
+        
+        noResultsLabel.hidden = true
+        self.store.getMovieRepositories("who") {
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.movieCollectionView.reloadData()
+            })
+        }
+        
     
     }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        noInternetConnectionAlert()
+    }
+    
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        
+//        guard let flowLayout = movieCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else
+//        {
+//            return
+//        }
+//        
+//        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+//            //landscape
+//        } else {
+//            //portrait
+//        }
+//        
+//        flowLayout.invalidateLayout()
+//    }
 
     
     func noInternetConnectionAlert()
@@ -49,12 +80,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         if Reachability.isConnectedToNetwork() == true
         {
-            noResultsLabel.hidden = true
-            self.store.getMovieRepositories("who") {
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    self.movieCollectionView.reloadData()
-                })
-            }
+            moviesSearchBar.userInteractionEnabled = true
         }
         else
         {
@@ -62,7 +88,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             noInternetAlertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(noInternetAlertController, animated: true, completion: nil)
             self.noResultsLabel.text = "No Wifi Connection"
-          
+            moviesSearchBar.userInteractionEnabled = false
+    
         }
     }
     
@@ -105,8 +132,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
             return cell
         }
-
-
     
      //if bottom of collection view is reached, get more
     func scrollViewDidScroll(scrollView: UIScrollView)
@@ -156,6 +181,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
+        
     }
 
    
@@ -188,7 +214,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                     })
                 })
             
-            
         }
         if store.movieArray.count == 0
         {
@@ -199,22 +224,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }        
         
     }
-    
+ 
     func searchBarCancelButtonClicked(searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
-    }
-    
-    func navBarUI()
-    {
-        let navBarColor = navigationController!.navigationBar
-        
-        navBarColor.backgroundColor = UIColor.blueColor()
-        navBarColor.alpha = 1.0
-      
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Bold", size: 20)!]
-    
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)

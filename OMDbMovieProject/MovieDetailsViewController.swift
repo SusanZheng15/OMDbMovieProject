@@ -12,11 +12,12 @@ import CoreData
 class MovieDetailsViewController: UIViewController
 {
     var movie: Movie?
+    var movieID: String?
     
     let omdbMovie = MovieDataStore.sharedInstance
     
     @IBOutlet weak var backColoring: UIView!
-    @IBOutlet weak var moviePlot: UILabel!
+   
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
@@ -25,16 +26,23 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var imbdScoreLabel: UILabel!
     @IBOutlet weak var metaScoreLabel: UILabel!
     @IBOutlet weak var posterImage: UIImageView!
-    
+    @IBOutlet weak var moviePlotTextField: UITextView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         omdbMovie.fetchData()
+        
         checkForData()
-    
+        
+        self.activityIndicator.hidden = false
+        self.activityIndicator.startAnimating()
+        
+        self.tabBarController?.navigationItem.title = movie?.title
         self.title = movie?.title
-         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
@@ -56,13 +64,15 @@ class MovieDetailsViewController: UIViewController
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
                     dispatch_async(dispatch_get_main_queue(),{
-                        self.moviePlot.text = self.movie?.plot
+                        self.moviePlotTextField.text = self.movie?.plot
                         self.releasedLabel.text = self.movie?.released
                         self.directorLabel.text = self.movie?.director
                         self.writerLabel.text = self.movie?.writer
                         self.starsLabel.text = self.movie?.actors
                         self.imbdScoreLabel.text = self.movie?.imdbRating
                         self.metaScoreLabel.text = self.movie?.metaScore
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.hidden = true
                         
                         self.imageDisplay()
                     })
@@ -77,7 +87,7 @@ class MovieDetailsViewController: UIViewController
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
                     print("Has it")
-                    self.moviePlot.text = movie.movies?.first?.plot
+                    self.moviePlotTextField.text = movie.movies?.first?.plot
                     self.releasedLabel.text = movie.movies?.first?.released
                     self.directorLabel.text = movie.movies?.first?.director
                     self.writerLabel.text = movie.movies?.first?.writer
@@ -85,6 +95,8 @@ class MovieDetailsViewController: UIViewController
                     self.imbdScoreLabel.text = movie.movies?.first?.imdbRating
                     self.metaScoreLabel.text = movie.movies?.first?.metaScore
                     self.imageDisplay()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidden = true
                 }
                 else if savedMovieID != movieObject.imdbID
                 {
@@ -92,14 +104,15 @@ class MovieDetailsViewController: UIViewController
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
                         dispatch_async(dispatch_get_main_queue(),{
-                            self.moviePlot.text = self.movie?.plot
+                            self.moviePlotTextField.text = self.movie?.plot
                             self.releasedLabel.text = self.movie?.released
                             self.directorLabel.text = self.movie?.director
                             self.writerLabel.text = self.movie?.writer
                             self.starsLabel.text = self.movie?.actors
                             self.imbdScoreLabel.text = self.movie?.imdbRating
                             self.metaScoreLabel.text = self.movie?.metaScore
-                            
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.hidden = true
                             self.imageDisplay()
                             
                             })

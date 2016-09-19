@@ -19,7 +19,7 @@ class FavoritesTableViewController: UITableViewController
         super.viewDidLoad()
         
         navBarUI()
-        self.title = "Favorites"
+        self.tabBarController?.navigationItem.title = "Favorites"
         
         store.fetchData()
         self.tableView.reloadData()
