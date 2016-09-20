@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B2B8CB01D8A212B005EC646 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2B8CAF1D8A212B005EC646 /* Reachability.swift */; };
+		1B3000FB1D91B3CF00705CD4 /* rsz_movielogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B3000FA1D91B3CF00705CD4 /* rsz_movielogo.png */; };
 		1B3249B81D87A2C0006F0CF5 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3249B71D87A2C0006F0CF5 /* FavoritesTableViewController.swift */; };
 		1B3249BC1D87B5A9006F0CF5 /* FavoritesMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3249BB1D87B5A9006F0CF5 /* FavoritesMovieTableViewCell.swift */; };
 		1B3249C11D884EBB006F0CF5 /* movieDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1B3249BF1D884EBB006F0CF5 /* movieDataModel.xcdatamodeld */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		1B2B8CAF1D8A212B005EC646 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		1B3000FA1D91B3CF00705CD4 /* rsz_movielogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_movielogo.png; sourceTree = "<group>"; };
 		1B3249B71D87A2C0006F0CF5 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		1B3249BB1D87B5A9006F0CF5 /* FavoritesMovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesMovieTableViewCell.swift; sourceTree = "<group>"; };
 		1B3249C01D884EBB006F0CF5 /* movieDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = movieDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -64,7 +66,7 @@
 		1BAD08B41D8DDF570088A4C0 /* Casablanca.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Casablanca.jpg; sourceTree = "<group>"; };
 		1BAD08B61D8DE1100088A4C0 /* psycho.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = psycho.jpg; sourceTree = "<group>"; };
 		1BE559C21D81FB26004CDF5E /* MovieDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDataStore.swift; sourceTree = "<group>"; };
-		1BE963B31D79DD990060A5C0 /* OMDbMovieProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OMDbMovieProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE963B31D79DD990060A5C0 /* Movie Hub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Hub.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE963B61D79DD990060A5C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BE963BB1D79DD990060A5C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1BE963BD1D79DD990060A5C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		1BE963B41D79DD990060A5C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1BE963B31D79DD990060A5C0 /* OMDbMovieProject.app */,
+				1BE963B31D79DD990060A5C0 /* Movie Hub.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,6 +138,7 @@
 				1BAD08AC1D8DDEF50088A4C0 /* shawshankRedemption.jpg */,
 				1BF9B6901D80D43300366B04 /* pikachu.png */,
 				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
+				1B3000FA1D91B3CF00705CD4 /* rsz_movielogo.png */,
 				1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */,
 				1BE963C21D79DD990060A5C0 /* Info.plist */,
 			);
@@ -159,7 +162,7 @@
 			);
 			name = OMDbMovieProject;
 			productName = OMDbMovieProject;
-			productReference = 1BE963B31D79DD990060A5C0 /* OMDbMovieProject.app */;
+			productReference = 1BE963B31D79DD990060A5C0 /* Movie Hub.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -204,6 +207,7 @@
 				1BAD08A91D8DDEAC0088A4C0 /* theWizardOfOz.jpg in Resources */,
 				1BAD08B71D8DE1100088A4C0 /* psycho.jpg in Resources */,
 				1BE963C11D79DD990060A5C0 /* LaunchScreen.storyboard in Resources */,
+				1B3000FB1D91B3CF00705CD4 /* rsz_movielogo.png in Resources */,
 				1BE963BE1D79DD990060A5C0 /* Assets.xcassets in Resources */,
 				1BAD08B31D8DDF4E0088A4C0 /* citizenKane.jpg in Resources */,
 				1BAD08AF1D8DDF030088A4C0 /* lawrenceOfArabia.jpg in Resources */,
@@ -361,7 +365,7 @@
 				INFOPLIST_FILE = OMDbMovieProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Flatiron-School.OMDbMovieProject";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Movie Hub";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -375,7 +379,7 @@
 				INFOPLIST_FILE = OMDbMovieProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Flatiron-School.OMDbMovieProject";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Movie Hub";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

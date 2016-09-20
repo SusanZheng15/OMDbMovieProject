@@ -14,8 +14,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var noResultsLabel: UILabel!
-    
     @IBOutlet weak var searchActivityIndictor: UIActivityIndicatorView!
+    
     var movie : Movie?
     
     let store = MovieDataStore.sharedInstance
@@ -23,7 +23,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     deinit{
         print("Im dead")
     }
-     
     
     override func viewDidLoad()
     {
@@ -36,30 +35,45 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         super.viewDidLoad()
         
-      
         
         self.tabBarController?.navigationItem.title = "Movie Search"
         self.searchActivityIndictor.hidden = false
         self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
+        
+        navigationController!.navigationBar.barTintColor = UIColor.greenColor()
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         noInternetConnectionAlert()
-       
-        
-        
     
+    }
+    
+ 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        guard let flowLayout = movieCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+            //landscape
+        } else {
+            //portrait
+        }
+        
+        flowLayout.invalidateLayout()
     }
     
     override func viewWillAppear(animated: Bool)
     {
-        noInternetConnectionAlert()
+        checkingForWifi()
     }
     
   //  override func view
     
     func noInternetConnectionAlert()
     {
-        
-        if Reachability.isConnectedToNetwork() == true
+       if Reachability.isConnectedToNetwork() == true
         {
             self.store.getMovieRepositories("who") {
                 NSOperationQueue.mainQueue().addOperationWithBlock({
@@ -68,27 +82,53 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                     self.searchActivityIndictor.stopAnimating()
                 })
             }
-
             moviesSearchBar.userInteractionEnabled = true
         }
         else
         {
             let noInternetAlertController = UIAlertController(title: "No Wifi Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
             
-            self.presentViewController(noInternetAlertController, animated: true, completion: nil)
+                self.presentViewController(noInternetAlertController, animated: true, completion: nil)
             
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                     noInternetAlertController.dismissViewControllerAnimated(true, completion: nil)
                 })
             }
-            self.noResultsLabel.text = "No Wifi Connection"
-            moviesSearchBar.userInteractionEnabled = false
-    
+            self.store.movieArray.removeAll()
+            dispatch_async(dispatch_get_main_queue(),{
+                self.movieCollectionView.reloadData()
+                
+            })
         }
+        
     }
     
+    func checkingForWifi()
+    {
+        if Reachability.isConnectedToNetwork() == true
+        {
+            
+        }
+        else
+        {
+            self.store.movieArray.removeAll()
+            dispatch_async(dispatch_get_main_queue(),{
+                self.movieCollectionView.reloadData()
+               
+            })
+            let noInternetAlertController = UIAlertController(title: "No Wifi Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            
+            self.presentViewController(noInternetAlertController, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noInternetAlertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+
+        }
+    }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
@@ -98,6 +138,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
+        checkingForWifi()
         
         guard self.store.movieArray.count > 0 else { return cell }
         
@@ -179,6 +220,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
+        checkingForWifi()
         
     }
 
@@ -222,6 +264,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             })
         }        
         
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        checkingForWifi()
     }
  
     func searchBarCancelButtonClicked(searchBar: UISearchBar)

@@ -18,8 +18,9 @@ class FavoritesTableViewController: UITableViewController
     {
         super.viewDidLoad()
         
-        navBarUI()
-        self.tabBarController?.navigationItem.title = "Favorites"
+      //  navBarUI()
+        navigationController!.navigationBar.barTintColor = UIColor.greenColor()
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         store.fetchData()
         self.tableView.reloadData()
@@ -36,16 +37,16 @@ class FavoritesTableViewController: UITableViewController
     }
 
     
-    func navBarUI()
-    {
-        let navBarColor = navigationController!.navigationBar
-        
-        navBarColor.backgroundColor = UIColor.blueColor()
-        navBarColor.alpha = 1.0
-        
-        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Bold", size: 20)!]
-        
-    }
+//    func navBarUI()
+//    {
+//        let navBarColor = navigationController!.navigationBar
+//        
+//        navBarColor.backgroundColor = UIColor.blueColor()
+//        navBarColor.alpha = 1.0
+//        
+//        navBarColor.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Bold", size: 20)!]
+//        
+//    }
 
     
     // MARK: - Table view data source

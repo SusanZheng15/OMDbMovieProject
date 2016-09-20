@@ -18,7 +18,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
     
     let titleAndPic : [String : String] = ["goneWithTheWind.jpg": "Gone With the Wind", "Casablanca.jpg" : "Casablanca", "theWizardOfOz.jpg": "The Wizard of Oz","theGodfather.jpg": "The Godfather", "shawshankRedemption.jpg" : "The Shawshank Redemption", "toKillAMockingBird.jpg" : "To Kill a Mockingbird", "citizenKane.jpg" : "Citizen Kane", "vertigo.jpg":"Vertigo", "LawrenceOfArabia.jpg" : "Lawrence Of Arabia" ,  "psycho.jpg": "Psycho"]
     
-    let topMoviePoster : [String] = ["goneWithTheWind.jpg", "Casablanca.jpg", "theWizardOfOz.jpg", "theGodfather.jpg", "shawshankRedemption.jpg", "toKillAMockingBird.jpg", "citizenKane.jpg", "vertigo.jpg", "LawrenceOfArabia.jpg", "psycho.jpg"]
+    let topMoviePoster : [String] = ["goneWithTheWind.jpg", "Casablanca.jpg", "theWizardOfOz.jpg", "theGodfather.jpg", "shawshankRedemption.jpg", "toKillAMockingBird.jpg", "citizenKane.jpg", "vertigo.jpg", "lawrenceOfArabia.jpg", "psycho.jpg"]
 
     
     let topMoviesID : NSArray = ["tt0031381", "tt0034583", "tt0032138", "tt0068646", "tt0111161", "tt0056592", "tt0033467", "tt0052357", "tt0056172", "tt0054215"]

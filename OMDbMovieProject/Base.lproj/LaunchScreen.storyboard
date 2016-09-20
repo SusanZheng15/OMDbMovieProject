@@ -16,12 +16,24 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rsz_movielogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FB-3un">
+                                <rect key="frame" x="160" y="128" width="281" height="232"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4V5-FB-3un" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-56" id="GNo-Hh-96j"/>
+                            <constraint firstItem="4V5-FB-3un" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XSC-qu-twy"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="-156" y="374"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rsz_movielogo.png" width="281" height="232"/>
+    </resources>
 </document>

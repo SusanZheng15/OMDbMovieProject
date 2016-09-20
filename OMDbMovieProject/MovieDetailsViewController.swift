@@ -28,6 +28,7 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var moviePlotTextField: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
