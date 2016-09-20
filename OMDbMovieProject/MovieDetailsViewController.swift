@@ -165,13 +165,17 @@ class MovieDetailsViewController: UIViewController
     func saveMovie()
     {
         guard let savedMovieTitle = self.movie?.title else {return}
-        let saveAlert = UIAlertController.init(title: "Saved", message: "\(savedMovieTitle) has been saved to favorites", preferredStyle: .Alert)
         
-        let okayAction = UIAlertAction.init(title: "Okay", style: .Cancel) { (action) in
-        }
-        saveAlert.addAction(okayAction)
-        self.navigationItem.rightBarButtonItem = nil
-        self.presentViewController(saveAlert, animated: true){
+        let saveAlert = UIAlertController(title: "Saved",
+                                      message: "\(savedMovieTitle) has been saved to favorites",
+                                      preferredStyle: .Alert)
+        self.presentViewController(saveAlert, animated: true, completion: nil)
+
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                saveAlert.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
         
         let context = omdbMovie.managedObjectContext

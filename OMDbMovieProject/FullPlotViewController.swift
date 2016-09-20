@@ -15,12 +15,15 @@ class FullPlotViewController: UIViewController
     let omdbMovie = MovieDataStore.sharedInstance
     
     @IBOutlet weak var fullPlotSummaryTextField: UITextView!
- 
+    @IBOutlet weak var fullPlotActivityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         omdbMovie.fetchData()
+        
+        fullPlotActivityIndicator.hidden = false
+        fullPlotActivityIndicator.startAnimating()
         
         checkForFullSummary()
         
@@ -44,6 +47,8 @@ class FullPlotViewController: UIViewController
                 {
                     dispatch_async(dispatch_get_main_queue(),{
                         self.fullPlotSummaryTextField.text = self.movie?.fullSummary
+                        self.fullPlotActivityIndicator.hidden = true
+                        self.fullPlotActivityIndicator.stopAnimating()
                     })
                 }
             }
@@ -67,6 +72,8 @@ class FullPlotViewController: UIViewController
                     {
                         dispatch_async(dispatch_get_main_queue(),{
                             self.fullPlotSummaryTextField.text = self.movie?.fullSummary
+                            self.fullPlotActivityIndicator.hidden = true
+                            self.fullPlotActivityIndicator.stopAnimating()
                         })
                     }
                     

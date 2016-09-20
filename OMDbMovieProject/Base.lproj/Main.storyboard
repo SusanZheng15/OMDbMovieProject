@@ -31,18 +31,15 @@
                                     <size key="itemSize" width="165" height="267"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="20" minY="10" maxX="20" maxY="10"/>
                                 </collectionViewFlowLayout>
-                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="utb-tu-Z38">
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" id="VCl-Ka-bhc">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="yuR-b2-Pn0" customClass="SearchedMovieCollectionViewCell" customModule="OMDbMovieProject" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="150" height="270"/>
+                                        <rect key="frame" x="20" y="10" width="150" height="270"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="270"/>
@@ -85,6 +82,12 @@
                                     <outlet property="delegate" destination="plm-nj-G1G" id="z5t-5g-lcP"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZD-St-CTb">
+                                <rect key="frame" x="20" y="291" width="335" height="21"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -103,7 +106,8 @@
                     <connections>
                         <outlet property="movieCollectionView" destination="Ht4-4S-gzo" id="HOc-JQ-l4Q"/>
                         <outlet property="moviesSearchBar" destination="0fS-Xf-pnA" id="9ap-yn-i1X"/>
-                        <outlet property="noResultsLabel" destination="utb-tu-Z38" id="c9x-uF-QcP"/>
+                        <outlet property="noResultsLabel" destination="AZD-St-CTb" id="ZX0-QS-Xia"/>
+                        <outlet property="searchActivityIndictor" destination="VCl-Ka-bhc" id="vF3-Sp-WKQ"/>
                         <outlet property="searchDisplayController" destination="9Zr-2n-a9O" id="iSZ-Jm-zLH"/>
                     </connections>
                 </viewController>
@@ -474,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1C0-Ci-EuH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4762.5" y="643.5"/>
+            <point key="canvasLocation" x="4772.5" y="283.5"/>
         </scene>
         <!--Full Plot View Controller-->
         <scene sceneID="1fd-rL-fij">
@@ -495,6 +499,9 @@
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="z1J-fb-m5D">
+                                <rect key="frame" x="177" y="282" width="20" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLOT SUMMARY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kg-DM-gEE">
                                 <rect key="frame" x="16" y="93" width="149" height="21"/>
                                 <constraints>
@@ -518,12 +525,13 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="fullPlotActivityIndicator" destination="z1J-fb-m5D" id="GE9-9v-TOH"/>
                         <outlet property="fullPlotSummaryTextField" destination="cqk-Rm-Css" id="zYj-ON-MgS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5WR-jS-nN8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5510.5" y="643.5"/>
+            <point key="canvasLocation" x="5496.5" y="283.5"/>
         </scene>
         <!--Top 10 Movies of all times-->
         <scene sceneID="bX4-EC-hkE">
@@ -663,6 +671,6 @@
         <image name="pikachu.png" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RCe-mQ-62I"/>
+        <segue reference="W5h-mO-ZJh"/>
     </inferredMetricsTieBreakers>
 </document>

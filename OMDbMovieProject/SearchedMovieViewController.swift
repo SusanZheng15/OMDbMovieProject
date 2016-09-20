@@ -15,6 +15,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var noResultsLabel: UILabel!
     
+    @IBOutlet weak var searchActivityIndictor: UIActivityIndicatorView!
     var movie : Movie?
     
     let store = MovieDataStore.sharedInstance
@@ -36,18 +37,14 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
       
+        
         self.tabBarController?.navigationItem.title = "Movie Search"
+        self.searchActivityIndictor.hidden = false
+        self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
         noInternetConnectionAlert()
-        print(store.movieArray.count)
+       
         
-        
-        noResultsLabel.hidden = true
-        self.store.getMovieRepositories("who") {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.movieCollectionView.reloadData()
-            })
-        }
         
     
     }
@@ -57,36 +54,35 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         noInternetConnectionAlert()
     }
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        
-//        guard let flowLayout = movieCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else
-//        {
-//            return
-//        }
-//        
-//        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
-//            //landscape
-//        } else {
-//            //portrait
-//        }
-//        
-//        flowLayout.invalidateLayout()
-//    }
-
+  //  override func view
     
     func noInternetConnectionAlert()
     {
         
         if Reachability.isConnectedToNetwork() == true
         {
+            self.store.getMovieRepositories("who") {
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    self.movieCollectionView.reloadData()
+                    self.searchActivityIndictor.hidden = true
+                    self.searchActivityIndictor.stopAnimating()
+                })
+            }
+
             moviesSearchBar.userInteractionEnabled = true
         }
         else
         {
             let noInternetAlertController = UIAlertController(title: "No Wifi Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
-            noInternetAlertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            
             self.presentViewController(noInternetAlertController, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noInternetAlertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
             self.noResultsLabel.text = "No Wifi Connection"
             moviesSearchBar.userInteractionEnabled = false
     
@@ -125,6 +121,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                             cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
                             cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
                             self.noResultsLabel.hidden = true
+                            self.searchActivityIndictor.hidden = true
+                            self.searchActivityIndictor.stopAnimating()
                         })
                     }
                 }
@@ -220,6 +218,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             dispatch_async(dispatch_get_main_queue(),{
                 self.movieCollectionView.reloadData()
                 self.noResultsLabel.hidden = false
+                self.noResultsLabel.text = "No Results"
             })
         }        
         
