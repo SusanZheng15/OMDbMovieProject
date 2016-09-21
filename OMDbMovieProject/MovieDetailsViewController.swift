@@ -247,7 +247,7 @@ class MovieDetailsViewController: UIViewController
 
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                 saveAlert.dismissViewControllerAnimated(true, completion: nil)
             })
         }
