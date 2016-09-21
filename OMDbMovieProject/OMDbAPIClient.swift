@@ -87,35 +87,6 @@ class OMDbAPIClient
         
     }
     
-//    func getMovieByTitle(title: String, completion: (NSDictionary)->())
-//    {
-//        
-//        let urlString = "https://www.omdbapi.com/?t=\(title)"
-//        let url = NSURL(string: urlString)
-//        
-//        guard let unwrappedURL = url else {return}
-//        
-//        let session = NSURLSession.sharedSession()
-//        
-//        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
-//            
-//            guard let unwrappedData = data else {return}
-//            
-//            do{
-//                let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-//                
-//                completion(movieSearched)
-//                
-//            }
-//            catch
-//            {
-//                print("did i crash?")
-//            }
-//        }
-//        dataTask.resume()
-//        
-//    }
-    
     func getMovieDetailAPICallWithID(id: String, completion: (NSDictionary)-> ())
     {
         let urlString = "http://www.omdbapi.com/?i=\(id)"

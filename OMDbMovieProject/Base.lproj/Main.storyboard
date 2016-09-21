@@ -204,21 +204,21 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikachu.png" translatesAutoresizingMaskIntoConstraints="NO" id="oHx-hr-9Ub">
-                                            <rect key="frame" x="8" y="0.0" width="85" height="99"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="85" id="0b9-h1-v9P"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="writerLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nD-O8-I9X">
                                             <rect key="frame" x="155" y="73" width="179" height="21"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikachu.png" translatesAutoresizingMaskIntoConstraints="NO" id="oHx-hr-9Ub">
+                                            <rect key="frame" x="13" y="6" width="79" height="95"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="79" id="0b9-h1-v9P"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="3nD-O8-I9X" firstAttribute="leading" secondItem="oHx-hr-9Ub" secondAttribute="trailing" constant="62" id="2LX-dy-DQK"/>
+                                        <constraint firstItem="3nD-O8-I9X" firstAttribute="leading" secondItem="oHx-hr-9Ub" secondAttribute="trailing" constant="63" id="2LX-dy-DQK"/>
                                         <constraint firstItem="j1C-Z7-HEm" firstAttribute="firstBaseline" secondItem="3nD-O8-I9X" secondAttribute="firstBaseline" id="2Lx-ri-8jG"/>
                                         <constraint firstItem="hS6-1t-6eh" firstAttribute="top" secondItem="m38-sJ-Ruw" secondAttribute="bottom" constant="25" id="5aG-7m-sm0"/>
                                         <constraint firstItem="7nA-54-5dS" firstAttribute="top" secondItem="y2A-tB-ESV" secondAttribute="bottom" constant="8" symbolic="YES" id="5dL-Dd-twf"/>
@@ -237,14 +237,14 @@
                                         <constraint firstItem="7nA-54-5dS" firstAttribute="trailing" secondItem="m38-sJ-Ruw" secondAttribute="trailing" id="dIO-q2-0TI"/>
                                         <constraint firstItem="j1C-Z7-HEm" firstAttribute="baseline" secondItem="3nD-O8-I9X" secondAttribute="baseline" id="fLX-oF-t5C"/>
                                         <constraint firstItem="y2A-tB-ESV" firstAttribute="top" secondItem="bcj-tC-Gqt" secondAttribute="topMargin" constant="17" id="fym-rg-S5H"/>
-                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="top" secondItem="bcj-tC-Gqt" secondAttribute="top" id="iHZ-IZ-AXf"/>
-                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="leading" secondItem="bcj-tC-Gqt" secondAttribute="leadingMargin" id="iNm-kw-onW"/>
+                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="top" secondItem="bcj-tC-Gqt" secondAttribute="top" constant="6" id="iHZ-IZ-AXf"/>
+                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="leading" secondItem="bcj-tC-Gqt" secondAttribute="leadingMargin" constant="5" id="iNm-kw-onW"/>
                                         <constraint firstItem="m38-sJ-Ruw" firstAttribute="top" secondItem="bcj-tC-Gqt" secondAttribute="topMargin" id="oQv-vd-dUV"/>
-                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="bottom" secondItem="bcj-tC-Gqt" secondAttribute="bottomMargin" id="psh-OC-HC3"/>
+                                        <constraint firstItem="oHx-hr-9Ub" firstAttribute="bottom" secondItem="bcj-tC-Gqt" secondAttribute="bottomMargin" constant="2" id="psh-OC-HC3"/>
                                         <constraint firstItem="y2A-tB-ESV" firstAttribute="trailing" secondItem="bcj-tC-Gqt" secondAttribute="trailingMargin" constant="22" id="sVk-FR-Toh"/>
                                         <constraint firstItem="7nA-54-5dS" firstAttribute="centerY" secondItem="hS6-1t-6eh" secondAttribute="centerY" id="xks-iK-uK7"/>
                                         <constraint firstItem="j1C-Z7-HEm" firstAttribute="leading" secondItem="hS6-1t-6eh" secondAttribute="leading" id="yxd-Hr-OMI"/>
-                                        <constraint firstItem="V7F-Js-SMU" firstAttribute="leading" secondItem="oHx-hr-9Ub" secondAttribute="trailing" constant="13" id="zr1-E2-TpK"/>
+                                        <constraint firstItem="V7F-Js-SMU" firstAttribute="leading" secondItem="oHx-hr-9Ub" secondAttribute="trailing" constant="14" id="zr1-E2-TpK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.14105364130247358" alpha="1" colorSpace="calibratedWhite"/>
@@ -268,7 +268,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIi-Kc-JpK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4082.5" y="1206.5"/>
+            <point key="canvasLocation" x="4082" y="1206"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="J8u-B1-nlS">
@@ -739,7 +739,7 @@
         <image name="pikachu.png" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="W5h-mO-ZJh"/>
+        <segue reference="RCe-mQ-62I"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

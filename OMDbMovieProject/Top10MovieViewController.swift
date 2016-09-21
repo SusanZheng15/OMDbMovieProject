@@ -29,10 +29,6 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
     {
         super.viewDidLoad()
         
-        let movies = dictionary["topMovies"]
-        guard let unwrappedMovies = movies else {return}
-        
-        
         store.api.getNewReleasedMovies { (array) in
             print(array)
         }
