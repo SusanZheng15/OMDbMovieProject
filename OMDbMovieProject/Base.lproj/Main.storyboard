@@ -29,6 +29,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GgQ-TT-ZZX">
+                                <rect key="frame" x="64" y="199" width="226" height="306"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ht4-4S-gzo">
                                 <rect key="frame" x="0.0" y="108" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.1410536413" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,7 +43,7 @@
                                     <inset key="sectionInset" minX="20" minY="10" maxX="20" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="VCl-Ka-bhc">
-                                    <rect key="frame" x="169" y="236" width="37" height="37"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
@@ -91,9 +94,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GgQ-TT-ZZX" firstAttribute="leading" secondItem="sGH-TB-wCO" secondAttribute="leadingMargin" constant="48" id="2eG-Ob-bOO"/>
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="top" secondItem="Hj8-o3-1zf" secondAttribute="bottom" id="AXD-Zh-Whl"/>
+                            <constraint firstItem="GgQ-TT-ZZX" firstAttribute="top" secondItem="0fS-Xf-pnA" secondAttribute="bottom" constant="91" id="Bek-du-JcZ"/>
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="leading" secondItem="Ht4-4S-gzo" secondAttribute="leading" id="Ekx-Nq-xrx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GgQ-TT-ZZX" secondAttribute="trailing" constant="69" id="HPB-cf-P3y"/>
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="OvD-4m-JV1"/>
+                            <constraint firstItem="SEU-sW-Uu0" firstAttribute="top" secondItem="GgQ-TT-ZZX" secondAttribute="bottom" constant="113" id="Wgn-E4-GGR"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="top" secondItem="sGH-TB-wCO" secondAttribute="top" constant="108" id="ZcJ-DH-s8H"/>
                             <constraint firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="Zn0-2d-Oqm"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="bottom" secondItem="SEU-sW-Uu0" secondAttribute="top" id="o40-gG-O59"/>
@@ -106,6 +113,7 @@
                         <outlet property="movieCollectionView" destination="Ht4-4S-gzo" id="HOc-JQ-l4Q"/>
                         <outlet property="moviesSearchBar" destination="0fS-Xf-pnA" id="9ap-yn-i1X"/>
                         <outlet property="noResultsLabel" destination="AZD-St-CTb" id="ZX0-QS-Xia"/>
+                        <outlet property="reachabilityImage" destination="GgQ-TT-ZZX" id="Tvx-PS-nkZ"/>
                         <outlet property="searchActivityIndictor" destination="VCl-Ka-bhc" id="vF3-Sp-WKQ"/>
                         <outlet property="searchDisplayController" destination="re8-AP-0uX" id="odh-Ry-K30"/>
                     </connections>

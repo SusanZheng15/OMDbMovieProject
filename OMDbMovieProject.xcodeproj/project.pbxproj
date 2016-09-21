@@ -35,10 +35,13 @@
 		1BE963BE1D79DD990060A5C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE963BD1D79DD990060A5C0 /* Assets.xcassets */; };
 		1BE963C11D79DD990060A5C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */; };
 		1BE963C91D79E0130060A5C0 /* OMDbAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */; };
+		1BEEF6D21D92EB62004552A6 /* InternetcheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6D11D92EB62004552A6 /* InternetcheckMark.png */; };
+		1BEEF6D41D92EB70004552A6 /* internetRedMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6D31D92EB70004552A6 /* internetRedMark.png */; };
 		1BF3CE771D91CCDD0013C957 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3CE761D91CCDD0013C957 /* Reachability.m */; };
 		1BF9B68D1D808F1A00366B04 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF9B68C1D808F1A00366B04 /* MovieDetailsViewController.swift */; };
 		1BF9B6911D80D43300366B04 /* pikachu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BF9B6901D80D43300366B04 /* pikachu.png */; };
 		1BF9B6931D80FE1900366B04 /* FullPlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF9B6921D80FE1900366B04 /* FullPlotViewController.swift */; };
+		261CFFC1B5FC11C64F84FBAB /* Pods_OMDbMovieProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2C1BF043D0C81B275DB188 /* Pods_OMDbMovieProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,12 +75,17 @@
 		1BE963C01D79DD990060A5C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BE963C21D79DD990060A5C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMDbAPIClient.swift; sourceTree = "<group>"; };
+		1BEEF6D11D92EB62004552A6 /* InternetcheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InternetcheckMark.png; sourceTree = "<group>"; };
+		1BEEF6D31D92EB70004552A6 /* internetRedMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internetRedMark.png; sourceTree = "<group>"; };
 		1BF3CE741D91CCDC0013C957 /* OMDbMovieProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OMDbMovieProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		1BF3CE751D91CCDD0013C957 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1BF3CE761D91CCDD0013C957 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1BF9B68C1D808F1A00366B04 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		1BF9B6901D80D43300366B04 /* pikachu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pikachu.png; sourceTree = "<group>"; };
 		1BF9B6921D80FE1900366B04 /* FullPlotViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPlotViewController.swift; sourceTree = "<group>"; };
+		390462BEFE9414C2FE818C1B /* Pods-OMDbMovieProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OMDbMovieProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OMDbMovieProject/Pods-OMDbMovieProject.debug.xcconfig"; sourceTree = "<group>"; };
+		6AD82D95927AC4147B3B5BFF /* Pods-OMDbMovieProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OMDbMovieProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-OMDbMovieProject/Pods-OMDbMovieProject.release.xcconfig"; sourceTree = "<group>"; };
+		BB2C1BF043D0C81B275DB188 /* Pods_OMDbMovieProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OMDbMovieProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261CFFC1B5FC11C64F84FBAB /* Pods_OMDbMovieProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +105,8 @@
 			children = (
 				1BE963B51D79DD990060A5C0 /* OMDbMovieProject */,
 				1BE963B41D79DD990060A5C0 /* Products */,
+				4D3375DADA6C93ECA2AFE4AB /* Pods */,
+				89F1DC48832B64429C94ECF5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,6 +141,8 @@
 				1BF3CE751D91CCDD0013C957 /* Reachability.h */,
 				1BF3CE761D91CCDD0013C957 /* Reachability.m */,
 				1BF3CE741D91CCDC0013C957 /* OMDbMovieProject-Bridging-Header.h */,
+				1BEEF6D11D92EB62004552A6 /* InternetcheckMark.png */,
+				1BEEF6D31D92EB70004552A6 /* internetRedMark.png */,
 				1BAD08B01D8DDF120088A4C0 /* goneWithTheWind.jpg */,
 				1BAD08AA1D8DDEBF0088A4C0 /* theGodfather.jpg */,
 				1BAD08AE1D8DDF030088A4C0 /* lawrenceOfArabia.jpg */,
@@ -141,12 +154,29 @@
 				1BAD08A61D8DDE9E0088A4C0 /* toKillAMockingBird.jpg */,
 				1BAD08AC1D8DDEF50088A4C0 /* shawshankRedemption.jpg */,
 				1BF9B6901D80D43300366B04 /* pikachu.png */,
-				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
 				1B3000FA1D91B3CF00705CD4 /* rsz_movielogo.png */,
+				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
 				1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */,
 				1BE963C21D79DD990060A5C0 /* Info.plist */,
 			);
 			path = OMDbMovieProject;
+			sourceTree = "<group>";
+		};
+		4D3375DADA6C93ECA2AFE4AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				390462BEFE9414C2FE818C1B /* Pods-OMDbMovieProject.debug.xcconfig */,
+				6AD82D95927AC4147B3B5BFF /* Pods-OMDbMovieProject.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		89F1DC48832B64429C94ECF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB2C1BF043D0C81B275DB188 /* Pods_OMDbMovieProject.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,9 +186,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BE963C51D79DD990060A5C0 /* Build configuration list for PBXNativeTarget "OMDbMovieProject" */;
 			buildPhases = (
+				DD0B4D7FEF4021F3D299C348 /* [CP] Check Pods Manifest.lock */,
 				1BE963AF1D79DD990060A5C0 /* Sources */,
 				1BE963B01D79DD990060A5C0 /* Frameworks */,
 				1BE963B11D79DD990060A5C0 /* Resources */,
+				AA8CBD9E7ED57A625BAA094C /* [CP] Embed Pods Frameworks */,
+				897BEDBDEB65754E156B13BC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,9 +248,11 @@
 				1BE963BE1D79DD990060A5C0 /* Assets.xcassets in Resources */,
 				1BAD08B31D8DDF4E0088A4C0 /* citizenKane.jpg in Resources */,
 				1BAD08AF1D8DDF030088A4C0 /* lawrenceOfArabia.jpg in Resources */,
+				1BEEF6D41D92EB70004552A6 /* internetRedMark.png in Resources */,
 				1BAD08A71D8DDE9E0088A4C0 /* toKillAMockingBird.jpg in Resources */,
 				1BAD08B51D8DDF570088A4C0 /* Casablanca.jpg in Resources */,
 				1BAD08AD1D8DDEF50088A4C0 /* shawshankRedemption.jpg in Resources */,
+				1BEEF6D21D92EB62004552A6 /* InternetcheckMark.png in Resources */,
 				1BAD08AB1D8DDEBF0088A4C0 /* theGodfather.jpg in Resources */,
 				1BAD08A51D8DDE8E0088A4C0 /* vertigo.jpg in Resources */,
 				1BE963BC1D79DD990060A5C0 /* Main.storyboard in Resources */,
@@ -227,6 +262,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		897BEDBDEB65754E156B13BC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OMDbMovieProject/Pods-OMDbMovieProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA8CBD9E7ED57A625BAA094C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OMDbMovieProject/Pods-OMDbMovieProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD0B4D7FEF4021F3D299C348 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1BE963AF1D79DD990060A5C0 /* Sources */ = {
@@ -362,6 +445,7 @@
 		};
 		1BE963C61D79DD990060A5C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 390462BEFE9414C2FE818C1B /* Pods-OMDbMovieProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -379,6 +463,7 @@
 		};
 		1BE963C71D79DD990060A5C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AD82D95927AC4147B3B5BFF /* Pods-OMDbMovieProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

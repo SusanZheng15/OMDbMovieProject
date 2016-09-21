@@ -18,6 +18,7 @@ let kREACHABLEWITHWWAN = "ReachableWithWWAN"
 class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate
 {
     
+    @IBOutlet weak var reachabilityImage: UIImageView!
     @IBOutlet weak var moviesSearchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var noResultsLabel: UILabel!
@@ -47,7 +48,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
         
         self.tabBarController?.navigationItem.title = "Movie Search"
-        //self.tabBarController?.tabBar.tintColor = UIColor.greenColor()
+       
         self.searchActivityIndictor.hidden = false
         self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
@@ -68,6 +69,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndictor.hidden = true
                 self.searchActivityIndictor.stopAnimating()
+                self.reachabilityImage.hidden = true
             })
         }
 
@@ -118,19 +120,21 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 })
             }
             moviesSearchBar.userInteractionEnabled = false
+            self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
+            self.reachabilityImage.hidden = false
+            self.view.addSubview(self.reachabilityImage)
+            self.view.bringSubviewToFront(self.reachabilityImage)
         }
         else if networkStatus.rawValue == ReachableViaWiFi.rawValue
         {
             print("Reachable with Wifi")
             reachabilityStatus = kREACHABILITYWITHWIFI
+            self.reachabilityImage.image = UIImage.init(named: "internetcheckMark.png")
+            self.reachabilityImage.hidden = false
+            self.view.addSubview(self.reachabilityImage)
+            self.view.bringSubviewToFront(self.reachabilityImage)
             
-//            self.store.getMovieRepositories("who") {
-//                NSOperationQueue.mainQueue().addOperationWithBlock({
-//                    self.movieCollectionView.reloadData()
-//                    self.searchActivityIndictor.hidden = true
-//                    self.searchActivityIndictor.stopAnimating()
-//                })
-//            }
+            
             moviesSearchBar.userInteractionEnabled = true
         }
         else if networkStatus.rawValue == ReachableViaWWAN.rawValue
@@ -138,14 +142,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             print("Reachable with WWAN")
             reachabilityStatus = kREACHABLEWITHWWAN
             
-//            self.store.getMovieRepositories("who") {
-//                NSOperationQueue.mainQueue().addOperationWithBlock({
-//                    self.movieCollectionView.reloadData()
-//                    self.searchActivityIndictor.hidden = true
-//                    self.searchActivityIndictor.stopAnimating()
-//                })
-//            }
             moviesSearchBar.userInteractionEnabled = true
+            self.reachabilityImage.image = UIImage.init(named: "internetcheckMark.png")
+            self.reachabilityImage.hidden = false
+            self.view.addSubview(self.reachabilityImage)
+            self.view.bringSubviewToFront(self.reachabilityImage)
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)

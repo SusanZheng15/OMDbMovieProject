@@ -1,0 +1,6 @@
+framework module Pods_OMDbMovieProject {
+  umbrella header "Pods-OMDbMovieProject-umbrella.h"
+
+  export *
+  module * { export * }
+}

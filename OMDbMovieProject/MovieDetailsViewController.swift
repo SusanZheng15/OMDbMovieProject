@@ -88,21 +88,11 @@ class MovieDetailsViewController: UIViewController
         }
         else if reachabilityStatus == kREACHABILITYWITHWIFI
         {
-//            self.releaseTemp.hidden = false
-//            self.dicrectorTemp.hidden = false
-//            self.writerTemp.hidden = false
-//            self.starsTemp.hidden = false
-//            self.metaTemp.hidden = false
-//            self.posterImage.hidden = false
+
         }
         else if reachabilityStatus == kREACHABLEWITHWWAN
         {
-//            self.releaseTemp.hidden = false
-//            self.dicrectorTemp.hidden = false
-//            self.writerTemp.hidden = false
-//            self.starsTemp.hidden = false
-//            self.metaTemp.hidden = false
-//            self.posterImage.hidden = false
+
         }
     }
     
@@ -229,7 +219,7 @@ class MovieDetailsViewController: UIViewController
                     let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
                     let blurEffectView = UIVisualEffectView(effect: blurEffect)
                     blurEffectView.frame = self.posterImageView.bounds
-                    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] // for supporting device rotation
+                    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] 
                     
                     self.posterImageView.addSubview(blurEffectView)
                     
