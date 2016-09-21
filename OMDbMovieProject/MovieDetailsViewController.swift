@@ -36,6 +36,9 @@ class MovieDetailsViewController: UIViewController
         omdbMovie.fetchData()
         
         checkForData()
+        reachabilityStatusChanged()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieDetailsViewController.reachabilityStatusChanged), name: "reachStatusChanged", object: nil)
         
         self.activityIndicator.hidden = false
         self.activityIndicator.startAnimating()
@@ -48,6 +51,31 @@ class MovieDetailsViewController: UIViewController
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
         
+    }
+    
+    func reachabilityStatusChanged()
+    {
+        if reachabilityStatus == kNOTREACHABLE
+        {
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            
+            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+
+        }
+        else if reachabilityStatus == kREACHABILITYWITHWIFI
+        {
+            
+        }
+        else if reachabilityStatus == kREACHABLEWITHWWAN
+        {
+            
+        }
     }
     
     
