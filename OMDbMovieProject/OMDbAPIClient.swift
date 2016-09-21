@@ -53,10 +53,11 @@ class OMDbAPIClient
         
     }
     
-    func getMovieByTitle(title: String, completion: (NSDictionary)->())
+    func getNewReleasedMovies(completion: (NSArray)->())
     {
         
-        let urlString = "https://www.omdbapi.com/?t=\(title)"
+        let urlString = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        
         let url = NSURL(string: urlString)
         
         guard let unwrappedURL = url else {return}
@@ -68,9 +69,13 @@ class OMDbAPIClient
             guard let unwrappedData = data else {return}
             
             do{
-                let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
                 
-                completion(movieSearched)
+                let moviesArray = movieSearched["results"] as? NSArray
+                
+                guard let unwrappedMovies = moviesArray else {return}
+                
+                completion(unwrappedMovies)
                 
             }
             catch
@@ -81,6 +86,35 @@ class OMDbAPIClient
         dataTask.resume()
         
     }
+    
+//    func getMovieByTitle(title: String, completion: (NSDictionary)->())
+//    {
+//        
+//        let urlString = "https://www.omdbapi.com/?t=\(title)"
+//        let url = NSURL(string: urlString)
+//        
+//        guard let unwrappedURL = url else {return}
+//        
+//        let session = NSURLSession.sharedSession()
+//        
+//        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+//            
+//            guard let unwrappedData = data else {return}
+//            
+//            do{
+//                let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+//                
+//                completion(movieSearched)
+//                
+//            }
+//            catch
+//            {
+//                print("did i crash?")
+//            }
+//        }
+//        dataTask.resume()
+//        
+//    }
     
     func getMovieDetailAPICallWithID(id: String, completion: (NSDictionary)-> ())
     {

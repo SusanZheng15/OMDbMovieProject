@@ -17,14 +17,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rsz_movielogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FB-3un">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchandLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FB-3un">
                                 <rect key="frame" x="160" y="128" width="281" height="232"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="GYd-SZ-w5f"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made by Susan Zheng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYn-iR-yfY">
+                                <rect key="frame" x="233" y="557" width="135" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4V5-FB-3un" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-56" id="GNo-Hh-96j"/>
-                            <constraint firstItem="4V5-FB-3un" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="XSC-qu-twy"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4V5-FB-3un" secondAttribute="bottom" constant="240" id="Naf-73-cya"/>
+                            <constraint firstItem="4V5-FB-3un" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iLP-xz-qf1"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="PYn-iR-yfY" secondAttribute="bottom" constant="27" id="ksO-iT-xKt"/>
+                            <constraint firstItem="4V5-FB-3un" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="108" id="mQm-EP-Fyj"/>
+                            <constraint firstItem="PYn-iR-yfY" firstAttribute="centerX" secondItem="4V5-FB-3un" secondAttribute="centerX" id="q33-vo-4Jy"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -34,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="rsz_movielogo.png" width="281" height="232"/>
+        <image name="LaunchandLogo.png" width="800" height="600"/>
     </resources>
 </document>

@@ -16,7 +16,6 @@ class MovieDetailsViewController: UIViewController
     
     let omdbMovie = MovieDataStore.sharedInstance
     
-    @IBOutlet weak var backColoring: UIView!
    
     @IBOutlet weak var releaseTemp: UILabel!
     @IBOutlet weak var dicrectorTemp: UILabel!

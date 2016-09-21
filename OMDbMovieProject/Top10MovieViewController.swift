@@ -33,11 +33,8 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         guard let unwrappedMovies = movies else {return}
         
         
-        for movie in unwrappedMovies
-        {
-            store.api.getMovieByTitle(movie, completion: { (dictionary) in
-                print(dictionary)
-            })
+        store.api.getNewReleasedMovies { (array) in
+            print(array)
         }
     
         topMoviesCollectionView.delegate = self

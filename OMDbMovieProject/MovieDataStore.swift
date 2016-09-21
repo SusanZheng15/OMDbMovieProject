@@ -44,21 +44,21 @@ class MovieDataStore
         }
     }
     
-    func getMovieRepositoriesBytitle(title: String, completion: ()->())
-    {
-        api.getMovieByTitle(title) { (dictionary) in
-            
-            let movieEntity = NSEntityDescription.entityForName("Movie", inManagedObjectContext: self.managedObjectContext)
-            
-            guard let entity = movieEntity else {fatalError("entity not working")}
-            
-            let repo = Movie(dictionary: dictionary, entity:entity , managedObjectContext: self.managedObjectContext)
-            
-            self.topMovies.append(repo)
-        }
-            
-    }
-        
+//    func getMovieRepositoriesBytitle(title: String, completion: ()->())
+//    {
+//        api.getMovieByTitle(title) { (dictionary) in
+//            
+//            let movieEntity = NSEntityDescription.entityForName("Movie", inManagedObjectContext: self.managedObjectContext)
+//            
+//            guard let entity = movieEntity else {fatalError("entity not working")}
+//            
+//            let repo = Movie(dictionary: dictionary, entity:entity , managedObjectContext: self.managedObjectContext)
+//            
+//            self.topMovies.append(repo)
+//        }
+//            
+//    }
+    
     
     
     

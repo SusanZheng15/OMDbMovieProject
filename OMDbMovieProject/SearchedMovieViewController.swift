@@ -59,21 +59,34 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         internetReach = Reachability.reachabilityForInternetConnection()
         internetReach?.startNotifier()
         
-        if internetReach != nil
-        {
-            self.statusChangedWithReachability(internetReach!)
-        }
+        
+        self.statusChangedWithReachability(internetReach!)
+        
         
         self.store.getMovieRepositories("who") {
             NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.reachabilityImage.hidden = true
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndictor.hidden = true
                 self.searchActivityIndictor.stopAnimating()
-                self.reachabilityImage.hidden = true
+                
             })
         }
 
     
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        
+        super.viewWillAppear(true)
+        
+        internetReach = Reachability.reachabilityForInternetConnection()
+        internetReach?.startNotifier()
+        
+        
+        self.statusChangedWithReachability(internetReach!)
+        
     }
     
  
@@ -101,8 +114,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         if networkStatus.rawValue == NotReachable.rawValue
         {
-            print("Network not reachable")
             reachabilityStatus = kNOTREACHABLE
+
+            self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
+            self.reachabilityImage.hidden = false
+            self.view.addSubview(self.reachabilityImage)
+            self.view.bringSubviewToFront(self.reachabilityImage)
+            print("Network not reachable")
             
             self.store.movieArray.removeAll()
             dispatch_async(dispatch_get_main_queue(),{
@@ -120,10 +138,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 })
             }
             moviesSearchBar.userInteractionEnabled = false
-            self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
-            self.reachabilityImage.hidden = false
-            self.view.addSubview(self.reachabilityImage)
-            self.view.bringSubviewToFront(self.reachabilityImage)
+            
         }
         else if networkStatus.rawValue == ReachableViaWiFi.rawValue
         {
