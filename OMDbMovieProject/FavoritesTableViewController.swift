@@ -19,8 +19,9 @@ class FavoritesTableViewController: UITableViewController
         super.viewDidLoad()
         
       //  navBarUI()
-        navigationController!.navigationBar.barTintColor = UIColor.greenColor()
+    
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+         //self.tabBarController?.tabBar.tintColor = UIColor.greenColor()
         
         store.fetchData()
         self.tableView.reloadData()

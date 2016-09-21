@@ -47,11 +47,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
         
         self.tabBarController?.navigationItem.title = "Movie Search"
+        //self.tabBarController?.tabBar.tintColor = UIColor.greenColor()
         self.searchActivityIndictor.hidden = false
         self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
         
-        navigationController!.navigationBar.barTintColor = UIColor.greenColor()
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         

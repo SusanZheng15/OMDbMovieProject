@@ -18,6 +18,15 @@ class MovieDetailsViewController: UIViewController
     
     @IBOutlet weak var backColoring: UIView!
    
+    @IBOutlet weak var releaseTemp: UILabel!
+    @IBOutlet weak var dicrectorTemp: UILabel!
+    @IBOutlet weak var writerTemp: UILabel!
+    @IBOutlet weak var starsTemp: UILabel!
+    @IBOutlet weak var imdbTemp: UILabel!
+    @IBOutlet weak var metaTemp: UILabel!
+    @IBOutlet weak var fullDescripTemp: UIButton!
+    
+    
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
@@ -32,6 +41,15 @@ class MovieDetailsViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.releaseTemp.hidden = true
+        self.dicrectorTemp.hidden = true
+        self.writerTemp.hidden = true
+        self.starsTemp.hidden = true
+        self.metaTemp.hidden = true
+        self.posterImage.hidden = true
+        self.fullDescripTemp.hidden = true
+        self.imdbTemp.hidden = true
         
         omdbMovie.fetchData()
         
@@ -70,11 +88,21 @@ class MovieDetailsViewController: UIViewController
         }
         else if reachabilityStatus == kREACHABILITYWITHWIFI
         {
-            
+//            self.releaseTemp.hidden = false
+//            self.dicrectorTemp.hidden = false
+//            self.writerTemp.hidden = false
+//            self.starsTemp.hidden = false
+//            self.metaTemp.hidden = false
+//            self.posterImage.hidden = false
         }
         else if reachabilityStatus == kREACHABLEWITHWWAN
         {
-            
+//            self.releaseTemp.hidden = false
+//            self.dicrectorTemp.hidden = false
+//            self.writerTemp.hidden = false
+//            self.starsTemp.hidden = false
+//            self.metaTemp.hidden = false
+//            self.posterImage.hidden = false
         }
     }
     
@@ -93,6 +121,15 @@ class MovieDetailsViewController: UIViewController
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
                     dispatch_async(dispatch_get_main_queue(),{
+                        self.releaseTemp.hidden = false
+                        self.dicrectorTemp.hidden = false
+                        self.writerTemp.hidden = false
+                        self.starsTemp.hidden = false
+                        self.metaTemp.hidden = false
+                        self.imdbTemp.hidden = false
+                        self.posterImage.hidden = false
+                        self.fullDescripTemp.hidden = false
+                        
                         self.moviePlotTextField.text = self.movie?.plot
                         self.releasedLabel.text = self.movie?.released
                         self.directorLabel.text = self.movie?.director
@@ -116,6 +153,15 @@ class MovieDetailsViewController: UIViewController
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
                     print("Has it")
+                    self.releaseTemp.hidden = false
+                    self.dicrectorTemp.hidden = false
+                    self.writerTemp.hidden = false
+                    self.starsTemp.hidden = false
+                    self.metaTemp.hidden = false
+                    self.posterImage.hidden = false
+                    self.imdbTemp.hidden = false
+                    self.fullDescripTemp.hidden = false
+                    
                     self.moviePlotTextField.text = movie.movies?.first?.plot
                     self.releasedLabel.text = movie.movies?.first?.released
                     self.directorLabel.text = movie.movies?.first?.director
@@ -133,6 +179,15 @@ class MovieDetailsViewController: UIViewController
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
                         dispatch_async(dispatch_get_main_queue(),{
+                            self.releaseTemp.hidden = false
+                            self.dicrectorTemp.hidden = false
+                            self.writerTemp.hidden = false
+                            self.starsTemp.hidden = false
+                            self.metaTemp.hidden = false
+                            self.posterImage.hidden = false
+                            self.imdbTemp.hidden = false
+                            self.fullDescripTemp.hidden = false
+                            
                             self.moviePlotTextField.text = self.movie?.plot
                             self.releasedLabel.text = self.movie?.released
                             self.directorLabel.text = self.movie?.director

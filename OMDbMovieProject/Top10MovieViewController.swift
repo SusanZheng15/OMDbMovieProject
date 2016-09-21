@@ -40,11 +40,8 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
             })
         }
     
-        
         topMoviesCollectionView.delegate = self
         topMoviesCollectionView.dataSource = self
-        
-        
         
     }
 
