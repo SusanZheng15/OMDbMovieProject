@@ -63,7 +63,9 @@ class MovieDetailsViewController: UIViewController
         self.tabBarController?.navigationItem.title = movie?.title
         self.title = movie?.title
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Apple SD Gothic Neo", size: 25)!], forState: UIControlState.Normal)
+       
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
         
@@ -79,7 +81,7 @@ class MovieDetailsViewController: UIViewController
             self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                     noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
                 })
             }
@@ -87,7 +89,7 @@ class MovieDetailsViewController: UIViewController
         }
         else if reachabilityStatus == kREACHABILITYWITHWIFI
         {
-
+            
         }
         else if reachabilityStatus == kREACHABLEWITHWWAN
         {

@@ -12,6 +12,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     @IBOutlet weak var topMoviesCollectionView: UICollectionView!
     
+    
     let store = MovieDataStore.sharedInstance
     var movie : Movie?
     var movieList = ""
@@ -36,8 +37,39 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         topMoviesCollectionView.delegate = self
         topMoviesCollectionView.dataSource = self
         
+        self.view.addSubview(topMoviesCollectionView)
+        self.view.sendSubviewToBack(topMoviesCollectionView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        guard let flowLayout = topMoviesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+            //landscape
+        } else {
+            //portrait
+        }
+        
+        flowLayout.invalidateLayout()
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        var itemsCount : CGFloat = 1.0
+        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
+            itemsCount = 1.0
+        }
+        return CGSize(width: self.view.frame.width/itemsCount - 20, height: 100/66 * (self.view.frame.width/itemsCount - 20));
     }
 
+    @IBAction func search(sender: AnyObject) {
+        print("was i pressed?")
+    }
+   
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return self.titleAndPic.count
@@ -51,7 +83,6 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         let movieImage = topMoviePoster[indexPath.row]
       
         cell.topMoviesImageView.image = UIImage.init(named: movieImage)
-       // cell.topMoviesLabel.text = store.topMovies[indexPath.row].title
         cell.topMoviesLabel.text = titleAndPic[movieImage]
     
         
