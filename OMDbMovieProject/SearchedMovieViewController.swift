@@ -44,6 +44,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
         
         super.viewDidLoad()
+        self.reachabilityImage.hidden = true
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
@@ -56,7 +57,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        
         internetReach = Reachability.reachabilityForInternetConnection()
         internetReach?.startNotifier()
         
@@ -67,7 +67,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         self.store.getMovieRepositories("who") {
             NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.reachabilityImage.hidden = true
                 self.movieCollectionView.reloadData()
                 self.searchActivityIndictor.hidden = true
                 self.searchActivityIndictor.stopAnimating()
@@ -77,11 +76,12 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
 
     
     }
-    
+
     override func viewWillAppear(animated: Bool)
     {
         
         super.viewWillAppear(true)
+        self.reachabilityImage.hidden = true
         
         internetReach = Reachability.reachabilityForInternetConnection()
         internetReach?.startNotifier()
@@ -90,13 +90,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         {
             self.statusChangedWithReachability(internetReach!)
         }
-        self.reachabilityImage.hidden = true
+      
+        
     }
     
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
         
+        self.reachabilityImage.hidden = true
         internetReach = Reachability.reachabilityForInternetConnection()
         internetReach?.startNotifier()
         
@@ -105,7 +107,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         {
             self.statusChangedWithReachability(internetReach!)
         }
-        self.reachabilityImage.hidden = true
         
     }
  
@@ -154,9 +155,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             moviesSearchBar.userInteractionEnabled = false
             self.reachabilityImage.hidden = false
             self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
-            //self.reachabilityImage.hidden = false
             self.view.addSubview(self.reachabilityImage)
             self.view.bringSubviewToFront(self.reachabilityImage)
+
             
         }
         else if networkStatus.rawValue == ReachableViaWiFi.rawValue
@@ -168,7 +169,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.view.addSubview(self.reachabilityImage)
             self.view.bringSubviewToFront(self.reachabilityImage)
             
-            
+            UIView.animateWithDuration(1.0, animations: {
+                self.reachabilityImage.alpha = 0.0
+                
+            })
             moviesSearchBar.userInteractionEnabled = true
         }
         else if networkStatus.rawValue == ReachableViaWWAN.rawValue
@@ -181,6 +185,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.reachabilityImage.hidden = false
             self.view.addSubview(self.reachabilityImage)
             self.view.bringSubviewToFront(self.reachabilityImage)
+            
+            UIView.animateWithDuration(1.0, animations: {
+                self.reachabilityImage.alpha = 0.0
+                
+            })
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
