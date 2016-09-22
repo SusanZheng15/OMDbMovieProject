@@ -25,10 +25,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var searchActivityIndictor: UIActivityIndicatorView!
     
     var movie : Movie?
-    
     var internetReach: Reachability?
-    
-   
+
     let store = MovieDataStore.sharedInstance
     
     deinit{
@@ -44,13 +42,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
         
         super.viewDidLoad()
-        self.reachabilityImage.hidden = true
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
         
         self.tabBarController?.navigationItem.title = "Movie Search"
        
+        self.noResultsLabel.hidden = true
         self.searchActivityIndictor.hidden = false
         self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
@@ -60,57 +58,12 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         internetReach = Reachability.reachabilityForInternetConnection()
         internetReach?.startNotifier()
         
-        if internetReach != nil
-        {
-            self.statusChangedWithReachability(internetReach!)
-        }
-        
-        self.store.getMovieRepositories("who") {
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.movieCollectionView.reloadData()
-                self.searchActivityIndictor.hidden = true
-                self.searchActivityIndictor.stopAnimating()
-                
-            })
-        }
-
+        self.statusChangedWithReachability(internetReach!)
     
-    }
-
-    override func viewWillAppear(animated: Bool)
-    {
-        
-        super.viewWillAppear(true)
-        self.reachabilityImage.hidden = true
-        
-        internetReach = Reachability.reachabilityForInternetConnection()
-        internetReach?.startNotifier()
-        
-        if internetReach != nil
-        {
-            self.statusChangedWithReachability(internetReach!)
-        }
-      
-        
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-        super.viewDidAppear(true)
-        
-        self.reachabilityImage.hidden = true
-        internetReach = Reachability.reachabilityForInternetConnection()
-        internetReach?.startNotifier()
-        
-        
-        if internetReach != nil
-        {
-            self.statusChangedWithReachability(internetReach!)
-        }
-        
     }
  
-    override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews()
+    {
         super.viewWillLayoutSubviews()
         
         guard let flowLayout = movieCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
@@ -132,35 +85,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
         print("Status: \(networkStatus.rawValue)")
         
-        if networkStatus.rawValue == NotReachable.rawValue
-        {
-            reachabilityStatus = kNOTREACHABLE
-            print("Network not reachable")
-            
-            self.store.movieArray.removeAll()
-            dispatch_async(dispatch_get_main_queue(),{
-                self.movieCollectionView.reloadData()
-                
-            })
-            
-            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
-            
-            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
-            
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
-                })
-            }
-            moviesSearchBar.userInteractionEnabled = false
-            self.reachabilityImage.hidden = false
-            self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
-            self.view.addSubview(self.reachabilityImage)
-            self.view.bringSubviewToFront(self.reachabilityImage)
 
-            
-        }
-        else if networkStatus.rawValue == ReachableViaWiFi.rawValue
+        if networkStatus.rawValue == ReachableViaWiFi.rawValue
         {
             print("Reachable with Wifi")
             reachabilityStatus = kREACHABILITYWITHWIFI
@@ -173,6 +99,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 self.reachabilityImage.alpha = 0.0
                 
             })
+            
+            self.store.getMovieRepositories("who") {
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    self.movieCollectionView.reloadData()
+                    self.searchActivityIndictor.hidden = true
+                    self.searchActivityIndictor.stopAnimating()
+                    
+                })
+            }
             moviesSearchBar.userInteractionEnabled = true
         }
         else if networkStatus.rawValue == ReachableViaWWAN.rawValue
@@ -190,6 +125,43 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 self.reachabilityImage.alpha = 0.0
                 
             })
+            self.store.getMovieRepositories("who") {
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    self.movieCollectionView.reloadData()
+                    self.searchActivityIndictor.hidden = true
+                    self.searchActivityIndictor.stopAnimating()
+                    
+                })
+            }
+        }
+        else if networkStatus.rawValue == NotReachable.rawValue
+        {
+            reachabilityStatus = kNOTREACHABLE
+            print("Network not reachable")
+            
+            self.store.movieArray.removeAll()
+            dispatch_async(dispatch_get_main_queue(),{
+                self.movieCollectionView.reloadData()
+                self.moviesSearchBar.userInteractionEnabled = false
+                self.view.bringSubviewToFront(self.reachabilityImage)
+                self.reachabilityImage.hidden = false
+                self.reachabilityImage.alpha = 1.0
+                self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
+                self.view.addSubview(self.reachabilityImage)
+
+            })
+            
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            
+            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+            
+            
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
@@ -209,7 +181,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
             itemsCount = 3.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount - 50, height: 240/100 * (self.view.frame.width/itemsCount - 50));
+        return CGSize(width: self.view.frame.width/itemsCount - 50, height: 238/100 * (self.view.frame.width/itemsCount - 50));
     }
 
     
@@ -302,14 +274,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar)
     {
-        self.reachabilityImage.hidden = true
+        //self.reachabilityImage.hidden = true
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
     }
-
    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
@@ -346,6 +317,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             dispatch_async(dispatch_get_main_queue(),{
                 self.movieCollectionView.reloadData()
                 self.noResultsLabel.hidden = false
+                self.view.addSubview(self.noResultsLabel)
+                self.view.bringSubviewToFront(self.noResultsLabel)
                 self.noResultsLabel.text = "No Results"
             })
         }        
