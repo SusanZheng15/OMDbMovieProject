@@ -30,8 +30,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgQ-TT-ZZX">
-                                <rect key="frame" x="77" y="213" width="211" height="172"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GgQ-TT-ZZX">
+                                <rect key="frame" x="49" y="213" width="211" height="172"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="211" id="8Ln-9J-8Jh"/>
                                 </constraints>
@@ -629,11 +629,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU1-Nl-itw">
-                                <rect key="frame" x="76" y="686" width="263" height="30"/>
+                                <rect key="frame" x="76" y="698" width="263" height="30"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                 <state key="normal" title="Click to begin search">
                                     <color key="titleColor" red="0.25098039220000001" green="1" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.25098039215686274" green="1" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="search:" destination="SDS-Pa-xrF" eventType="touchUpInside" id="EtK-u7-fdC"/>
                                     <segue destination="Y5G-xm-4zD" kind="show" id="TMw-V9-PIZ"/>
@@ -647,7 +652,7 @@
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="bottom" secondItem="Umc-y9-tDE" secondAttribute="top" id="NS1-E2-9fD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="yU1-Nl-itw" secondAttribute="trailing" constant="55" id="OOd-Gu-zyK"/>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="leading" secondItem="c6U-ra-aJj" secondAttribute="leading" id="U8e-Kj-j4I"/>
-                            <constraint firstItem="Umc-y9-tDE" firstAttribute="top" secondItem="yU1-Nl-itw" secondAttribute="bottom" constant="20" id="g9L-R5-Ci0"/>
+                            <constraint firstItem="Umc-y9-tDE" firstAttribute="top" secondItem="yU1-Nl-itw" secondAttribute="bottom" constant="8" id="g9L-R5-Ci0"/>
                             <constraint firstAttribute="trailing" secondItem="Kga-4D-c7u" secondAttribute="trailing" id="h8O-tg-hhs"/>
                             <constraint firstItem="SeH-DG-UhI" firstAttribute="top" secondItem="Wn6-JO-Grp" secondAttribute="bottom" constant="14" id="hpC-Pa-XKI"/>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="top" secondItem="c6U-ra-aJj" secondAttribute="topMargin" constant="63" id="izV-Gt-fJd"/>
@@ -658,6 +663,7 @@
                     <navigationItem key="navigationItem" title="Top 10 Movies of all times" id="8m1-9U-CCz"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="startSearchButton" destination="yU1-Nl-itw" id="mwg-eQ-bM2"/>
                         <outlet property="topMoviesCollectionView" destination="Kga-4D-c7u" id="29Z-Bb-JsO"/>
                     </connections>
                 </viewController>

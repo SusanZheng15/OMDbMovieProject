@@ -26,7 +26,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     var movie : Movie?
     var internetReach: Reachability?
-    let randomSearchTerm = ["love", "horror", "game", "the", "night", "life", "west", "wild", "star", "adventure", "heart"]
+    let randomSearchTerm = ["love", "horror", "game", "the", "night", "life", "west", "wild", "star", "adventure", "heart", "who", "gone", "kill"]
     
 
     let store = MovieDataStore.sharedInstance
@@ -189,7 +189,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
             itemsCount = 3.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount - 50, height: 240/100 * (self.view.frame.width/itemsCount - 50));
+        return CGSize(width: self.view.frame.width/itemsCount - 40, height: 240/100 * (self.view.frame.width/itemsCount - 40));
     }
 
     

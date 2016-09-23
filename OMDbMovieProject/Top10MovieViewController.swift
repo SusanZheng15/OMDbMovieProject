@@ -12,6 +12,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
 {
     @IBOutlet weak var topMoviesCollectionView: UICollectionView!
     
+    @IBOutlet weak var startSearchButton: UIButton!
     
     let store = MovieDataStore.sharedInstance
     var movie : Movie?
@@ -36,6 +37,11 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         
         self.view.addSubview(topMoviesCollectionView)
         self.view.sendSubviewToBack(topMoviesCollectionView)
+        
+        self.startSearchButton.layer.borderWidth = 1
+        self.startSearchButton.layer.borderColor = UIColor.greenColor().CGColor
+        self.startSearchButton.layer.cornerRadius = 10
+        self.startSearchButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
     }
     
     override func viewWillLayoutSubviews() {
