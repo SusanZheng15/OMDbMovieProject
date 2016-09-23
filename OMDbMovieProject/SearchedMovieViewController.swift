@@ -131,6 +131,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 self.reachabilityImage.alpha = 0.0
                 
             })
+            
             let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
             let randomSearch = randomSearchTerm[randomIndex]
             self.store.getMovieRepositories(randomSearch) {
