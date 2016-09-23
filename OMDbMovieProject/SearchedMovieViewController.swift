@@ -26,6 +26,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     
     var movie : Movie?
     var internetReach: Reachability?
+    let randomSearchTerm = ["love", "horror", "game", "the", "night", "life", "west", "wild", "star", "adventure", "heart"]
+    
 
     let store = MovieDataStore.sharedInstance
     
@@ -59,6 +61,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         internetReach?.startNotifier()
         
         self.statusChangedWithReachability(internetReach!)
+        self.reachabilityImage.hidden = true
     
     }
  
@@ -95,12 +98,15 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.view.addSubview(self.reachabilityImage)
             self.view.bringSubviewToFront(self.reachabilityImage)
             
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animateWithDuration(1.3, animations: {
                 self.reachabilityImage.alpha = 0.0
                 
             })
             
-            self.store.getMovieRepositories("who") {
+            let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
+            let randomSearch = randomSearchTerm[randomIndex]
+            
+            self.store.getMovieRepositories(randomSearch) {
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     self.movieCollectionView.reloadData()
                     self.searchActivityIndictor.hidden = true
@@ -121,11 +127,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.view.addSubview(self.reachabilityImage)
             self.view.bringSubviewToFront(self.reachabilityImage)
             
-            UIView.animateWithDuration(1.0, animations: {
+            UIView.animateWithDuration(1.3, animations: {
                 self.reachabilityImage.alpha = 0.0
                 
             })
-            self.store.getMovieRepositories("who") {
+            let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
+            let randomSearch = randomSearchTerm[randomIndex]
+            self.store.getMovieRepositories(randomSearch) {
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     self.movieCollectionView.reloadData()
                     self.searchActivityIndictor.hidden = true
@@ -181,7 +189,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
             itemsCount = 3.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount - 50, height: 238/100 * (self.view.frame.width/itemsCount - 50));
+        return CGSize(width: self.view.frame.width/itemsCount - 50, height: 240/100 * (self.view.frame.width/itemsCount - 50));
     }
 
     
@@ -241,8 +249,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
             if search == ""
             {
+                let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
+                let randomSearch = randomSearchTerm[randomIndex]
                 self.store.api.getNextPage()
-                self.store.getMovieRepositories("who", completion: {
+                self.store.getMovieRepositories(randomSearch, completion: {
                     dispatch_async(dispatch_get_main_queue(),{
                         
                         self.movieCollectionView.reloadData()
@@ -306,10 +316,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             let search = unwrappedSearch.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
             self.store.api.pageNumber = 1
             self.store.getMovieRepositories(search, completion: {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        self.movieCollectionView.reloadData()
-                    })
+                dispatch_async(dispatch_get_main_queue(),{
+                    self.movieCollectionView.reloadData()
                 })
+            })
             
         }
         if store.movieArray.count == 0

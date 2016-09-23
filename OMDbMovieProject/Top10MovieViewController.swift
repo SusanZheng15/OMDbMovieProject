@@ -29,10 +29,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-//        store.api.getNewReleasedMovies { (array) in
-//            print(array)
-//        }
+
     
         topMoviesCollectionView.delegate = self
         topMoviesCollectionView.dataSource = self
