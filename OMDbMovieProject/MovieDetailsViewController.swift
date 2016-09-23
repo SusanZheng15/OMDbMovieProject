@@ -76,6 +76,8 @@ class MovieDetailsViewController: UIViewController
     {
         if reachabilityStatus == kNOTREACHABLE
         {
+            self.activityIndicator.hidden = true
+            self.activityIndicator.stopAnimating()
             let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
             
             self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
@@ -260,7 +262,6 @@ class MovieDetailsViewController: UIViewController
         guard let savedMovie = self.movie else {return}
         addMovie.movies?.insert(savedMovie)
         
-        print(addMovie.movies)
         
         omdbMovie.saveContext()
         

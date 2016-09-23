@@ -2,7 +2,7 @@
 //  10MoviesCollectionViewCell.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/16/16.
+//  Created by Susan Zheng on 9/16/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 

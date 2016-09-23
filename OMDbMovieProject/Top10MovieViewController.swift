@@ -2,7 +2,7 @@
 //  Top10MovieViewController.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/16/16.
+//  Created by Susan Zheng on 9/16/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
@@ -35,23 +35,24 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         topMoviesCollectionView.delegate = self
         topMoviesCollectionView.dataSource = self
         
-        self.view.addSubview(topMoviesCollectionView)
-        self.view.sendSubviewToBack(topMoviesCollectionView)
-        
         self.startSearchButton.layer.borderWidth = 1
         self.startSearchButton.layer.borderColor = UIColor.greenColor().CGColor
         self.startSearchButton.layer.cornerRadius = 10
         self.startSearchButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+        
     }
     
-    override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews()
+    {
         super.viewWillLayoutSubviews()
         
-        guard let flowLayout = topMoviesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+        guard let flowLayout = topMoviesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else
+        {
             return
         }
         
-        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
+        {
             //landscape
         } else {
             //portrait
@@ -60,18 +61,17 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         flowLayout.invalidateLayout()
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
         var itemsCount : CGFloat = 1.0
-        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
+        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait
+        {
             itemsCount = 1.0
         }
         return CGSize(width: self.view.frame.width/itemsCount - 20, height: 100/66 * (self.view.frame.width/itemsCount - 20));
     }
 
-    @IBAction func search(sender: AnyObject) {
-        print("was i pressed?")
-    }
-   
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {

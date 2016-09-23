@@ -150,12 +150,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.store.movieArray.removeAll()
             dispatch_async(dispatch_get_main_queue(),{
                 self.movieCollectionView.reloadData()
+                self.searchActivityIndictor.hidden = true
+                self.searchActivityIndictor.stopAnimating()
                 self.moviesSearchBar.userInteractionEnabled = false
-                self.view.bringSubviewToFront(self.reachabilityImage)
-                self.reachabilityImage.hidden = false
-                self.reachabilityImage.alpha = 1.0
-                self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
-                self.view.addSubview(self.reachabilityImage)
 
             })
             
@@ -164,8 +161,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
             
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
                     noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+                    self.view.bringSubviewToFront(self.reachabilityImage)
+                    self.reachabilityImage.hidden = false
+                    self.reachabilityImage.alpha = 1.0
+                    self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
+                    self.view.addSubview(self.reachabilityImage)
                 })
             }
             
@@ -184,9 +186,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    {
         var itemsCount : CGFloat = 2.0
-        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait {
+        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait
+        {
             itemsCount = 3.0
         }
         return CGSize(width: self.view.frame.width/itemsCount - 40, height: 240/100 * (self.view.frame.width/itemsCount - 40));
@@ -282,10 +286,6 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
-    {
-        //self.reachabilityImage.hidden = true
-    }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
@@ -351,8 +351,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
             if let unwrappedIndex = indexPath
             {
-                let movieID = self.store.movieArray[unwrappedIndex.row]
-                destinationVC.movie = movieID
+                let movie = self.store.movieArray[unwrappedIndex.row]
+                destinationVC.movie = movie
             }
             
         }
