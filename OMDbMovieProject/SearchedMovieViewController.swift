@@ -241,52 +241,46 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
     
      //if bottom of collection view is reached, get more
-    func scrollViewDidScroll(scrollView: UIScrollView)
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
     {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.size.height
+        if indexPath.row == self.store.movieArray.count - 1
         {
-            
-           if let searchText = moviesSearchBar.text
-           {
+            print("each the end mate")
+            if let searchText = moviesSearchBar.text
+            {
                 let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
-            
-            if search == ""
-            {
-                let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
-                let randomSearch = randomSearchTerm[randomIndex]
-                self.store.api.getNextPage()
-                self.store.getMovieRepositories(randomSearch, completion: {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        
-                        self.movieCollectionView.reloadData()
-                        print(self.store.movieArray.count)
+                
+                if search == ""
+                {
+                    let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
+                    let randomSearch = randomSearchTerm[randomIndex]
+                    self.store.api.getNextPage()
+                    self.store.getMovieRepositories(randomSearch, completion: {
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            self.movieCollectionView.reloadData()
+                            print(self.store.movieArray.count)
+                            
+                        })
                         
                     })
+                }
+                else if search != ""
+                {
+                    self.store.api.getNextPage()
+                    self.store.getMovieRepositories(search, completion: {
+                        dispatch_async(dispatch_get_main_queue(),{
+                            
+                            self.movieCollectionView.reloadData()
+                            print(self.store.movieArray.count)
+                            
+                        })
+                    })
+                }
 
-                })
-            }
-            else if search != ""
-            {
-                self.store.api.getNextPage()
-                self.store.getMovieRepositories(search, completion: {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        
-                        self.movieCollectionView.reloadData()
-                        print(self.store.movieArray.count)
-                        
-                    })
-                })
-            }
-            
         }
-            print("Reached the end of collection view")
-            
-        }
-        
     }
-    
+    }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)
     {
