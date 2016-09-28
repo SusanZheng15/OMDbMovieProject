@@ -100,31 +100,32 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     
-   
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
-    {
-        print("pressed")
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(store.api.upcomingMovie[indexPath.row].id)
     }
+
 
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-//    {
-//        if segue.identifier == "topMovieSegue"
-//        {
-//            let destinationVC = segue.destinationViewController as! MovieDetailsViewController
-//            let indexPath = topMoviesCollectionView.indexPathForCell(sender as! UICollectionViewCell)
-//            let id = topMoviesID[indexPath!.row] as? String
-//            if let unwrappedID = id
-//            {
-//                destinationVC.movieID = unwrappedID
-//            }
-//            
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "movieTrailerSegue"
+        {
+            let destinationVC = segue.destinationViewController as! MovieTrailerViewController
+            
+            let indexPath = topMoviesCollectionView.indexPathForCell(sender as! UICollectionViewCell)
+            
+            if let unwrappedIndex = indexPath
+            {
+                let id = self.store.api.upcomingMovie[unwrappedIndex.row].id
+                print(id)
+                destinationVC.movieID = id
+            }
+            
+        }
+    }
     
 
 }

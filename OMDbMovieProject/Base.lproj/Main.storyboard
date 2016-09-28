@@ -581,6 +581,33 @@
             </objects>
             <point key="canvasLocation" x="6083" y="283"/>
         </scene>
+        <!--Movie Trailer View Controller-->
+        <scene sceneID="jI0-Av-aYO">
+            <objects>
+                <viewController id="AAe-jG-g7b" customClass="MovieTrailerViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fcY-JK-Rw7"/>
+                        <viewControllerLayoutGuide type="bottom" id="IA4-r8-dXP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WvA-fL-3rf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-Q9-wGP">
+                                <rect key="frame" x="0.0" y="20" width="375" height="652"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="movieTrailerWebView" destination="qyG-Q9-wGP" id="lso-Sr-E0z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rGo-E9-DSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2783.5" y="-592.5"/>
+        </scene>
         <!--Top 10 Movies of all times-->
         <scene sceneID="bX4-EC-hkE">
             <objects>
@@ -625,6 +652,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="topMoviesImageView" destination="uwy-pp-AxA" id="1Ii-Vu-d5x"/>
+                                            <segue destination="AAe-jG-g7b" kind="show" identifier="movieTrailerSegue" id="YM7-Pa-kxU"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

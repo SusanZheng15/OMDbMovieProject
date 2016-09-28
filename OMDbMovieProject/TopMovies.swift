@@ -14,6 +14,7 @@ class TopMovies
     var poster: String
     var releaseDate: String
     var plot : String
+    var id : Int
 
     
     init(dictionary: NSDictionary)
@@ -22,7 +23,8 @@ class TopMovies
         movieTitle = dictionary["title"] as? String,
         moviePoster = dictionary["poster_path"] as? String,
         movieDate = dictionary["release_date"] as? String,
-        moviePlot = dictionary["overview"] as? String
+        moviePlot = dictionary["overview"] as? String,
+        movieID = dictionary["id"] as? Int
     
         else { fatalError("Could not create object from supplied dictionary") }
     
@@ -30,6 +32,7 @@ class TopMovies
         self.poster = moviePoster
         self.releaseDate = movieDate
         self.plot = moviePlot
+        self.id = movieID
             
     }
     
