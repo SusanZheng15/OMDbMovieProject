@@ -190,5 +190,38 @@ class OMDbAPIClient
         dataTask.resume()
     }
     
+    func checkIfAnyTrailersAvailable(ID: Int, completion: NSArray->())
+    {
+        
+            let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+            let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
+            
+            let url = NSURL(string: urlString)
+            
+            
+            let session = NSURLSession.sharedSession()
+            
+            let dataTask = session.dataTaskWithURL(url!) { (data, response, error) in
+                
+                guard let unwrappedData = data else {return}
+                
+                do{
+                    let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                    
+                    let moviesTrailers = upcomingMovie["results"] as? NSArray
+                    
+                    guard let unwrappedMovies = moviesTrailers else {return}
+                    
+                    completion(unwrappedMovies)
+                    
+                }
+                catch
+                {
+                    print("did i crash?")
+                }
+            }
+            dataTask.resume()
+        }
+    
 }
     

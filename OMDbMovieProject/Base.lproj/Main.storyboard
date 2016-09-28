@@ -593,15 +593,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-Q9-wGP">
-                                <rect key="frame" x="0.0" y="20" width="375" height="652"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-Q9-wGP">
+                                <rect key="frame" x="22" y="68" width="330" height="379"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEM-N1-clY">
+                                <rect key="frame" x="99" y="551" width="176" height="30"/>
+                                <state key="normal" title="Back to upcoming movies">
+                                    <color key="titleColor" red="0.25062030639999999" green="1" blue="0.58550095710000005" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="SDS-Pa-xrF" kind="show" id="hda-kY-pat"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Trailer Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94n-tO-BFF">
+                                <rect key="frame" x="92" y="247" width="191" height="21"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="21"/>
+                                <color key="textColor" red="0.25062030639999999" green="1" blue="0.58550095710000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="qyG-Q9-wGP" firstAttribute="leading" secondItem="WvA-fL-3rf" secondAttribute="leadingMargin" constant="6" id="49E-47-a7W"/>
+                            <constraint firstItem="IA4-r8-dXP" firstAttribute="top" secondItem="KEM-N1-clY" secondAttribute="bottom" constant="86" id="Nl4-Ba-m9C"/>
+                            <constraint firstItem="94n-tO-BFF" firstAttribute="centerX" secondItem="KEM-N1-clY" secondAttribute="centerX" id="YlA-Jd-yxq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qyG-Q9-wGP" secondAttribute="trailing" constant="7" id="Yr6-UJ-Dxg"/>
+                            <constraint firstItem="94n-tO-BFF" firstAttribute="centerY" secondItem="qyG-Q9-wGP" secondAttribute="centerY" id="jyk-DK-tCR"/>
+                            <constraint firstItem="94n-tO-BFF" firstAttribute="top" secondItem="fcY-JK-Rw7" secondAttribute="bottom" constant="227" id="kKA-5y-ghe"/>
+                            <constraint firstItem="IA4-r8-dXP" firstAttribute="top" secondItem="qyG-Q9-wGP" secondAttribute="bottom" constant="220" id="oKT-SI-esu"/>
+                            <constraint firstItem="94n-tO-BFF" firstAttribute="centerX" secondItem="qyG-Q9-wGP" secondAttribute="centerX" id="pNJ-OM-WlT"/>
+                            <constraint firstItem="qyG-Q9-wGP" firstAttribute="top" secondItem="fcY-JK-Rw7" secondAttribute="bottom" constant="48" id="syR-HQ-XfK"/>
+                            <constraint firstItem="94n-tO-BFF" firstAttribute="leading" secondItem="WvA-fL-3rf" secondAttribute="leadingMargin" constant="76" id="yRG-IS-1S3"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="movieTrailerWebView" destination="qyG-Q9-wGP" id="lso-Sr-E0z"/>
+                        <outlet property="noTrailerLabel" destination="94n-tO-BFF" id="33n-UN-Phx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rGo-E9-DSa" userLabel="First Responder" sceneMemberID="firstResponder"/>

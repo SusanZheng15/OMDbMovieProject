@@ -12,6 +12,7 @@ class MovieTrailerViewController: UIViewController {
     
     @IBOutlet weak var movieTrailerWebView: UIWebView!
     
+    @IBOutlet weak var noTrailerLabel: UILabel!
     var movieID : Int?
     
     let store = MovieDataStore.sharedInstance
@@ -21,17 +22,31 @@ class MovieTrailerViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        movieTrailerWebView.frame = self.view.frame
        
+        self.noTrailerLabel.hidden = true
         guard let id = movieID else {return}
-        store.api.movieTrailerAPI(id) { (string) in
+        
+         store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
-            print(string)
-            self.movieTrailerWebView.loadHTMLString("<iframe width=\"560\" height=\"315\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
-        }
+            if results == []
+            {
+                self.movieTrailerWebView.hidden = true
+                self.noTrailerLabel.hidden = false
+                print("no trailers")
+            }
+            else
+            {
+                self.store.api.movieTrailerAPI(id) { (string) in
+                    
+                    print(string)
+                    self.movieTrailerWebView.loadHTMLString("<iframe width=\"560\" height=\"315\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+                
+                }
+            
+            }
+        
     }
-
+    }
     
     
 
