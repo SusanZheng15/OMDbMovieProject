@@ -11,5 +11,4 @@ import UIKit
 class TopMoviesCollectionViewCell: UICollectionViewCell
 {
     @IBOutlet weak var topMoviesImageView: UIImageView!
-    @IBOutlet weak var topMoviesLabel: UILabel!
 }

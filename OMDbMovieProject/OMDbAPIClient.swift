@@ -14,6 +14,7 @@ class OMDbAPIClient
     static let sharedInstance = OMDbAPIClient()
 
     var pageNumber = 1
+    var upcomingMovie : [TopMovies] = []
     
     func getNextPage()
     {
@@ -112,6 +113,44 @@ class OMDbAPIClient
             }
         }
         dataTask.resume()
+    }
+    
+    func getMoviesPlayingInTheaters(completion: NSArray->())
+    {
+        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)"
+        
+        let url = NSURL(string: urlString)
+        
+        
+        let session = NSURLSession.sharedSession()
+        
+        let dataTask = session.dataTaskWithURL(url!) { (data, response, error) in
+            
+            guard let unwrappedData = data else {return}
+            
+            do{
+                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                
+                let moviesArray = upcomingMovie["results"] as? NSArray
+                
+                guard let unwrappedMovies = moviesArray else {return}
+                
+                for movie in unwrappedMovies
+                {
+                    let movieDict = TopMovies.init(dictionary: movie as! NSDictionary)
+                    self.upcomingMovie.append(movieDict)
+                    completion(unwrappedMovies)
+                }
+                
+            }
+            catch
+            {
+                print("did i crash?")
+            }
+        }
+        dataTask.resume()
+     
     }
     
 }

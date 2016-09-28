@@ -15,18 +15,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var startSearchButton: UIButton!
     
     let store = MovieDataStore.sharedInstance
-    var movie : Movie?
-    var movieList = ""
-    
-    let titleAndPic : [String : String] = ["goneWithTheWind.jpg": "Gone With the Wind", "Casablanca.jpg" : "Casablanca", "theWizardOfOz.jpg": "The Wizard of Oz","theGodfather.jpg": "The Godfather", "shawshankRedemption.jpg" : "The Shawshank Redemption", "toKillAMockingBird.jpg" : "To Kill a Mockingbird", "citizenKane.jpg" : "Citizen Kane", "vertigo.jpg":"Vertigo", "LawrenceOfArabia.jpg" : "Lawrence Of Arabia" ,  "psycho.jpg": "Psycho"]
-    
-    let topMoviePoster : [String] = ["goneWithTheWind.jpg", "Casablanca.jpg", "theWizardOfOz.jpg", "theGodfather.jpg", "shawshankRedemption.jpg", "toKillAMockingBird.jpg", "citizenKane.jpg", "vertigo.jpg", "lawrenceOfArabia.jpg", "psycho.jpg"]
-
-    
-    let topMoviesID : NSArray = ["tt0031381", "tt0034583", "tt0032138", "tt0068646", "tt0111161", "tt0056592", "tt0033467", "tt0052357", "tt0056172", "tt0054215"]
-
-    let dictionary : [String:[String]] = ["topMovies" : ["Gone+With+the+Wind", "Casablanca", "The+Wizard of+Oz", "The+Godfather", "The+Shawshank+Redemption", "To+Kill+a+Mockingbird", "Citizen+Kane", "Vertigo", "Lawrence+Of+Arabia", "Psycho"]]
-    
+ 
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -38,9 +27,19 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         self.startSearchButton.layer.borderWidth = 1
         self.startSearchButton.layer.borderColor = UIColor.greenColor().CGColor
         self.startSearchButton.layer.cornerRadius = 10
-        self.startSearchButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+        self.startSearchButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        
+        store.api.getMoviesPlayingInTheaters { (array) in
+            NSOperationQueue.mainQueue().addOperationWithBlock({
+                self.topMoviesCollectionView.reloadData()
+            })
+            
+        }
+       
         
     }
+    
+    
     
     override func viewWillLayoutSubviews()
     {
@@ -69,34 +68,43 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         {
             itemsCount = 1.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount - 20, height: 100/66 * (self.view.frame.width/itemsCount - 20));
+        return CGSize(width: self.view.frame.width/itemsCount, height: 100/62.5 * (self.view.frame.width/itemsCount));
     }
 
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return self.titleAndPic.count
+        return store.api.upcomingMovie.count
     }
     
-   
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TopMoviesCollectionViewCell
+
         
-        let movieImage = topMoviePoster[indexPath.row]
-      
-        cell.topMoviesImageView.image = UIImage.init(named: movieImage)
-        cell.topMoviesLabel.text = titleAndPic[movieImage]
-    
+        let stringPosterURL = NSURL(string: "http://image.tmdb.org/t/p/w500"+store.api.upcomingMovie[indexPath.row].poster)
+        
+        if let url = stringPosterURL
+        {
+            let dtinternet = NSData(contentsOfURL: url)
+            
+            if let unwrappedImage = dtinternet
+            {
+                dispatch_async(dispatch_get_main_queue(),{
+                    cell.topMoviesImageView.image = UIImage.init(data: unwrappedImage)
+                })
+            }
+        }
         
         return cell
     }
     
+   
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        let path = topMoviesID[indexPath.row]
-        print(path)
-        
+        print("pressed")
     }
 
     

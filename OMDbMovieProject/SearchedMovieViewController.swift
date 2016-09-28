@@ -192,9 +192,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         var itemsCount : CGFloat = 2.0
         if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait
         {
-            itemsCount = 3.0
+            itemsCount = 2.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount - 40, height: 240/100 * (self.view.frame.width/itemsCount - 40));
+        return CGSize(width: self.view.frame.width/itemsCount - 30, height: 240/120 * (self.view.frame.width/itemsCount - 30));
     }
 
     
@@ -280,6 +280,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
 
         }
     }
+        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar)

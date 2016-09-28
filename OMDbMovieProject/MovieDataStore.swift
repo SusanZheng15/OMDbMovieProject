@@ -43,8 +43,8 @@ class MovieDataStore
             completion()
         }
     }
-        
     
+
     func getDetailsFor(movie: Movie, completion: ()->())
     {
         api.getMovieDetailAPICallWithID(movie.imdbID!) { (dictionary) in
