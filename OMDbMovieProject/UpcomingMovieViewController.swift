@@ -40,7 +40,6 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    
     override func viewWillLayoutSubviews()
     {
         super.viewWillLayoutSubviews()
@@ -84,7 +83,8 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         if let poster = store.api.upcomingMovie[indexPath.row].poster
         {
-    
+            cell.movieImageView.hidden = true
+            dispatch_async(dispatch_get_main_queue(),{
             let stringPosterURL = NSURL(string: "http://image.tmdb.org/t/p/w500"+poster)
             
             if let url = stringPosterURL
@@ -93,14 +93,15 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
                 
                 if let unwrappedImage = dtinternet
                 {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        cell.movieImageView.image = UIImage.init(data: unwrappedImage)
-                    })
+                    cell.movieImageView.hidden = false
+                    cell.movieImageView.image = UIImage.init(data: unwrappedImage)
                 }
             }
+                
+            })
+            
         }
-        
-    
+        cell.movieImageView.image = UIImage.init(named: "pikachu.png")
         return cell
     }
     
@@ -115,7 +116,14 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
             if let unwrappedIndex = indexPath
             {
                 let id = self.store.api.upcomingMovie[unwrappedIndex.row].id
+                let title = self.store.api.upcomingMovie[unwrappedIndex.row].title
+                let release = self.store.api.upcomingMovie[unwrappedIndex.row].releaseDate
+                let overview = self.store.api.upcomingMovie[unwrappedIndex.row].plot
+                
                 destinationVC.movieID = id
+                destinationVC.movieTitle = title
+                destinationVC.releaseDate = release
+                destinationVC.overview = overview
             }
             
         }

@@ -15,23 +15,23 @@ class UpcomingMovies
     var releaseDate: String?
     var plot : String?
     var id : Int?
-
+    
     
     init(dictionary: NSDictionary)
     {
         if let moviePoster = dictionary["poster_path"]
         {
             self.poster = moviePoster as? String
-            if dictionary["poster_path"] == nil
-            {
-                self.poster = "navStarButton.png"
-            }
+        }
+        else
+        {
+            self.poster = "pikachu.png"
         }
         if let movieTitle = dictionary["title"]
         {
             self.title = movieTitle as? String
         }
-        if let movieDate = dictionary["released_date"]
+        if let movieDate = dictionary["release_date"]
         {
             self.releaseDate = movieDate as? String
         }
@@ -47,7 +47,7 @@ class UpcomingMovies
         {
             fatalError("Could not create object from supplied dictionary")
         }
-
+        
         
     }
     
