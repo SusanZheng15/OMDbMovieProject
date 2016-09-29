@@ -14,7 +14,7 @@ class OMDbAPIClient
     static let sharedInstance = OMDbAPIClient()
 
     var pageNumber = 1
-    var upcomingMovie : [TopMovies] = []
+    var upcomingMovie : [UpcomingMovies] = []
     
     func getNextPage()
     {
@@ -130,7 +130,7 @@ class OMDbAPIClient
             guard let unwrappedData = data else {return}
             
             do{
-                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: [])
                 
                 let moviesArray = upcomingMovie["results"] as? NSArray
                 
@@ -138,7 +138,7 @@ class OMDbAPIClient
                 
                 for movie in unwrappedMovies
                 {
-                    let movieDict = TopMovies.init(dictionary: movie as! NSDictionary)
+                    let movieDict = UpcomingMovies.init(dictionary: movie as! NSDictionary)
                     self.upcomingMovie.append(movieDict)
                     completion(unwrappedMovies)
                 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
     @IBOutlet weak var topMoviesCollectionView: UICollectionView!
     
@@ -68,7 +68,7 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
         {
             itemsCount = 1.0
         }
-        return CGSize(width: self.view.frame.width/itemsCount, height: 100/62.5 * (self.view.frame.width/itemsCount));
+        return CGSize(width: self.view.frame.width/itemsCount, height: 100/65 * (self.view.frame.width/itemsCount));
     }
 
     
@@ -80,35 +80,30 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TopMoviesCollectionViewCell
-
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! UpcomingMoviesCollectionViewCell
         
-        let stringPosterURL = NSURL(string: "http://image.tmdb.org/t/p/w500"+store.api.upcomingMovie[indexPath.row].poster)
-        
-        if let url = stringPosterURL
+        if let poster = store.api.upcomingMovie[indexPath.row].poster
         {
-            let dtinternet = NSData(contentsOfURL: url)
+    
+            let stringPosterURL = NSURL(string: "http://image.tmdb.org/t/p/w500"+poster)
             
-            if let unwrappedImage = dtinternet
+            if let url = stringPosterURL
             {
-                dispatch_async(dispatch_get_main_queue(),{
-                    cell.topMoviesImageView.image = UIImage.init(data: unwrappedImage)
-                })
+                let dtinternet = NSData(contentsOfURL: url)
+                
+                if let unwrappedImage = dtinternet
+                {
+                    dispatch_async(dispatch_get_main_queue(),{
+                        cell.movieImageView.image = UIImage.init(data: unwrappedImage)
+                    })
+                }
             }
         }
         
+    
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(store.api.upcomingMovie[indexPath.row].id)
-    }
-
-
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
         if segue.identifier == "movieTrailerSegue"
@@ -120,7 +115,6 @@ class Top10MovieViewController: UIViewController, UICollectionViewDelegate, UICo
             if let unwrappedIndex = indexPath
             {
                 let id = self.store.api.upcomingMovie[unwrappedIndex.row].id
-                print(id)
                 destinationVC.movieID = id
             }
             

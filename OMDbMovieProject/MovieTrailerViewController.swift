@@ -15,6 +15,7 @@ class MovieTrailerViewController: UIViewController {
     @IBOutlet weak var noTrailerLabel: UILabel!
     var movieID : Int?
     
+    @IBOutlet weak var goBackToFirstButton: UIButton!
     let store = MovieDataStore.sharedInstance
 
     let youtubeURL = "https://www.youtube.com/embed/"
@@ -25,6 +26,11 @@ class MovieTrailerViewController: UIViewController {
        
         self.noTrailerLabel.hidden = true
         guard let id = movieID else {return}
+        
+        self.goBackToFirstButton.layer.borderWidth = 1
+        self.goBackToFirstButton.layer.borderColor = UIColor.greenColor().CGColor
+        self.goBackToFirstButton.layer.cornerRadius = 10
+        self.goBackToFirstButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         
          store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
@@ -38,8 +44,10 @@ class MovieTrailerViewController: UIViewController {
             {
                 self.store.api.movieTrailerAPI(id) { (string) in
                     
+                    let width = self.movieTrailerWebView.frame.width
+                    let height = self.movieTrailerWebView.frame.height
                     print(string)
-                    self.movieTrailerWebView.loadHTMLString("<iframe width=\"560\" height=\"315\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+                    self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"30\" allowfullscreen></iframe>", baseURL: nil)
                 
                 }
             

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopMoviesCollectionViewCell: UICollectionViewCell
+class UpcomingMoviesCollectionViewCell: UICollectionViewCell
 {
-    @IBOutlet weak var topMoviesImageView: UIImageView!
+    @IBOutlet weak var movieImageView: UIImageView!
 }
