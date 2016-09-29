@@ -55,11 +55,9 @@ class MovieTrailerViewController: UIViewController
                 self.noTrailerLabel.hidden = true
                 
                 self.store.api.movieTrailerAPI(id) { (string) in
-                    let width = self.movieTrailerWebView.bounds.width
-                    let height = self.movieTrailerWebView.bounds.height
-                    print(string)
+                    let width = self.movieTrailerWebView.frame.width
+                    let height = self.movieTrailerWebView.frame.height
                     self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
-                
                 }
             
             }
