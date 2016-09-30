@@ -15,13 +15,13 @@ class MovieDataStore
     
     let api = OMDbAPIClient.sharedInstance
     
-    private init() {}
+    fileprivate init() {}
     
     var movieArray : [Movie] = []
     var topMovies : [Movie] = []
     var favorites: [Favorites] = []    
     
-    func getMovieRepositories(searched: String, completion: ()->())
+    func getMovieRepositories(_ searched: String, completion: @escaping ()->())
     {
         api.OMDbSearchAPIcall(searched) { (array) in
             
@@ -29,7 +29,7 @@ class MovieDataStore
             {
                 guard let repoDictionary = dictionary as? NSDictionary else { fatalError("Object in array is of non-dictionary type") }
                 
-                let movieEntity = NSEntityDescription.entityForName("Movie", inManagedObjectContext: self.managedObjectContext)
+                let movieEntity = NSEntityDescription.entity(forEntityName: "Movie", in: self.managedObjectContext)
                 
                 guard let entity = movieEntity else {fatalError("entity not working")}
                 
@@ -45,7 +45,7 @@ class MovieDataStore
     }
     
 
-    func getDetailsFor(movie: Movie, completion: ()->())
+    func getDetailsFor(_ movie: Movie, completion: @escaping ()->())
     {
         api.getMovieDetailAPICallWithID(movie.imdbID!) { (dictionary) in
             movie.updateMovieDetailsFrom(dictionary, completion: { success in
@@ -55,7 +55,7 @@ class MovieDataStore
             })
         }
     }
-    func getFullSummary(movie: Movie, completion: ()->())
+    func getFullSummary(_ movie: Movie, completion: @escaping ()->())
     {
         api.getMovieFullPlot(movie.imdbID!) { (dictionary) in
             movie.updateMovieWithFullSummary(dictionary, completion: { (successful) in
@@ -87,10 +87,10 @@ class MovieDataStore
     func fetchData()
     {
         
-        let userRequest = NSFetchRequest(entityName: "Favorites")
+        let userRequest = NSFetchRequest<Favorites>(entityName: "Favorites")
         
         do{
-            favorites = try managedObjectContext.executeFetchRequest(userRequest) as! [Favorites]
+            favorites = try managedObjectContext.fetch(userRequest)
         }
         catch
         {
@@ -105,30 +105,30 @@ class MovieDataStore
     lazy var managedObjectContext: NSManagedObjectContext = {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("movieDataModel", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "movieDataModel", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("movieDataModel.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("movieDataModel.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject?
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject?
             
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
@@ -144,9 +144,9 @@ class MovieDataStore
     //MARK: Application's Documents directory
     // Returns the URL to the application's Documents directory.
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.FlatironSchool.SlapChat" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls[urls.count-1]
     }()
 

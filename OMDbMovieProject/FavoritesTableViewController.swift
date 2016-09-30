@@ -19,14 +19,14 @@ class FavoritesTableViewController: UITableViewController
         super.viewDidLoad()
         
     
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
         store.fetchData()
         self.tableView.reloadData()
     
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
         
@@ -37,16 +37,16 @@ class FavoritesTableViewController: UITableViewController
 
     
     // MARK: - Table view data source
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return store.favorites.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("favoritesCell", forIndexPath: indexPath) as! FavoritesMovieTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "favoritesCell", for: indexPath) as! FavoritesMovieTableViewCell
 
-        let favMovie = store.favorites[indexPath.row].movies
+        let favMovie = store.favorites[(indexPath as NSIndexPath).row].movies
         
         cell.favMovieTitleLabel.text = favMovie?.first?.title
         cell.favDirectorLabel.text = favMovie?.first?.director
@@ -61,10 +61,10 @@ class FavoritesTableViewController: UITableViewController
             {
                 cell.favMoviePosterImage.image = UIImage.init(named: "pikachu.png")
             }
-            let stringPosterUrl = NSURL(string: unwrappedString)
+            let stringPosterUrl = URL(string: unwrappedString)
             if let url = stringPosterUrl
             {
-                let dtinternet = NSData(contentsOfURL: url)
+                let dtinternet = try? Data(contentsOf: url)
                 
                 if let unwrappedImage = dtinternet
                 {
@@ -77,21 +77,21 @@ class FavoritesTableViewController: UITableViewController
         return cell
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
     
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
-        if editingStyle == UITableViewCellEditingStyle.Delete
+        if editingStyle == UITableViewCellEditingStyle.delete
         {
 
             let context = store.managedObjectContext
-            context.deleteObject(store.favorites[indexPath.row])
+            context.delete(store.favorites[(indexPath as NSIndexPath).row])
             
-            store.favorites.removeAtIndex(indexPath.row)
+            store.favorites.remove(at: (indexPath as NSIndexPath).row)
             store.saveContext()
             
             self.tableView.reloadData()
@@ -101,18 +101,18 @@ class FavoritesTableViewController: UITableViewController
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
    
         if segue.identifier == "favoritesSegueToDetails"
         {
-            let destinationVC = segue.destinationViewController as? MovieDetailsViewController
+            let destinationVC = segue.destination as? MovieDetailsViewController
             
-            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)
+            let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
             
             if let unwrappedIndex = indexPath
             {
-                let movieID = self.store.favorites[unwrappedIndex.row].movies
+                let movieID = self.store.favorites[(unwrappedIndex as NSIndexPath).row].movies
                 guard let movieTitle = movieID?.first else {return}
     
                 guard let destinationVC = destinationVC else {return}

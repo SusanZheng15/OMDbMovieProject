@@ -33,26 +33,26 @@ class MovieTrailerViewController: UIViewController
         guard let id = movieID else {return}
         
         self.goBackToFirstButton.layer.borderWidth = 1
-        self.goBackToFirstButton.layer.borderColor = UIColor.greenColor().CGColor
+        self.goBackToFirstButton.layer.borderColor = UIColor.green.cgColor
         self.goBackToFirstButton.layer.cornerRadius = 10
-        self.goBackToFirstButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
-        self.titleLabel.hidden = true
-        self.releaseDateLabel.hidden = true
-        self.overviewTextView.hidden = true
+        self.goBackToFirstButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.titleLabel.isHidden = true
+        self.releaseDateLabel.isHidden = true
+        self.overviewTextView.isHidden = true
         
          store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
             if results == []
             {
-                self.movieTrailerWebView.hidden = true
-                self.noTrailerLabel.hidden = false
+                self.movieTrailerWebView.isHidden = true
+                self.noTrailerLabel.isHidden = false
                 self.noTrailerLabel.text = "No Trailers Available"
                 print("no trailers")
             }
             else
             {
-                self.movieTrailerWebView.hidden = false
-                self.noTrailerLabel.hidden = true
+                self.movieTrailerWebView.isHidden = false
+                self.noTrailerLabel.isHidden = true
                 
                 self.store.api.movieTrailerAPI(id) { (string) in
                     let width = self.movieTrailerWebView.frame.width
@@ -62,20 +62,20 @@ class MovieTrailerViewController: UIViewController
             
             }
             
-            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+            OperationQueue.main.addOperation({ 
                 if let title = self.movieTitle
                 {
-                    self.titleLabel.hidden = false
+                    self.titleLabel.isHidden = false
                     self.titleLabel.text = title
                 }
                 if let date = self.releaseDate
                 {
-                    self.releaseDateLabel.hidden = false
+                    self.releaseDateLabel.isHidden = false
                     self.releaseDateLabel.text = date
                 }
                 if let plot = self.overview
                 {
-                    self.overviewTextView.hidden = false
+                    self.overviewTextView.isHidden = false
                     self.overviewTextView.text = plot
                 }
             })

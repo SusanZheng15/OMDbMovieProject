@@ -21,22 +21,22 @@ class OMDbAPIClient
         pageNumber += 1
     }
     
-    func OMDbSearchAPIcall(searchedResult: String, completion: (NSArray)->())
+    func OMDbSearchAPIcall(_ searchedResult: String, completion: @escaping (NSArray)->())
     {
         
         let urlString = "https://www.omdbapi.com/?s=\(searchedResult)&page=\(pageNumber)"
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         guard let unwrappedURL = url else {return}
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+        let dataTask = session.dataTask(with: unwrappedURL, completionHandler: { (data, response, error) in
             
             guard let unwrappedData = data else {return}
             
             do{
-                let movieSearched = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                let movieSearched = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
                 
                 let moviesArray = movieSearched["Search"] as? NSArray
         
@@ -49,27 +49,27 @@ class OMDbAPIClient
             {
                 print("did i crash?")
             }
-        }
+        }) 
         dataTask.resume()
         
     }
     
     
-    func getMovieDetailAPICallWithID(id: String, completion: (NSDictionary)-> ())
+    func getMovieDetailAPICallWithID(_ id: String, completion: @escaping (NSDictionary)-> ())
     {
         let urlString = "http://www.omdbapi.com/?i=\(id)"
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         guard let unwrappedURL = url else {return}
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+        let dataTask = session.dataTask(with: unwrappedURL, completionHandler: { (data, response, error) in
             
             guard let unwrappedData = data else {return}
             
             do{
-                let movieDetails = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                let movieDetails = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
                 
                 if let movieDetailDictionary = movieDetails
                 {
@@ -80,27 +80,27 @@ class OMDbAPIClient
             {
                 print(error)
             }
-        }
+        }) 
         dataTask.resume()
 
     }
     
-    func getMovieFullPlot(id: String, completion: (NSDictionary)->())
+    func getMovieFullPlot(_ id: String, completion: @escaping (NSDictionary)->())
     {
         let urlString = "https://www.omdbapi.com/?i=\(id)&plot=full"
         
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         guard let unwrappedURL = url else {return}
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(unwrappedURL) { (data, response, error) in
+        let dataTask = session.dataTask(with: unwrappedURL, completionHandler: { (data, response, error) in
             
             guard let unwrappedData = data else {return}
             
             do{
-                let movieDetailsFull = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                let movieDetailsFull = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as? NSDictionary
                 
                 if let movieDetailDictionary = movieDetailsFull
                 {
@@ -111,26 +111,26 @@ class OMDbAPIClient
             {
                 print(error)
             }
-        }
+        }) 
         dataTask.resume()
     }
     
-    func getMoviesPlayingInTheaters(completion: NSArray->())
+    func getMoviesPlayingInTheaters(_ completion: @escaping (NSArray)->())
     {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let urlString = "https://api.themoviedb.org/3/movie/upcoming?api_key=\(apiKey)"
         
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(url!) { (data, response, error) in
+        let dataTask = session.dataTask(with: url!, completionHandler: { (data, response, error) in
             
             guard let unwrappedData = data else {return}
             
             do{
-                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: [])
+                let upcomingMovie = try JSONSerialization.jsonObject(with: unwrappedData, options: []) as! NSDictionary
                 
                 let moviesArray = upcomingMovie["results"] as? NSArray
                 
@@ -148,27 +148,27 @@ class OMDbAPIClient
             {
                 print("did i crash?")
             }
-        }
+        }) 
         dataTask.resume()
      
     }
     
-    func movieTrailerAPI(ID: Int, completion: String->())
+    func movieTrailerAPI(_ ID: Int, completion: @escaping (String)->())
     {
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
         
-        let url = NSURL(string: urlString)
+        let url = URL(string: urlString)
         
         
-        let session = NSURLSession.sharedSession()
+        let session = URLSession.shared
         
-        let dataTask = session.dataTaskWithURL(url!) { (data, response, error) in
+        let dataTask = session.dataTask(with: url!, completionHandler: { (data, response, error) in
             
             guard let unwrappedData = data else {return}
             
             do{
-                let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                let upcomingMovie = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
                 
                 let moviesTrailers = upcomingMovie["results"] as? NSArray
                 
@@ -186,27 +186,27 @@ class OMDbAPIClient
             {
                 print("did i crash?")
             }
-        }
+        }) 
         dataTask.resume()
     }
     
-    func checkIfAnyTrailersAvailable(ID: Int, completion: NSArray->())
+    func checkIfAnyTrailersAvailable(_ ID: Int, completion: @escaping (NSArray)->())
     {
         
             let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
             let urlString = "https://api.themoviedb.org/3/movie/\(ID)/videos?api_key=\(apiKey)"
             
-            let url = NSURL(string: urlString)
+            let url = URL(string: urlString)
             
             
-            let session = NSURLSession.sharedSession()
+            let session = URLSession.shared
             
-            let dataTask = session.dataTaskWithURL(url!) { (data, response, error) in
+            let dataTask = session.dataTask(with: url!, completionHandler: { (data, response, error) in
                 
                 guard let unwrappedData = data else {return}
                 
                 do{
-                    let upcomingMovie = try NSJSONSerialization.JSONObjectWithData(unwrappedData, options: NSJSONReadingOptions.AllowFragments)
+                    let upcomingMovie = try JSONSerialization.jsonObject(with: unwrappedData, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
                     
                     let moviesTrailers = upcomingMovie["results"] as? NSArray
                     
@@ -219,7 +219,7 @@ class OMDbAPIClient
                 {
                     print("did i crash?")
                 }
-            }
+            }) 
             dataTask.resume()
         }
     

@@ -22,7 +22,7 @@ class FullPlotViewController: UIViewController
         super.viewDidLoad()
         omdbMovie.fetchData()
         
-        fullPlotActivityIndicator.hidden = false
+        fullPlotActivityIndicator.isHidden = false
         fullPlotActivityIndicator.startAnimating()
         
         checkForFullSummary()
@@ -33,10 +33,10 @@ class FullPlotViewController: UIViewController
     
     func checkForFullSummary()
     {
-        let userRequest = NSFetchRequest(entityName: "Favorites")
+        let userRequest = NSFetchRequest<Favorites>(entityName: "Favorites")
         
         do{
-            let object = try omdbMovie.managedObjectContext.executeFetchRequest(userRequest) as! [Favorites]
+            let object = try omdbMovie.managedObjectContext.fetch(userRequest) 
             
             guard let movieObject = self.movie else {return}
             
@@ -45,9 +45,9 @@ class FullPlotViewController: UIViewController
                 print("nothing in core data")
                 self.omdbMovie.getFullSummary(movieObject)
                 {
-                    dispatch_async(dispatch_get_main_queue(),{
+                    DispatchQueue.main.async(execute: {
                         self.fullPlotSummaryTextField.text = self.movie?.fullSummary
-                        self.fullPlotActivityIndicator.hidden = true
+                        self.fullPlotActivityIndicator.isHidden = true
                         self.fullPlotActivityIndicator.stopAnimating()
                     })
                 }
@@ -70,9 +70,9 @@ class FullPlotViewController: UIViewController
                     
                     self.omdbMovie.getFullSummary(unwrappedMovie)
                     {
-                        dispatch_async(dispatch_get_main_queue(),{
+                        DispatchQueue.main.async(execute: {
                             self.fullPlotSummaryTextField.text = self.movie?.fullSummary
-                            self.fullPlotActivityIndicator.hidden = true
+                            self.fullPlotActivityIndicator.isHidden = true
                             self.fullPlotActivityIndicator.stopAnimating()
                         })
                     }

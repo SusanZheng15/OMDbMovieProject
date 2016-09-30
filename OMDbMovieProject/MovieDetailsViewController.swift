@@ -41,33 +41,33 @@ class MovieDetailsViewController: UIViewController
     {
         super.viewDidLoad()
         
-        self.releaseTemp.hidden = true
-        self.dicrectorTemp.hidden = true
-        self.writerTemp.hidden = true
-        self.starsTemp.hidden = true
-        self.metaTemp.hidden = true
-        self.posterImage.hidden = true
-        self.fullDescripTemp.hidden = true
-        self.imdbTemp.hidden = true
+        self.releaseTemp.isHidden = true
+        self.dicrectorTemp.isHidden = true
+        self.writerTemp.isHidden = true
+        self.starsTemp.isHidden = true
+        self.metaTemp.isHidden = true
+        self.posterImage.isHidden = true
+        self.fullDescripTemp.isHidden = true
+        self.imdbTemp.isHidden = true
         
         omdbMovie.fetchData()
         
         checkForData()
         reachabilityStatusChanged()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MovieDetailsViewController.reachabilityStatusChanged), name: "reachStatusChanged", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MovieDetailsViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "reachStatusChanged"), object: nil)
         
-        self.activityIndicator.hidden = false
+        self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         
         self.tabBarController?.navigationItem.title = movie?.title
         self.title = movie?.title
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .Done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Apple SD Gothic Neo", size: 25)!], forState: UIControlState.Normal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "⭐️", style: .done, target: self, action: #selector(MovieDetailsViewController.saveMovie))
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Apple SD Gothic Neo", size: 25)!], for: UIControlState())
        
-        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.blackColor()
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         
         
     }
@@ -76,15 +76,15 @@ class MovieDetailsViewController: UIViewController
     {
         if reachabilityStatus == kNOTREACHABLE
         {
-            self.activityIndicator.hidden = true
+            self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
-            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .alert)
             
-            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            self.present(noNetworkAlertController, animated: true, completion: nil)
             
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
+            DispatchQueue.main.async { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { () -> Void in
+                    noNetworkAlertController.dismiss(animated: true, completion: nil)
                 })
             }
 
@@ -102,10 +102,10 @@ class MovieDetailsViewController: UIViewController
     
      func checkForData()
      {
-        let userRequest = NSFetchRequest(entityName: "Favorites")
+        let userRequest = NSFetchRequest<Favorites>(entityName: "Favorites")
      
         do{
-            let object = try omdbMovie.managedObjectContext.executeFetchRequest(userRequest) as! [Favorites]
+            let object = try omdbMovie.managedObjectContext.fetch(userRequest)
             guard let movieObject = self.movie else {return}
             
             if object.count == 0
@@ -113,15 +113,15 @@ class MovieDetailsViewController: UIViewController
                 print("theres nothing in core data")
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
-                    dispatch_async(dispatch_get_main_queue(),{
-                        self.releaseTemp.hidden = false
-                        self.dicrectorTemp.hidden = false
-                        self.writerTemp.hidden = false
-                        self.starsTemp.hidden = false
-                        self.metaTemp.hidden = false
-                        self.imdbTemp.hidden = false
-                        self.posterImage.hidden = false
-                        self.fullDescripTemp.hidden = false
+                    DispatchQueue.main.async(execute: {
+                        self.releaseTemp.isHidden = false
+                        self.dicrectorTemp.isHidden = false
+                        self.writerTemp.isHidden = false
+                        self.starsTemp.isHidden = false
+                        self.metaTemp.isHidden = false
+                        self.imdbTemp.isHidden = false
+                        self.posterImage.isHidden = false
+                        self.fullDescripTemp.isHidden = false
                         
                         self.moviePlotTextField.text = self.movie?.plot
                         self.releasedLabel.text = self.movie?.released
@@ -131,7 +131,7 @@ class MovieDetailsViewController: UIViewController
                         self.imbdScoreLabel.text = self.movie?.imdbRating
                         self.metaScoreLabel.text = self.movie?.metaScore
                         self.activityIndicator.stopAnimating()
-                        self.activityIndicator.hidden = true
+                        self.activityIndicator.isHidden = true
                         
                         self.imageDisplay()
                     })
@@ -146,14 +146,14 @@ class MovieDetailsViewController: UIViewController
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
                     print("Has it")
-                    self.releaseTemp.hidden = false
-                    self.dicrectorTemp.hidden = false
-                    self.writerTemp.hidden = false
-                    self.starsTemp.hidden = false
-                    self.metaTemp.hidden = false
-                    self.posterImage.hidden = false
-                    self.imdbTemp.hidden = false
-                    self.fullDescripTemp.hidden = false
+                    self.releaseTemp.isHidden = false
+                    self.dicrectorTemp.isHidden = false
+                    self.writerTemp.isHidden = false
+                    self.starsTemp.isHidden = false
+                    self.metaTemp.isHidden = false
+                    self.posterImage.isHidden = false
+                    self.imdbTemp.isHidden = false
+                    self.fullDescripTemp.isHidden = false
                     
                     self.moviePlotTextField.text = movie.movies?.first?.plot
                     self.releasedLabel.text = movie.movies?.first?.released
@@ -164,22 +164,22 @@ class MovieDetailsViewController: UIViewController
                     self.metaScoreLabel.text = movie.movies?.first?.metaScore
                     self.imageDisplay()
                     self.activityIndicator.stopAnimating()
-                    self.activityIndicator.hidden = true
+                    self.activityIndicator.isHidden = true
                 }
                 else if savedMovieID != movieObject.imdbID
                 {
                     print("doesnt have it")
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
-                        dispatch_async(dispatch_get_main_queue(),{
-                            self.releaseTemp.hidden = false
-                            self.dicrectorTemp.hidden = false
-                            self.writerTemp.hidden = false
-                            self.starsTemp.hidden = false
-                            self.metaTemp.hidden = false
-                            self.posterImage.hidden = false
-                            self.imdbTemp.hidden = false
-                            self.fullDescripTemp.hidden = false
+                        DispatchQueue.main.async(execute: {
+                            self.releaseTemp.isHidden = false
+                            self.dicrectorTemp.isHidden = false
+                            self.writerTemp.isHidden = false
+                            self.starsTemp.isHidden = false
+                            self.metaTemp.isHidden = false
+                            self.posterImage.isHidden = false
+                            self.imdbTemp.isHidden = false
+                            self.fullDescripTemp.isHidden = false
                             
                             self.moviePlotTextField.text = self.movie?.plot
                             self.releasedLabel.text = self.movie?.released
@@ -189,7 +189,7 @@ class MovieDetailsViewController: UIViewController
                             self.imbdScoreLabel.text = self.movie?.imdbRating
                             self.metaScoreLabel.text = self.movie?.metaScore
                             self.activityIndicator.stopAnimating()
-                            self.activityIndicator.hidden = true
+                            self.activityIndicator.isHidden = true
                             self.imageDisplay()
                             
                             })
@@ -210,19 +210,19 @@ class MovieDetailsViewController: UIViewController
         let imageString = self.movie?.poster
         if let unwrappedString = imageString
         {
-            let stringPosterUrl = NSURL(string: unwrappedString)
+            let stringPosterUrl = URL(string: unwrappedString)
             if let url = stringPosterUrl
             {
-                let dtinternet = NSData(contentsOfURL: url)
+                let dtinternet = try? Data(contentsOf: url)
                 
                 if let unwrappedImage = dtinternet
                 {
                     self.posterImage.image = UIImage.init(data: unwrappedImage)
                     self.posterImageView.image = UIImage.init(data: unwrappedImage)
-                    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+                    let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
                     let blurEffectView = UIVisualEffectView(effect: blurEffect)
                     blurEffectView.frame = self.posterImageView.bounds
-                    blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight] 
+                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] 
                     
                     self.posterImageView.addSubview(blurEffectView)
                     
@@ -234,7 +234,7 @@ class MovieDetailsViewController: UIViewController
     }
     
     
-    @IBAction func plotDescriptionButton(sender: AnyObject)
+    @IBAction func plotDescriptionButton(_ sender: AnyObject)
     {
         //segue
     }
@@ -245,21 +245,21 @@ class MovieDetailsViewController: UIViewController
         
         let saveAlert = UIAlertController(title: "Saved",
                                       message: "\(savedMovieTitle) has been saved to favorites",
-                                      preferredStyle: .Alert)
-        self.presentViewController(saveAlert, animated: true, completion: nil)
+                                      preferredStyle: .alert)
+        self.present(saveAlert, animated: true, completion: nil)
         self.navigationItem.rightBarButtonItem = nil
 
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-                saveAlert.dismissViewControllerAnimated(true, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { () -> Void in
+                saveAlert.dismiss(animated: true, completion: nil)
                 
             })
         }
         
         let context = omdbMovie.managedObjectContext
     
-        let addMovie = NSEntityDescription.insertNewObjectForEntityForName("Favorites", inManagedObjectContext: context) as! Favorites
+        let addMovie = NSEntityDescription.insertNewObject(forEntityName: "Favorites", into: context) as! Favorites
         
         guard let savedMovie = self.movie else {return}
         addMovie.movies?.insert(savedMovie)
@@ -270,11 +270,11 @@ class MovieDetailsViewController: UIViewController
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "fullSummarySegue"
         {
-            let destinationFullPlotVC = segue.destinationViewController as? FullPlotViewController
+            let destinationFullPlotVC = segue.destination as? FullPlotViewController
             
             if let unwrappedMovie = movie
             {

@@ -41,27 +41,27 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
       
-        moviesSearchBar.barStyle = UIBarStyle.BlackTranslucent
+        moviesSearchBar.barStyle = UIBarStyle.blackTranslucent
         
         super.viewDidLoad()
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: kReachabilityChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
         
         self.tabBarController?.navigationItem.title = "Movie Search"
        
-        self.noResultsLabel.hidden = true
-        self.searchActivityIndictor.hidden = false
+        self.noResultsLabel.isHidden = true
+        self.searchActivityIndictor.isHidden = false
         self.searchActivityIndictor.startAnimating()
         self.title = "Movie Search"
         
-        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
-        internetReach = Reachability.reachabilityForInternetConnection()
+        internetReach = Reachability.forInternetConnection()
         internetReach?.startNotifier()
         
         self.statusChangedWithReachability(internetReach!)
-        self.reachabilityImage.hidden = true
+        self.reachabilityImage.isHidden = true
     
     }
  
@@ -73,7 +73,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             return
         }
         
-        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation) {
+        if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
             //landscape
         } else {
             //portrait
@@ -82,7 +82,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         flowLayout.invalidateLayout()
     }
   
-    func statusChangedWithReachability(currentStatus: Reachability)
+    func statusChangedWithReachability(_ currentStatus: Reachability)
     {
         let networkStatus: NetworkStatus = currentStatus.currentReachabilityStatus()
     
@@ -94,11 +94,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             print("Reachable with Wifi")
             reachabilityStatus = kREACHABILITYWITHWIFI
             self.reachabilityImage.image = UIImage.init(named: "internetcheckMark.png")
-            self.reachabilityImage.hidden = false
+            self.reachabilityImage.isHidden = false
             self.view.addSubview(self.reachabilityImage)
-            self.view.bringSubviewToFront(self.reachabilityImage)
+            self.view.bringSubview(toFront: self.reachabilityImage)
             
-            UIView.animateWithDuration(1.3, animations: {
+            UIView.animate(withDuration: 1.3, animations: {
                 self.reachabilityImage.alpha = 0.0
                 
             })
@@ -107,27 +107,27 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             let randomSearch = randomSearchTerm[randomIndex]
             
             self.store.getMovieRepositories(randomSearch) {
-                NSOperationQueue.mainQueue().addOperationWithBlock({
+                OperationQueue.main.addOperation({
                     self.movieCollectionView.reloadData()
-                    self.searchActivityIndictor.hidden = true
+                    self.searchActivityIndictor.isHidden = true
                     self.searchActivityIndictor.stopAnimating()
                     
                 })
             }
-            moviesSearchBar.userInteractionEnabled = true
+            moviesSearchBar.isUserInteractionEnabled = true
         }
         else if networkStatus.rawValue == ReachableViaWWAN.rawValue
         {
             print("Reachable with WWAN")
             reachabilityStatus = kREACHABLEWITHWWAN
             
-            moviesSearchBar.userInteractionEnabled = true
+            moviesSearchBar.isUserInteractionEnabled = true
             self.reachabilityImage.image = UIImage.init(named: "internetcheckMark.png")
-            self.reachabilityImage.hidden = false
+            self.reachabilityImage.isHidden = false
             self.view.addSubview(self.reachabilityImage)
-            self.view.bringSubviewToFront(self.reachabilityImage)
+            self.view.bringSubview(toFront: self.reachabilityImage)
             
-            UIView.animateWithDuration(1.3, animations: {
+            UIView.animate(withDuration: 1.3, animations: {
                 self.reachabilityImage.alpha = 0.0
                 
             })
@@ -135,9 +135,9 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             let randomIndex = Int(arc4random_uniform(UInt32(randomSearchTerm.count)))
             let randomSearch = randomSearchTerm[randomIndex]
             self.store.getMovieRepositories(randomSearch) {
-                NSOperationQueue.mainQueue().addOperationWithBlock({
+                OperationQueue.main.addOperation({
                     self.movieCollectionView.reloadData()
-                    self.searchActivityIndictor.hidden = true
+                    self.searchActivityIndictor.isHidden = true
                     self.searchActivityIndictor.stopAnimating()
                     
                 })
@@ -149,23 +149,23 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             print("Network not reachable")
             
             self.store.movieArray.removeAll()
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 self.movieCollectionView.reloadData()
-                self.searchActivityIndictor.hidden = true
+                self.searchActivityIndictor.isHidden = true
                 self.searchActivityIndictor.stopAnimating()
-                self.moviesSearchBar.userInteractionEnabled = false
+                self.moviesSearchBar.isUserInteractionEnabled = false
 
             })
             
-            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .Alert)
+            let noNetworkAlertController = UIAlertController(title: "No Network Connection detected", message: "Cannot conduct search", preferredStyle: .alert)
             
-            self.presentViewController(noNetworkAlertController, animated: true, completion: nil)
+            self.present(noNetworkAlertController, animated: true, completion: nil)
             
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2.0 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
-                    noNetworkAlertController.dismissViewControllerAnimated(true, completion: nil)
-                    self.view.bringSubviewToFront(self.reachabilityImage)
-                    self.reachabilityImage.hidden = false
+            DispatchQueue.main.async { () -> Void in
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(2.0 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { () -> Void in
+                    noNetworkAlertController.dismiss(animated: true, completion: nil)
+                    self.view.bringSubview(toFront: self.reachabilityImage)
+                    self.reachabilityImage.isHidden = false
                     self.reachabilityImage.alpha = 1.0
                     self.reachabilityImage.image = UIImage.init(named: "internetRedMark.png")
                     self.view.addSubview(self.reachabilityImage)
@@ -175,11 +175,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("reachStatusChanged", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "reachStatusChanged"), object: nil)
     }
     
     
-    func reachabilityChanged(notification: NSNotification)
+    func reachabilityChanged(_ notification: Notification)
     {
         print("Reachability status changed")
         reachability = notification.object as? Reachability
@@ -187,10 +187,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         var itemsCount : CGFloat = 2.0
-        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait
+        if UIApplication.shared.statusBarOrientation != UIInterfaceOrientation.portrait
         {
             itemsCount = 2.0
         }
@@ -198,39 +198,39 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
 
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return self.store.movieArray.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("collectionCell", forIndexPath: indexPath) as! SearchedMovieCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchedMovieCollectionViewCell
      
         
         guard self.store.movieArray.count > 0 else { return cell }
         
         
-            if let unwrappedPoster = self.store.movieArray[indexPath.row].poster
+            if let unwrappedPoster = self.store.movieArray[(indexPath as NSIndexPath).row].poster
             {
                 if unwrappedPoster == "N/A"
                 {
                     cell.moviePosterImageView.image = UIImage.init(named: "pikachu.png")
                 }
             
-                let stringPosterURL = NSURL(string: unwrappedPoster)
+                let stringPosterURL = URL(string: unwrappedPoster)
                 
                 if let url = stringPosterURL
                 {
-                    let dtinternet = NSData(contentsOfURL: url)
+                    let dtinternet = try? Data(contentsOf: url)
                     
                     if let unwrappedImage = dtinternet
                     {
-                        dispatch_async(dispatch_get_main_queue(),{
+                        DispatchQueue.main.async(execute: {
                             cell.moviePosterImageView.image = UIImage.init(data: unwrappedImage)
-                            cell.movieTitleLabel.text = self.store.movieArray[indexPath.row].title
-                            self.noResultsLabel.hidden = true
-                            self.searchActivityIndictor.hidden = true
+                            cell.movieTitleLabel.text = self.store.movieArray[(indexPath as NSIndexPath).row].title
+                            self.noResultsLabel.isHidden = true
+                            self.searchActivityIndictor.isHidden = true
                             self.searchActivityIndictor.stopAnimating()
                         })
                     }
@@ -241,14 +241,14 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
     
      //if bottom of collection view is reached, get more
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     {
-        if indexPath.row == self.store.movieArray.count - 1
+        if (indexPath as NSIndexPath).row == self.store.movieArray.count - 1
         {
-            print("each the end mate")
+
             if let searchText = moviesSearchBar.text
             {
-                let search = searchText.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+                let search = searchText.replacingOccurrences(of: " ", with: "+").lowercased()
                 
                 if search == ""
                 {
@@ -256,7 +256,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                     let randomSearch = randomSearchTerm[randomIndex]
                     self.store.api.getNextPage()
                     self.store.getMovieRepositories(randomSearch, completion: {
-                        dispatch_async(dispatch_get_main_queue(),{
+                        DispatchQueue.main.async(execute: {
                             
                             self.movieCollectionView.reloadData()
                             print(self.store.movieArray.count)
@@ -269,7 +269,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
                 {
                     self.store.api.getNextPage()
                     self.store.getMovieRepositories(search, completion: {
-                        dispatch_async(dispatch_get_main_queue(),{
+                        DispatchQueue.main.async(execute: {
                             
                             self.movieCollectionView.reloadData()
                             print(self.store.movieArray.count)
@@ -283,24 +283,23 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar)
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
     }
    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
     {
         let searchResult = moviesSearchBar.text
         guard let unwrappedSearch = searchResult else {return}
         
         print(store.movieArray.count)
-    
 
         if unwrappedSearch == ""
         {
             self.store.movieArray.removeAll()
            
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 self.movieCollectionView.reloadData()
             })
         
@@ -309,10 +308,10 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         {
             self.store.movieArray.removeAll()
     
-            let search = unwrappedSearch.stringByReplacingOccurrencesOfString(" ", withString: "+").lowercaseString
+            let search = unwrappedSearch.replacingOccurrences(of: " ", with: "+").lowercased()
             self.store.api.pageNumber = 1
             self.store.getMovieRepositories(search, completion: {
-                dispatch_async(dispatch_get_main_queue(),{
+                DispatchQueue.main.async(execute: {
                     self.movieCollectionView.reloadData()
                 })
             })
@@ -320,11 +319,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
         if store.movieArray.count == 0
         {
-            dispatch_async(dispatch_get_main_queue(),{
+            DispatchQueue.main.async(execute: {
                 self.movieCollectionView.reloadData()
-                self.noResultsLabel.hidden = false
+                self.noResultsLabel.isHidden = false
                 self.view.addSubview(self.noResultsLabel)
-                self.view.bringSubviewToFront(self.noResultsLabel)
+                self.view.bringSubview(toFront: self.noResultsLabel)
                 self.noResultsLabel.text = "No Results"
             })
         }        
@@ -332,22 +331,22 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     
  
-    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
     {
         self.moviesSearchBar.resignFirstResponder()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "movieDetailSegue"
         {
-            let destinationVC = segue.destinationViewController as! MovieDetailsViewController
+            let destinationVC = segue.destination as! MovieDetailsViewController
             
-            let indexPath = movieCollectionView.indexPathForCell(sender as! UICollectionViewCell)
+            let indexPath = movieCollectionView.indexPath(for: sender as! UICollectionViewCell)
             
             if let unwrappedIndex = indexPath
             {
-                let movie = self.store.movieArray[unwrappedIndex.row]
+                let movie = self.store.movieArray[(unwrappedIndex as NSIndexPath).row]
                 destinationVC.movie = movie
             }
             

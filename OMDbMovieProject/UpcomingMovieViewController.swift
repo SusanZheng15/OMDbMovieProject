@@ -25,12 +25,12 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         topMoviesCollectionView.dataSource = self
         
         self.startSearchButton.layer.borderWidth = 1
-        self.startSearchButton.layer.borderColor = UIColor.greenColor().CGColor
+        self.startSearchButton.layer.borderColor = UIColor.green.cgColor
         self.startSearchButton.layer.cornerRadius = 10
-        self.startSearchButton.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        self.startSearchButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         
         store.api.getMoviesPlayingInTheaters { (array) in
-            NSOperationQueue.mainQueue().addOperationWithBlock({
+            OperationQueue.main.addOperation({
                 self.topMoviesCollectionView.reloadData()
             })
             
@@ -49,7 +49,7 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
             return
         }
         
-        if UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication().statusBarOrientation)
+        if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
         {
             //landscape
         } else {
@@ -60,10 +60,10 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
         var itemsCount : CGFloat = 1.0
-        if UIApplication.sharedApplication().statusBarOrientation != UIInterfaceOrientation.Portrait
+        if UIApplication.shared.statusBarOrientation != UIInterfaceOrientation.portrait
         {
             itemsCount = 1.0
         }
@@ -71,29 +71,29 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
     }
 
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return store.api.upcomingMovie.count
     }
     
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! UpcomingMoviesCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! UpcomingMoviesCollectionViewCell
         
-        if let poster = store.api.upcomingMovie[indexPath.row].poster
+        if let poster = store.api.upcomingMovie[(indexPath as NSIndexPath).row].poster
         {
-            cell.movieImageView.hidden = true
-            dispatch_async(dispatch_get_main_queue(),{
-            let stringPosterURL = NSURL(string: "http://image.tmdb.org/t/p/w500"+poster)
+            cell.movieImageView.isHidden = true
+            DispatchQueue.main.async(execute: {
+            let stringPosterURL = URL(string: "http://image.tmdb.org/t/p/w500"+poster)
             
             if let url = stringPosterURL
             {
-                let dtinternet = NSData(contentsOfURL: url)
+                let dtinternet = try? Data(contentsOf: url)
                 
                 if let unwrappedImage = dtinternet
                 {
-                    cell.movieImageView.hidden = false
+                    cell.movieImageView.isHidden = false
                     cell.movieImageView.image = UIImage.init(data: unwrappedImage)
                 }
             }
@@ -105,20 +105,20 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "movieTrailerSegue"
         {
-            let destinationVC = segue.destinationViewController as! MovieTrailerViewController
+            let destinationVC = segue.destination as! MovieTrailerViewController
             
-            let indexPath = topMoviesCollectionView.indexPathForCell(sender as! UICollectionViewCell)
+            let indexPath = topMoviesCollectionView.indexPath(for: sender as! UICollectionViewCell)
             
             if let unwrappedIndex = indexPath
             {
-                let id = self.store.api.upcomingMovie[unwrappedIndex.row].id
-                let title = self.store.api.upcomingMovie[unwrappedIndex.row].title
-                let release = self.store.api.upcomingMovie[unwrappedIndex.row].releaseDate
-                let overview = self.store.api.upcomingMovie[unwrappedIndex.row].plot
+                let id = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].id
+                let title = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].title
+                let release = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].releaseDate
+                let overview = self.store.api.upcomingMovie[(unwrappedIndex as NSIndexPath).row].plot
                 
                 destinationVC.movieID = id
                 destinationVC.movieTitle = title

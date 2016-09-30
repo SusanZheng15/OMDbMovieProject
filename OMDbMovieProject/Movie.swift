@@ -14,13 +14,13 @@ class Movie: NSManagedObject
     
     convenience init(dictionary: NSDictionary,entity: NSEntityDescription, managedObjectContext: NSManagedObjectContext)
     {
-        self.init(entity: entity, insertIntoManagedObjectContext: managedObjectContext)
+        self.init(entity: entity, insertInto: managedObjectContext)
 
         guard let
             movieTitle = dictionary["Title"] as? String,
-            moviePoster = dictionary["Poster"] as? String,
-            movieYear = dictionary["Year"] as? String,
-            movieID = dictionary["imdbID"] as? String
+            let moviePoster = dictionary["Poster"] as? String,
+            let movieYear = dictionary["Year"] as? String,
+            let movieID = dictionary["imdbID"] as? String
         
             else { fatalError("Could not create object from supplied dictionary") }
         
@@ -32,7 +32,7 @@ class Movie: NSManagedObject
 
     }
 
-    func updateMovieDetailsFrom(dictionary: NSDictionary, completion:(Bool) -> ())
+    func updateMovieDetailsFrom(_ dictionary: NSDictionary, completion:(Bool) -> ())
     {
         self.plot = dictionary["Plot"] as? String
         self.actors = dictionary["Actors"] as? String
@@ -45,7 +45,7 @@ class Movie: NSManagedObject
         completion(true)
     }
     
-    func updateMovieWithFullSummary(dictionary: NSDictionary, completion:(Bool)->())
+    func updateMovieWithFullSummary(_ dictionary: NSDictionary, completion:(Bool)->())
     {
         self.fullSummary = dictionary["Plot"] as? String
         completion(true)
