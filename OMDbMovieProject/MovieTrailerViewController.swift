@@ -32,10 +32,10 @@ class MovieTrailerViewController: UIViewController
        
         guard let id = movieID else {return}
         
-        self.goBackToFirstButton.layer.borderWidth = 1
-        self.goBackToFirstButton.layer.borderColor = UIColor.green.cgColor
-        self.goBackToFirstButton.layer.cornerRadius = 10
-        self.goBackToFirstButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+       // self.goBackToFirstButton.layer.borderWidth = 1
+       // self.goBackToFirstButton.layer.borderColor = UIColor.green.cgColor
+       // self.goBackToFirstButton.layer.cornerRadius = 10
+       // self.goBackToFirstButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         self.titleLabel.isHidden = true
         self.releaseDateLabel.isHidden = true
         self.overviewTextView.isHidden = true

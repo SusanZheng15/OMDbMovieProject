@@ -27,7 +27,6 @@
 		1BE963C11D79DD990060A5C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */; };
 		1BE963C91D79E0130060A5C0 /* OMDbAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */; };
 		1BEEF6D61D931D28004552A6 /* LaunchandLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6D51D931D28004552A6 /* LaunchandLogo.png */; };
-		1BEEF6D81D9354C8004552A6 /* navStarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6D71D9354C8004552A6 /* navStarButton.png */; };
 		1BEEF6DA1D938350004552A6 /* InternetcheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6D91D938350004552A6 /* InternetcheckMark.png */; };
 		1BEEF6DC1D941B90004552A6 /* internetRedMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEEF6DB1D941B90004552A6 /* internetRedMark.png */; };
 		1BF3CE771D91CCDD0013C957 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF3CE761D91CCDD0013C957 /* Reachability.m */; };
@@ -59,7 +58,6 @@
 		1BE963C21D79DD990060A5C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE963C81D79E0130060A5C0 /* OMDbAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OMDbAPIClient.swift; sourceTree = "<group>"; };
 		1BEEF6D51D931D28004552A6 /* LaunchandLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchandLogo.png; sourceTree = "<group>"; };
-		1BEEF6D71D9354C8004552A6 /* navStarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navStarButton.png; sourceTree = "<group>"; };
 		1BEEF6D91D938350004552A6 /* InternetcheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InternetcheckMark.png; sourceTree = "<group>"; };
 		1BEEF6DB1D941B90004552A6 /* internetRedMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internetRedMark.png; sourceTree = "<group>"; };
 		1BF3CE741D91CCDC0013C957 /* OMDbMovieProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OMDbMovieProject-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				1BF3CE741D91CCDC0013C957 /* OMDbMovieProject-Bridging-Header.h */,
 				1BEEF6D91D938350004552A6 /* InternetcheckMark.png */,
 				1BEEF6DB1D941B90004552A6 /* internetRedMark.png */,
-				1BEEF6D71D9354C8004552A6 /* navStarButton.png */,
 				1BEEF6D51D931D28004552A6 /* LaunchandLogo.png */,
 				1BE963BD1D79DD990060A5C0 /* Assets.xcassets */,
 				1BE963BF1D79DD990060A5C0 /* LaunchScreen.storyboard */,
@@ -220,7 +217,6 @@
 			files = (
 				1BE963C11D79DD990060A5C0 /* LaunchScreen.storyboard in Resources */,
 				1BEEF6DC1D941B90004552A6 /* internetRedMark.png in Resources */,
-				1BEEF6D81D9354C8004552A6 /* navStarButton.png in Resources */,
 				1BE963BE1D79DD990060A5C0 /* Assets.xcassets in Resources */,
 				1BE963BC1D79DD990060A5C0 /* Main.storyboard in Resources */,
 				1BEEF6DA1D938350004552A6 /* InternetcheckMark.png in Resources */,
