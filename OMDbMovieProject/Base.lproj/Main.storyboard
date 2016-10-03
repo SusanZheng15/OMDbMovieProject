@@ -164,7 +164,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ChR-lF-fc9" id="bcj-tC-Gqt">
-                                    <frame key="frameInset" width="414" height="108"/>
+                                    <frame key="frameInset" width="414" height="107"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m38-sJ-Ruw">
@@ -652,12 +652,12 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="qHf-lB-tIo"/>
                                         <exclude reference="4hU-pK-mdu"/>
                                         <exclude reference="C9F-2F-rfh"/>
                                         <exclude reference="b4a-NI-CMn"/>
                                         <exclude reference="dr4-7L-bdV"/>
                                         <exclude reference="fNE-FN-q4y"/>
-                                        <exclude reference="qHf-lB-tIo"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -667,7 +667,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4Y-2t-M3C">
-                                <color key="barTintColor" red="0.25062030639999999" green="1" blue="0.58550095710000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.59603083053691275" green="0.22759244632550341" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
@@ -676,7 +676,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.25062030639999999" green="1" blue="0.58550095710000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="f4Y-2t-M3C" firstAttribute="width" secondItem="WvA-fL-3rf" secondAttribute="width" id="1nf-no-6An"/>
                             <constraint firstItem="f4Y-2t-M3C" firstAttribute="centerX" secondItem="94n-tO-BFF" secondAttribute="centerX" id="33O-tO-gxN"/>
@@ -700,11 +700,11 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="EBt-xe-5jy"/>
+                                <exclude reference="YWN-dl-DRB"/>
+                                <exclude reference="cbU-Sn-WbT"/>
                                 <exclude reference="8CD-PM-7RF"/>
                                 <exclude reference="Gzf-vB-tfH"/>
                                 <exclude reference="jjV-9M-boU"/>
-                                <exclude reference="YWN-dl-DRB"/>
-                                <exclude reference="cbU-Sn-WbT"/>
                                 <exclude reference="EgK-1k-etg"/>
                             </mask>
                         </variation>
@@ -745,7 +745,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="H5x-uM-QsQ" customClass="UpcomingMoviesCollectionViewCell" customModule="Movie_Hub" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="118.66666666666667" width="300" height="436"/>
+                                        <rect key="frame" x="0.0" y="119" width="300" height="436"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="436"/>
@@ -774,9 +774,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU1-Nl-itw">
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
                                 <state key="normal" title="Click to begin search">
-                                    <color key="titleColor" red="0.25098039220000001" green="1" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
@@ -788,7 +788,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.25062030639999999" green="1" blue="0.58550095710000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SeH-DG-UhI" firstAttribute="leading" secondItem="c6U-ra-aJj" secondAttribute="leadingMargin" constant="34" id="Hjv-vD-Acp"/>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="top" secondItem="SeH-DG-UhI" secondAttribute="bottom" constant="8" id="MZc-U4-TR9"/>
@@ -845,10 +845,10 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iwK-Ev-A7M">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="iwK-Ev-A7M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.2506203063991097" green="1" blue="0.58550095709178629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -871,10 +871,10 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="g4q-BR-Ncx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="g4q-BR-Ncx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25098039215686274" green="1" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
