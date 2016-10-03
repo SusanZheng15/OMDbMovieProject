@@ -25,9 +25,9 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         topMoviesCollectionView.dataSource = self
         
         self.startSearchButton.layer.borderWidth = 1
-        self.startSearchButton.layer.borderColor = UIColor.green.cgColor
+        self.startSearchButton.layer.borderColor = UIColor.purple.cgColor
         self.startSearchButton.layer.cornerRadius = 10
-        self.startSearchButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.startSearchButton.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
         store.api.getMoviesPlayingInTheaters { (array) in
             OperationQueue.main.addOperation({

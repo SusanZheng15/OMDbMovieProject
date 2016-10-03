@@ -32,10 +32,10 @@ class MovieTrailerViewController: UIViewController
        
         guard let id = movieID else {return}
         
-       // self.goBackToFirstButton.layer.borderWidth = 1
-       // self.goBackToFirstButton.layer.borderColor = UIColor.green.cgColor
-       // self.goBackToFirstButton.layer.cornerRadius = 10
-       // self.goBackToFirstButton.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        self.goBackToFirstButton.layer.borderWidth = 1
+        self.goBackToFirstButton.layer.borderColor = UIColor.purple.cgColor
+        self.goBackToFirstButton.layer.cornerRadius = 10
+        self.goBackToFirstButton.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         self.titleLabel.isHidden = true
         self.releaseDateLabel.isHidden = true
         self.overviewTextView.isHidden = true
@@ -60,7 +60,6 @@ class MovieTrailerViewController: UIViewController
                         let width = self.movieTrailerWebView.frame.width
                         let height = self.movieTrailerWebView.frame.height
                         self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
-                       // self.movieTrailerWebView.frame = UIScreen.main.bounds
                         self.movieTrailerWebView.backgroundColor = UIColor.clear
                     })
                     

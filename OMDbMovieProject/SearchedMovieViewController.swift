@@ -46,6 +46,8 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(SearchedMovieViewController.backButton))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
         
         self.tabBarController?.navigationItem.title = "Movie Search"
@@ -81,7 +83,13 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         
         flowLayout.invalidateLayout()
     }
-  
+    
+    func backButton()
+    {
+        performSegue(withIdentifier: "backToUpcomingSegue", sender: self)
+    }
+
+
     func statusChangedWithReachability(_ currentStatus: Reachability)
     {
         let networkStatus: NetworkStatus = currentStatus.currentReachabilityStatus()
