@@ -84,7 +84,6 @@ class MovieTrailerViewController: UIViewController
         
         }
         
-      
         
         
     }

@@ -12,6 +12,9 @@ class SearchedTrailerViewController: UIViewController
 {
     
     let youtubeURL = "https://www.youtube.com/embed/"
+    
+    var youTubeVideoHTML: String = "<!DOCTYPE html><html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = \"http://www.youtube.com/player_api\"; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'%0.0f', height:'%0.0f', videoId:'%@', events: { 'onReady': onPlayerReady, } }); } function onPlayerReady(event) { event.target.playVideo(); } </script> </body> </html>"
+
     var movieTrailer : Movie?
     
     let store = MovieDataStore.sharedInstance
@@ -22,17 +25,17 @@ class SearchedTrailerViewController: UIViewController
     {
         super.viewDidLoad()
 
-        print("did it go through?")
         if let movieID = movieTrailer?.imdbID
         {
-           print("whats goign on?")
-            self.store.api.movieTrailerAPIWithString(movieID, completion: { (string) in
+            self.store.api.movieTrailerAPIWithString(movieID, completion: { (stringID) in
                 DispatchQueue.main.async { () -> Void in
-                    let width = self.trailerWebView.frame.width
-                    let height = self.trailerWebView.frame.height
-                        
-                    self.trailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+                
                     self.trailerWebView.mediaPlaybackRequiresUserAction = false
+                    self.trailerWebView.allowsInlineMediaPlayback = true
+                    
+                    let html: String = String(format: self.youTubeVideoHTML, self.trailerWebView.frame.size.width, self.trailerWebView.frame.size.height, stringID)
+                    
+                    self.trailerWebView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
                        
                 }
             })

@@ -528,10 +528,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gfa-dZ-713" firstAttribute="centerY" secondItem="ErM-Iq-Xcc" secondAttribute="centerY" id="74j-VB-LK3"/>
+                            <constraint firstItem="gfa-dZ-713" firstAttribute="centerY" secondItem="ErM-Iq-Xcc" secondAttribute="centerY" constant="-183" id="74j-VB-LK3"/>
                             <constraint firstItem="gfa-dZ-713" firstAttribute="width" secondItem="ErM-Iq-Xcc" secondAttribute="width" id="8vm-hk-uM8"/>
                             <constraint firstItem="gfa-dZ-713" firstAttribute="centerX" secondItem="ErM-Iq-Xcc" secondAttribute="centerX" id="GIl-4R-2UT"/>
-                            <constraint firstItem="gfa-dZ-713" firstAttribute="height" secondItem="ErM-Iq-Xcc" secondAttribute="height" id="wop-1z-1lX"/>
+                            <constraint firstItem="gfa-dZ-713" firstAttribute="height" secondItem="ErM-Iq-Xcc" secondAttribute="height" multiplier="0.5" id="wop-1z-1lX"/>
                         </constraints>
                     </view>
                     <connections>
