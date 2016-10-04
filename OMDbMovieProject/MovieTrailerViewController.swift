@@ -12,11 +12,12 @@ class MovieTrailerViewController: UIViewController
 {
     
     @IBOutlet weak var movieTrailerWebView: UIWebView!
+    
+    
     @IBOutlet weak var noTrailerLabel: UILabel!
     @IBOutlet weak var overviewTextView: UITextView!
     @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var goBackToFirstButton: UIButton!
+   
     
     let store = MovieDataStore.sharedInstance
     var movieID : Int?
@@ -32,13 +33,9 @@ class MovieTrailerViewController: UIViewController
        
         guard let id = movieID else {return}
         
-        self.goBackToFirstButton.layer.borderWidth = 1
-        self.goBackToFirstButton.layer.borderColor = UIColor.purple.cgColor
-        self.goBackToFirstButton.layer.cornerRadius = 10
-        self.goBackToFirstButton.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        self.titleLabel.isHidden = true
         self.releaseDateLabel.isHidden = true
         self.overviewTextView.isHidden = true
+        self.title = movieTitle
         
          store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
@@ -56,23 +53,20 @@ class MovieTrailerViewController: UIViewController
                 
                 self.store.api.movieTrailerAPI(id) { (string) in
     
-                    OperationQueue.main.addOperation({
-                        let width = self.movieTrailerWebView.frame.width
-                        let height = self.movieTrailerWebView.frame.height
+                    DispatchQueue.main.async { () -> Void in
+                        let width = self.movieTrailerWebView.frame.width-10
+                        let height = self.movieTrailerWebView.frame.height-10
+                        
                         self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
                         self.movieTrailerWebView.backgroundColor = UIColor.clear
-                    })
-                    
+        
+                    }
                 }
             
             }
             
             OperationQueue.main.addOperation({ 
-                if let title = self.movieTitle
-                {
-                    self.titleLabel.isHidden = false
-                    self.titleLabel.text = title
-                }
+               
                 if let date = self.releaseDate
                 {
                     self.releaseDateLabel.isHidden = false

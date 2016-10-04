@@ -29,6 +29,8 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         self.startSearchButton.layer.cornerRadius = 10
         self.startSearchButton.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
         store.api.getMoviesPlayingInTheaters { (array) in
             OperationQueue.main.addOperation({
                 self.topMoviesCollectionView.reloadData()
