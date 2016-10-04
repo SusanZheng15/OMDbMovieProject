@@ -11,11 +11,11 @@ import UIKit
 class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
     @IBOutlet weak var topMoviesCollectionView: UICollectionView!
-    
-    @IBOutlet weak var startSearchButton: UIButton!
+
     
     let store = MovieDataStore.sharedInstance
  
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -23,14 +23,11 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
     
         topMoviesCollectionView.delegate = self
         topMoviesCollectionView.dataSource = self
-        
-        self.startSearchButton.layer.borderWidth = 1
-        self.startSearchButton.layer.borderColor = UIColor.purple.cgColor
-        self.startSearchButton.layer.cornerRadius = 10
-        self.startSearchButton.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+    
         
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "🔍", style: .done, target: self, action: #selector(UpcomingMovieViewController.beginSearch))
         store.api.getMoviesPlayingInTheaters { (array) in
             OperationQueue.main.addOperation({
                 self.topMoviesCollectionView.reloadData()
@@ -105,6 +102,11 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
         }
         cell.movieImageView.image = UIImage.init(named: "movieTempPic.png")
         return cell
+    }
+    
+    func beginSearch()
+    {
+        performSegue(withIdentifier: "moveToSearch", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

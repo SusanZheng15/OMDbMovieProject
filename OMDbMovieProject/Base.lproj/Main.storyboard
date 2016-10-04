@@ -545,10 +545,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gfa-dZ-713" firstAttribute="centerY" secondItem="ErM-Iq-Xcc" secondAttribute="centerY" constant="-78" id="74j-VB-LK3"/>
+                            <constraint firstItem="gfa-dZ-713" firstAttribute="centerY" secondItem="ErM-Iq-Xcc" secondAttribute="centerY" constant="-119.5" id="74j-VB-LK3"/>
                             <constraint firstItem="gfa-dZ-713" firstAttribute="width" secondItem="ErM-Iq-Xcc" secondAttribute="width" id="8vm-hk-uM8"/>
                             <constraint firstItem="gfa-dZ-713" firstAttribute="centerX" secondItem="ErM-Iq-Xcc" secondAttribute="centerX" id="GIl-4R-2UT"/>
-                            <constraint firstItem="gfa-dZ-713" firstAttribute="height" secondItem="ErM-Iq-Xcc" secondAttribute="height" multiplier="0.5" id="wop-1z-1lX"/>
+                            <constraint firstItem="gfa-dZ-713" firstAttribute="height" secondItem="ErM-Iq-Xcc" secondAttribute="height" multiplier="0.5" constant="1" id="wop-1z-1lX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -761,36 +761,19 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yU1-Nl-itw">
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="13"/>
-                                <state key="normal" title="Click to begin search">
-                                    <color key="titleColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                        <color key="value" red="0.25098039215686274" green="1" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="Y5G-xm-4zD" kind="presentation" id="TMw-V9-PIZ"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.59603083050000005" green="0.2275924463" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="bottom" secondItem="Umc-y9-tDE" secondAttribute="top" constant="1" id="NS1-E2-9fD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="yU1-Nl-itw" secondAttribute="trailing" constant="55" id="OOd-Gu-zyK"/>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="leading" secondItem="c6U-ra-aJj" secondAttribute="leading" id="U8e-Kj-j4I"/>
-                            <constraint firstItem="Umc-y9-tDE" firstAttribute="top" secondItem="yU1-Nl-itw" secondAttribute="bottom" constant="20" id="g9L-R5-Ci0"/>
                             <constraint firstAttribute="trailing" secondItem="Kga-4D-c7u" secondAttribute="trailing" id="h8O-tg-hhs"/>
                             <constraint firstItem="Kga-4D-c7u" firstAttribute="top" secondItem="c6U-ra-aJj" secondAttribute="topMargin" id="izV-Gt-fJd"/>
-                            <constraint firstItem="yU1-Nl-itw" firstAttribute="leading" secondItem="c6U-ra-aJj" secondAttribute="leadingMargin" constant="56" id="ln2-zh-6vl"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upcoming Movies" id="8m1-9U-CCz"/>
                     <connections>
-                        <outlet property="startSearchButton" destination="yU1-Nl-itw" id="mwg-eQ-bM2"/>
                         <outlet property="topMoviesCollectionView" destination="Kga-4D-c7u" id="29Z-Bb-JsO"/>
+                        <segue destination="Y5G-xm-4zD" kind="presentation" identifier="moveToSearch" modalPresentationStyle="fullScreen" id="Hlh-j8-dWF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBp-EI-n6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -815,7 +798,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baV-hn-e0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="263"/>
+            <point key="canvasLocation" x="2829" y="263"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g1p-eI-tHz">

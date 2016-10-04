@@ -25,7 +25,7 @@ class UpcomingMovies
         }
         else
         {
-            self.poster = "pikachu.png"
+            self.poster = "movieTempPic.png"
         }
         if let movieTitle = dictionary["title"]
         {

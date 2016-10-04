@@ -2,7 +2,7 @@
 //  SearchedTrailerViewController.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 10/4/16.
+//  Created by Susan Zheng on 10/4/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
