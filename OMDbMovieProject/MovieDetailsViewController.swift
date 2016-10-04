@@ -13,6 +13,8 @@ class MovieDetailsViewController: UIViewController
 {
     var movie: Movie?
     var movieID: String?
+    let youtubeURL = "https://www.youtube.com/embed/"
+
     
     let omdbMovie = MovieDataStore.sharedInstance
     
@@ -24,7 +26,7 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var imdbTemp: UILabel!
     @IBOutlet weak var metaTemp: UILabel!
     @IBOutlet weak var fullDescripTemp: UIButton!
-    
+
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var starsLabel: UILabel!
@@ -36,10 +38,28 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var moviePlotTextField: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+ 
+    @IBOutlet weak var trailerButtonOutlet: UIButton!
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        checkIfTrailerExist()
+        
+        if let imdbID = movie?.imdbID
+        {
+            let iD = Int(imdbID)
+            if let trailerID = iD
+            {
+                print("$$$$$$$$$$$$$$$$$$$ID:\(trailerID)#####################################")
+            }
+        }
+        
+        guard let imdbID = movie?.imdbID else {return}
+        
+        let id = Int(imdbID)
+        
+        print("$$$$$$$$$$$$$$$$$$$ID:\(id)#####################################")
         
         self.releaseTemp.isHidden = true
         self.dicrectorTemp.isHidden = true
@@ -53,6 +73,8 @@ class MovieDetailsViewController: UIViewController
         omdbMovie.fetchData()
         
         checkForData()
+        
+       
         reachabilityStatusChanged()
         
         NotificationCenter.default.addObserver(self, selector: #selector(MovieDetailsViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "reachStatusChanged"), object: nil)
@@ -72,6 +94,7 @@ class MovieDetailsViewController: UIViewController
         
     }
     
+ 
     func reachabilityStatusChanged()
     {
         if reachabilityStatus == kNOTREACHABLE
@@ -99,6 +122,32 @@ class MovieDetailsViewController: UIViewController
         }
     }
     
+    
+    func checkIfTrailerExist()
+    {
+        if let imdbID = movie?.imdbID
+        {
+           
+                omdbMovie.api.checkIfAnyTrailersAvailableWithString(imdbID, completion: { (results) in
+                    
+                    if results == []
+                    {
+                        self.trailerButtonOutlet.isHidden = true
+                        print("#################no trailer###################")
+                    }
+                    else
+                    {
+                        self.trailerButtonOutlet.isHidden = false
+                        print("################theres a trailer################")
+                    }
+                    
+                })
+            
+            
+        }
+        
+        
+    }
     
      func checkForData()
      {
@@ -233,7 +282,13 @@ class MovieDetailsViewController: UIViewController
         }
     }
     
-    
+
+   
+    @IBAction func trailerButton(_ sender: AnyObject)
+    {
+        print("pressed")
+        
+    }
     @IBAction func plotDescriptionButton(_ sender: AnyObject)
     {
         //segue
@@ -281,6 +336,16 @@ class MovieDetailsViewController: UIViewController
                 destinationFullPlotVC?.movie = unwrappedMovie
             }
             
+        }
+        
+        if segue.identifier == "movieSegue"
+        {
+            let destinationVC = segue.destination as? SearchedTrailerViewController
+            
+            if let unwrappedMovie = movie
+            {
+                destinationVC?.movieTrailer = unwrappedMovie
+            }
         }
         
     }

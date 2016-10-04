@@ -54,10 +54,11 @@ class MovieTrailerViewController: UIViewController
                 self.store.api.movieTrailerAPI(id) { (string) in
     
                     DispatchQueue.main.async { () -> Void in
-                        let width = self.movieTrailerWebView.frame.width-10
-                        let height = self.movieTrailerWebView.frame.height-10
+                        let width = self.movieTrailerWebView.frame.width
+                        let height = self.movieTrailerWebView.frame.height
                         
                         self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+                        self.movieTrailerWebView.mediaPlaybackRequiresUserAction = false
                         self.movieTrailerWebView.backgroundColor = UIColor.clear
         
                     }
