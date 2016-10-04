@@ -26,6 +26,8 @@ class MovieTrailerViewController: UIViewController
     var overview : String?
     
     let youtubeURL = "https://www.youtube.com/embed/"
+    
+    
 
     override func viewDidLoad()
     {
@@ -36,6 +38,7 @@ class MovieTrailerViewController: UIViewController
         self.releaseDateLabel.isHidden = true
         self.overviewTextView.isHidden = true
         self.title = movieTitle
+        checkStatus()
         
          store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
@@ -54,10 +57,13 @@ class MovieTrailerViewController: UIViewController
                 self.store.api.movieTrailerAPI(id) { (string) in
     
                     DispatchQueue.main.async { () -> Void in
-                        let width = self.movieTrailerWebView.frame.width
-                        let height = self.movieTrailerWebView.frame.height
                         
-                        self.movieTrailerWebView.loadHTMLString("<iframe width=\"\(width)\" height=\(height)\" src=\"\(self.youtubeURL+string)\" frameborder=\"0\" allowfullscreen></iframe>", baseURL: nil)
+                        let youTubeVideoHTML: String = "<!DOCTYPE html><html><head><style>body{margin:0px 0px 0px 0px;}</style></head> <body> <div id=\"player\"></div> <script> var tag = document.createElement('script'); tag.src = \"http://www.youtube.com/player_api\"; var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag); var player; function onYouTubePlayerAPIReady() { player = new YT.Player('player', { width:'%0.0f', height:'%0.0f', videoId:'%@', events: { 'onReady': onPlayerReady, } }); } function onPlayerReady(event) { event.target.playVideo(); } </script> </body> </html>"
+                        
+                        
+                        let html: String = String(format: youTubeVideoHTML, self.movieTrailerWebView.frame.size.width, self.movieTrailerWebView.frame.size.height, string)
+                        
+                        self.movieTrailerWebView.loadHTMLString(html, baseURL: nil)
                         self.movieTrailerWebView.mediaPlaybackRequiresUserAction = false
                         self.movieTrailerWebView.backgroundColor = UIColor.clear
         
@@ -88,7 +94,20 @@ class MovieTrailerViewController: UIViewController
         
     }
     
-    
+    func checkStatus()
+    {
+        guard let id = movieID else {return}
+        store.api.checkIfAnyTrailersAvailableStatusCodeWithInt(id) { (result) in
+            if result == 34
+            {
+                self.movieTrailerWebView.isHidden = true
+                self.noTrailerLabel.isHidden = false
+                self.noTrailerLabel.text = "No Trailers Available"
+                self.view.bringSubview(toFront: self.noTrailerLabel)
+                print("no trailers")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

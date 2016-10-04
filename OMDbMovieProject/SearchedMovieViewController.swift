@@ -223,7 +223,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
             {
                 if unwrappedPoster == "N/A"
                 {
-                    cell.moviePosterImageView.image = UIImage.init(named: "movieTemp.png")
+                    cell.moviePosterImageView.image = UIImage.init(named: "movieTempPic.png")
                 }
             
                 let stringPosterURL = URL(string: unwrappedPoster)

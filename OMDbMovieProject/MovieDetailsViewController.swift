@@ -40,6 +40,12 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
  
     @IBOutlet weak var trailerButtonOutlet: UIButton!
+    
+    @IBOutlet weak var trailerPic: UIImageView!
+    @IBOutlet weak var trailerLabel: UILabel!
+    
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -144,7 +150,10 @@ class MovieDetailsViewController: UIViewController
                 {
                     print("no trailers???????????")
                     self.trailerButtonOutlet.isHidden = true
+                    self.trailerPic.isHidden = true
+                    self.trailerLabel.isHidden = true
                 }
+                
             })
         }
     }
