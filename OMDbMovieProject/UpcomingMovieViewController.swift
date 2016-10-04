@@ -103,7 +103,7 @@ class UpcomingMovieViewController: UIViewController, UICollectionViewDelegate, U
             })
             
         }
-        cell.movieImageView.image = UIImage.init(named: "pikachu.png")
+        cell.movieImageView.image = UIImage.init(named: "movieTemp.png")
         return cell
     }
     

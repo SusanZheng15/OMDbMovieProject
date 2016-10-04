@@ -45,21 +45,7 @@ class MovieDetailsViewController: UIViewController
         super.viewDidLoad()
         
         checkIfTrailerExist()
-        
-        if let imdbID = movie?.imdbID
-        {
-            let iD = Int(imdbID)
-            if let trailerID = iD
-            {
-                print("$$$$$$$$$$$$$$$$$$$ID:\(trailerID)#####################################")
-            }
-        }
-        
-        guard let imdbID = movie?.imdbID else {return}
-        
-        let id = Int(imdbID)
-        
-        print("$$$$$$$$$$$$$$$$$$$ID:\(id)#####################################")
+        checkingStatusCode()
         
         self.releaseTemp.isHidden = true
         self.dicrectorTemp.isHidden = true
@@ -130,12 +116,12 @@ class MovieDetailsViewController: UIViewController
            
                 omdbMovie.api.checkIfAnyTrailersAvailableWithString(imdbID, completion: { (results) in
                     
-                    if results == []
+                    if results == [] 
                     {
                         self.trailerButtonOutlet.isHidden = true
                         print("#################no trailer###################")
                     }
-                    else
+                    else if results != []
                     {
                         self.trailerButtonOutlet.isHidden = false
                         print("################theres a trailer################")
@@ -147,6 +133,20 @@ class MovieDetailsViewController: UIViewController
         }
         
         
+    }
+    
+    func checkingStatusCode()
+    {
+        if let id = movie?.imdbID
+        {
+            omdbMovie.api.checkIfAnyTrailersAvailableStatusCodeWithString(id, completion: { (code) in
+                if code == 34
+                {
+                    print("no trailers???????????")
+                    self.trailerButtonOutlet.isHidden = true
+                }
+            })
+        }
     }
     
      func checkForData()
