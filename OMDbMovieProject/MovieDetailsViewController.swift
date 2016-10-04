@@ -63,10 +63,7 @@ class MovieDetailsViewController: UIViewController
         self.imdbTemp.isHidden = true
         
         omdbMovie.fetchData()
-        
         checkForData()
-        
-       
         reachabilityStatusChanged()
         
         NotificationCenter.default.addObserver(self, selector: #selector(MovieDetailsViewController.reachabilityStatusChanged), name: NSNotification.Name(rawValue: "reachStatusChanged"), object: nil)
@@ -119,21 +116,17 @@ class MovieDetailsViewController: UIViewController
     {
         if let imdbID = movie?.imdbID
         {
-           
-                omdbMovie.api.checkIfAnyTrailersAvailableWithString(imdbID, completion: { (results) in
+           omdbMovie.api.checkIfAnyTrailersAvailableWithString(imdbID, completion: { (results) in
+                if results == []
+                {
+                    self.trailerButtonOutlet.isHidden = true
+                }
+                else if results != []
+                {
+                    self.trailerButtonOutlet.isHidden = false
+                }
                     
-                    if results == [] 
-                    {
-                        self.trailerButtonOutlet.isHidden = true
-                        print("#################no trailer###################")
-                    }
-                    else if results != []
-                    {
-                        self.trailerButtonOutlet.isHidden = false
-                        print("################theres a trailer################")
-                    }
-                    
-                })
+            })
             
             
         }
@@ -168,7 +161,6 @@ class MovieDetailsViewController: UIViewController
             
             if object.count == 0
             {
-                print("theres nothing in core data")
                 self.omdbMovie.getDetailsFor(movieObject)
                 {
                     DispatchQueue.main.async(execute: {
@@ -203,7 +195,6 @@ class MovieDetailsViewController: UIViewController
                 
                if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
-                    print("Has it")
                     self.releaseTemp.isHidden = false
                     self.dicrectorTemp.isHidden = false
                     self.writerTemp.isHidden = false
@@ -226,7 +217,6 @@ class MovieDetailsViewController: UIViewController
                 }
                 else if savedMovieID != movieObject.imdbID
                 {
-                    print("doesnt have it")
                     self.omdbMovie.getDetailsFor(movieObject)
                     {
                         DispatchQueue.main.async(execute: {
@@ -283,7 +273,6 @@ class MovieDetailsViewController: UIViewController
                     blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] 
                     
                     self.posterImageView.addSubview(blurEffectView)
-                    
                     
                 }
             }

@@ -59,7 +59,7 @@ class FavoritesTableViewController: UITableViewController
         {
             if unwrappedString == "N/A"
             {
-                cell.favMoviePosterImage.image = UIImage.init(named: "pikachu.png")
+                cell.favMoviePosterImage.image = UIImage.init(named: "movieTempPic.png")
             }
             let stringPosterUrl = URL(string: unwrappedString)
             if let url = stringPosterUrl

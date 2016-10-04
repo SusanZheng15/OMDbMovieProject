@@ -42,7 +42,6 @@ class FullPlotViewController: UIViewController
             
             if object.count == 0
             {
-                print("nothing in core data")
                 self.omdbMovie.getFullSummary(movieObject)
                 {
                     DispatchQueue.main.async(execute: {
@@ -59,12 +58,10 @@ class FullPlotViewController: UIViewController
                 
                 if object.count != 0 && savedMovieID == movieObject.imdbID
                 {
-                    print("\(movieObject.title) Have summary")
                     self.fullPlotSummaryTextField.text = movies.movies?.first?.fullSummary
                 }
                 else if object.count != 0 && savedMovieID != movieObject.imdbID
                 {
-                    print("doesnt have summary")
                     
                     guard let unwrappedMovie = movie else {return}
                     

@@ -24,9 +24,10 @@
                             <searchBar contentMode="redraw" placeholder="Search movies and shows here" translatesAutoresizingMaskIntoConstraints="NO" id="0fS-Xf-pnA">
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZD-St-CTb">
-                                <frame key="frameInset" minX="20" minY="291" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZD-St-CTb">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="h10-jV-hlW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -112,11 +113,14 @@
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="top" secondItem="Hj8-o3-1zf" secondAttribute="bottom" id="AXD-Zh-Whl"/>
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="leading" secondItem="Ht4-4S-gzo" secondAttribute="leading" id="Ekx-Nq-xrx"/>
                             <constraint firstItem="GgQ-TT-ZZX" firstAttribute="centerX" secondItem="sGH-TB-wCO" secondAttribute="centerX" constant="-6" id="I6p-QZ-vYS"/>
+                            <constraint firstItem="SEU-sW-Uu0" firstAttribute="top" secondItem="AZD-St-CTb" secondAttribute="bottom" constant="375" id="KNJ-mN-eXE"/>
                             <constraint firstItem="0fS-Xf-pnA" firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="OvD-4m-JV1"/>
+                            <constraint firstItem="AZD-St-CTb" firstAttribute="leading" secondItem="sGH-TB-wCO" secondAttribute="leadingMargin" constant="15" id="PbS-iz-aOw"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="top" secondItem="sGH-TB-wCO" secondAttribute="top" constant="108" id="ZcJ-DH-s8H"/>
                             <constraint firstAttribute="trailing" secondItem="Ht4-4S-gzo" secondAttribute="trailing" id="Zn0-2d-Oqm"/>
                             <constraint firstItem="GgQ-TT-ZZX" firstAttribute="centerY" secondItem="sGH-TB-wCO" secondAttribute="centerY" constant="15" id="hNk-Dd-FqY"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="bottom" secondItem="SEU-sW-Uu0" secondAttribute="top" id="o40-gG-O59"/>
+                            <constraint firstItem="AZD-St-CTb" firstAttribute="centerX" secondItem="0fS-Xf-pnA" secondAttribute="centerX" id="reF-xb-1H0"/>
                             <constraint firstItem="Ht4-4S-gzo" firstAttribute="leading" secondItem="sGH-TB-wCO" secondAttribute="leading" id="vW8-FL-Va9"/>
                             <constraint firstItem="SEU-sW-Uu0" firstAttribute="top" secondItem="GgQ-TT-ZZX" secondAttribute="bottom" constant="134" id="yda-Xm-V7t"/>
                         </constraints>
