@@ -13,6 +13,7 @@ class MovieTrailerViewController: UIViewController
     
     @IBOutlet weak var movieTrailerWebView: UIWebView!
     
+    @IBOutlet weak var TrailerIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var noTrailerLabel: UILabel!
     @IBOutlet weak var overviewTextView: UITextView!
@@ -37,6 +38,8 @@ class MovieTrailerViewController: UIViewController
         
         checkStatus()
         
+        TrailerIndicator.startAnimating()
+        TrailerIndicator.isHidden = false
          store.api.checkIfAnyTrailersAvailable(id) { (results) in
             
             if results == []
@@ -44,6 +47,8 @@ class MovieTrailerViewController: UIViewController
                 self.movieTrailerWebView.isHidden = true
                 self.noTrailerLabel.isHidden = false
                 self.noTrailerLabel.text = "No Trailers Available"
+                self.TrailerIndicator.isHidden = true
+                self.TrailerIndicator.stopAnimating()
                 print("no trailers")
             }
             else
@@ -59,10 +64,10 @@ class MovieTrailerViewController: UIViewController
                         
                         
                         let html: String = String(format: youTubeVideoHTML, self.movieTrailerWebView.frame.size.width, self.movieTrailerWebView.frame.size.height, stringID)
-                        
+                        self.TrailerIndicator.stopAnimating()
+                        self.TrailerIndicator.isHidden = true
                         self.movieTrailerWebView.loadHTMLString(html, baseURL: nil)
                         self.movieTrailerWebView.mediaPlaybackRequiresUserAction = false
-                        self.movieTrailerWebView.backgroundColor = UIColor.clear
         
                     }
                 }
@@ -97,6 +102,8 @@ class MovieTrailerViewController: UIViewController
         store.api.checkIfAnyTrailersAvailableStatusCodeWithInt(id) { (result) in
             if result == 34
             {
+                self.TrailerIndicator.stopAnimating()
+                self.TrailerIndicator.isHidden = true
                 self.movieTrailerWebView.isHidden = true
                 self.noTrailerLabel.isHidden = false
                 self.noTrailerLabel.text = "No Trailers Available"
@@ -104,5 +111,7 @@ class MovieTrailerViewController: UIViewController
             }
         }
     }
+
+    
 
 }

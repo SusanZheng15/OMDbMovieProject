@@ -42,7 +42,7 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var trailerButtonOutlet: UIButton!
     
     @IBOutlet weak var trailerPic: UIImageView!
-    @IBOutlet weak var trailerLabel: UILabel!
+    
     
     
     
@@ -120,10 +120,15 @@ class MovieDetailsViewController: UIViewController
                 if results == []
                 {
                     self.trailerButtonOutlet.isHidden = true
+                    self.trailerPic.isHidden = true
+                    
                 }
                 else if results != []
                 {
                     self.trailerButtonOutlet.isHidden = false
+                    self.trailerPic.isHidden = false
+                    self.trailerPic.image = UIImage.init(named: "trailerButtonLogo.png")
+                    
                 }
                     
             })
@@ -144,7 +149,7 @@ class MovieDetailsViewController: UIViewController
                     print("no trailers???????????")
                     self.trailerButtonOutlet.isHidden = true
                     self.trailerPic.isHidden = true
-                    self.trailerLabel.isHidden = true
+    
                 }
                 
             })

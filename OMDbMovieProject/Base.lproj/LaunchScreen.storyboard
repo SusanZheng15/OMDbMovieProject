@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,29 +15,20 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchandLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FB-3un">
-                                <rect key="frame" x="160" y="128" width="281" height="232"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MovieHubLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="4V5-FB-3un">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="281" id="GYd-SZ-w5f"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made by Susan Zheng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYn-iR-yfY">
-                                <rect key="frame" x="233" y="557" width="135" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4V5-FB-3un" secondAttribute="bottom" constant="240" id="Naf-73-cya"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="4V5-FB-3un" secondAttribute="bottom" constant="268" id="Naf-73-cya"/>
                             <constraint firstItem="4V5-FB-3un" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="iLP-xz-qf1"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="PYn-iR-yfY" secondAttribute="bottom" constant="27" id="ksO-iT-xKt"/>
-                            <constraint firstItem="4V5-FB-3un" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="108" id="mQm-EP-Fyj"/>
-                            <constraint firstItem="PYn-iR-yfY" firstAttribute="centerX" secondItem="4V5-FB-3un" secondAttribute="centerX" id="q33-vo-4Jy"/>
+                            <constraint firstItem="4V5-FB-3un" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="147" id="mQm-EP-Fyj"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchandLogo.png" width="800" height="600"/>
+        <image name="MovieHubLogo.png" width="800" height="600"/>
     </resources>
 </document>
