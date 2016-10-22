@@ -40,7 +40,6 @@ class MovieDetailsViewController: UIViewController
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
  
     @IBOutlet weak var trailerButtonOutlet: UIButton!
-    
     @IBOutlet weak var trailerPic: UIImageView!
     
     
