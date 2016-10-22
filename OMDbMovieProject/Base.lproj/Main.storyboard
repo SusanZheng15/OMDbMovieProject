@@ -48,7 +48,7 @@
                                     <inset key="sectionInset" minX="15" minY="10" maxX="15" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="VCl-Ka-bhc">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="579"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
@@ -742,7 +742,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="H5x-uM-QsQ" customClass="UpcomingMoviesCollectionViewCell" customModule="Search_My_Movie" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="119" width="300" height="436"/>
+                                        <rect key="frame" x="0.0" y="84" width="300" height="436"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="436"/>
