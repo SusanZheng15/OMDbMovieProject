@@ -28,7 +28,17 @@ class FullPlotViewController: UIViewController
         checkForFullSummary()
         
         self.title = "Full Plot Description"
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.navigationItem.leftBarButtonItem =
+            UIBarButtonItem(image: UIImage.init(named: "customBackButton.png"), style: .done, target: self, action: #selector (FullPlotViewController.backButtonPressed))
 
+    }
+    
+    func backButtonPressed(sender:UIButton)
+    {
+        navigationController?.popViewController(animated: true)
     }
     
     func checkForFullSummary()

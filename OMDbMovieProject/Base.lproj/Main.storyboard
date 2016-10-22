@@ -13,7 +13,7 @@
         <!--Movie Search-->
         <scene sceneID="gXE-U8-KC9">
             <objects>
-                <viewController id="plm-nj-G1G" customClass="SearchedMovieViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="plm-nj-G1G" customClass="SearchedMovieViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hj8-o3-1zf"/>
                         <viewControllerLayoutGuide type="bottom" id="SEU-sW-Uu0"/>
@@ -52,15 +52,15 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="yuR-b2-Pn0" customClass="SearchedMovieCollectionViewCell" customModule="Movie_Hub" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell" id="yuR-b2-Pn0" customClass="SearchedMovieCollectionViewCell" customModule="Search_My_Movie" customModuleProvider="target">
                                         <rect key="frame" x="15" y="10" width="120" height="270"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUa-MI-GXe">
-                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUa-MI-GXe">
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -160,20 +160,20 @@
         <!--Favorites-->
         <scene sceneID="xlA-gk-tnh">
             <objects>
-                <tableViewController id="4W4-ib-IZ7" customClass="FavoritesTableViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4W4-ib-IZ7" customClass="FavoritesTableViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="108" sectionHeaderHeight="28" sectionFooterHeight="28" id="DTU-2B-9ba">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.075795732438564301" green="0.032084614038467407" blue="0.03240656852722168" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" rowHeight="108" id="ChR-lF-fc9" customClass="FavoritesMovieTableViewCell" customModule="Movie_Hub" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" rowHeight="108" id="ChR-lF-fc9" customClass="FavoritesMovieTableViewCell" customModule="Search_My_Movie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="414" height="108"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ChR-lF-fc9" id="bcj-tC-Gqt">
                                     <frame key="frameInset" width="414" height="107"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m38-sJ-Ruw">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Name" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m38-sJ-Ruw">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="5JQ-qW-bS8"/>
                                             </constraints>
@@ -205,17 +205,17 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="releasedLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-tB-ESV">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="releasedLabel" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2A-tB-ESV">
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="directorLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nA-54-5dS">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="directorLabel" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nA-54-5dS">
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="writerLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nD-O8-I9X">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="writerLabel" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nD-O8-I9X">
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -281,7 +281,7 @@
         <!--Movie Details View Controller-->
         <scene sceneID="J8u-B1-nlS">
             <objects>
-                <viewController id="ihr-8j-rkj" customClass="MovieDetailsViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ihr-8j-rkj" customClass="MovieDetailsViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PHA-co-Fbn"/>
                         <viewControllerLayoutGuide type="bottom" id="Hx2-Uv-dLd"/>
@@ -341,22 +341,22 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="nuZ-In-uJr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4P-zM-hL4">
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4P-zM-hL4">
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq7-hS-sKp">
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq7-hS-sKp">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5a-Cr-Pvo">
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -364,7 +364,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="127" id="Gy8-bw-gBQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -372,7 +372,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="86" id="eIq-3h-BNa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -431,8 +431,8 @@
                             <constraint firstItem="lia-8y-lBY" firstAttribute="top" secondItem="NbJ-Y8-OGk" secondAttribute="bottom" constant="30" id="7Ey-Sf-hI4"/>
                             <constraint firstItem="zJP-o0-m0H" firstAttribute="baseline" secondItem="Aaz-RR-kBz" secondAttribute="baseline" id="8Xq-4D-rnd"/>
                             <constraint firstItem="XO3-kp-DvB" firstAttribute="baseline" secondItem="lia-8y-lBY" secondAttribute="baseline" id="8gI-E8-pbg"/>
-                            <constraint firstItem="7yp-1H-3Uv" firstAttribute="leading" secondItem="9Vz-PO-DYp" secondAttribute="leadingMargin" multiplier="0.33" constant="50" id="9qP-yg-bJe"/>
-                            <constraint firstItem="7yp-1H-3Uv" firstAttribute="centerX" secondItem="biq-Jr-fAh" secondAttribute="centerX" id="AI7-Fs-gxo"/>
+                            <constraint firstItem="7yp-1H-3Uv" firstAttribute="leading" secondItem="9Vz-PO-DYp" secondAttribute="leadingMargin" multiplier="0.33" constant="92.400000000000006" id="9qP-yg-bJe"/>
+                            <constraint firstItem="7yp-1H-3Uv" firstAttribute="centerX" secondItem="biq-Jr-fAh" secondAttribute="centerX" constant="4.5" id="AI7-Fs-gxo"/>
                             <constraint firstItem="Hx2-Uv-dLd" firstAttribute="top" secondItem="ZDD-qW-8tf" secondAttribute="bottom" constant="20" id="AOy-6u-zk6"/>
                             <constraint firstItem="MjC-Oj-jsy" firstAttribute="centerY" secondItem="9Vz-PO-DYp" secondAttribute="centerY" id="DB6-sg-3ZA"/>
                             <constraint firstItem="Hx2-Uv-dLd" firstAttribute="top" secondItem="yD1-yX-tVN" secondAttribute="bottom" constant="26" id="EJK-IP-Fkx"/>
@@ -442,7 +442,7 @@
                             <constraint firstAttribute="bottom" secondItem="gJI-hN-Gkd" secondAttribute="bottom" constant="200" id="G0w-Zp-pBG"/>
                             <constraint firstItem="Ktl-6l-0Nq" firstAttribute="centerY" secondItem="qen-Pq-P1m" secondAttribute="centerY" id="Gfw-Aq-rL9"/>
                             <constraint firstItem="zJP-o0-m0H" firstAttribute="firstBaseline" secondItem="Aaz-RR-kBz" secondAttribute="firstBaseline" id="GzI-Hf-wYa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ktl-6l-0Nq" secondAttribute="trailing" constant="132" id="Jhy-73-Vnk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ktl-6l-0Nq" secondAttribute="trailing" constant="-4" id="Jhy-73-Vnk"/>
                             <constraint firstItem="MjC-Oj-jsy" firstAttribute="centerX" secondItem="9Vz-PO-DYp" secondAttribute="centerX" constant="-4.5" id="KOp-TT-ESp"/>
                             <constraint firstItem="m4P-zM-hL4" firstAttribute="leading" secondItem="NbJ-Y8-OGk" secondAttribute="trailing" constant="8" symbolic="YES" id="M8w-vl-rBC"/>
                             <constraint firstItem="Ktl-6l-0Nq" firstAttribute="leading" secondItem="9Vz-PO-DYp" secondAttribute="leadingMargin" constant="84" id="MMQ-mW-aR9"/>
@@ -484,7 +484,7 @@
                             <constraint firstItem="Oq7-hS-sKp" firstAttribute="leading" secondItem="9Vz-PO-DYp" secondAttribute="leadingMargin" constant="61" id="wGl-px-QyH"/>
                             <constraint firstItem="lia-8y-lBY" firstAttribute="top" secondItem="21M-2v-8Ai" secondAttribute="bottom" constant="12" id="x6S-Y4-hzA"/>
                             <constraint firstItem="Xrk-lW-9M9" firstAttribute="top" secondItem="E5a-Cr-Pvo" secondAttribute="bottom" constant="31" id="xVP-L8-1j9"/>
-                            <constraint firstItem="m4P-zM-hL4" firstAttribute="centerX" secondItem="Ktl-6l-0Nq" secondAttribute="centerX" constant="64" id="yki-AE-WtH"/>
+                            <constraint firstItem="m4P-zM-hL4" firstAttribute="centerX" secondItem="Ktl-6l-0Nq" secondAttribute="centerX" constant="-4" id="yki-AE-WtH"/>
                             <constraint firstItem="E5a-Cr-Pvo" firstAttribute="trailing" secondItem="IOa-ke-7qu" secondAttribute="trailing" id="zcz-tp-4zC"/>
                         </constraints>
                     </view>
@@ -528,7 +528,7 @@
         <!--Searched Trailer View Controller-->
         <scene sceneID="8W8-6R-D0Y">
             <objects>
-                <viewController id="YLA-IU-5FN" customClass="SearchedTrailerViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YLA-IU-5FN" customClass="SearchedTrailerViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SSc-MS-q7q"/>
                         <viewControllerLayoutGuide type="bottom" id="mFz-0p-era"/>
@@ -560,7 +560,7 @@
         <!--Full Plot View Controller-->
         <scene sceneID="1fd-rL-fij">
             <objects>
-                <viewController id="Tzy-hz-8d3" customClass="FullPlotViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Tzy-hz-8d3" customClass="FullPlotViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eHf-Kb-1rl"/>
                         <viewControllerLayoutGuide type="bottom" id="aGt-l2-cQt"/>
@@ -609,7 +609,7 @@
         <!--Movie Trailer View Controller-->
         <scene sceneID="jI0-Av-aYO">
             <objects>
-                <viewController id="AAe-jG-g7b" customClass="MovieTrailerViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AAe-jG-g7b" customClass="MovieTrailerViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fcY-JK-Rw7"/>
                         <viewControllerLayoutGuide type="bottom" id="IA4-r8-dXP"/>
@@ -723,7 +723,7 @@
         <!--Upcoming Movies-->
         <scene sceneID="bX4-EC-hkE">
             <objects>
-                <viewController id="SDS-Pa-xrF" customClass="UpcomingMovieViewController" customModule="Movie_Hub" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SDS-Pa-xrF" customClass="UpcomingMovieViewController" customModule="Search_My_Movie" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wn6-JO-Grp"/>
                         <viewControllerLayoutGuide type="bottom" id="Umc-y9-tDE"/>
@@ -741,7 +741,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="H5x-uM-QsQ" customClass="UpcomingMoviesCollectionViewCell" customModule="Movie_Hub" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="H5x-uM-QsQ" customClass="UpcomingMoviesCollectionViewCell" customModule="Search_My_Movie" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="119" width="300" height="436"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -777,7 +777,7 @@
                     <navigationItem key="navigationItem" title="Upcoming Movies" id="8m1-9U-CCz"/>
                     <connections>
                         <outlet property="topMoviesCollectionView" destination="Kga-4D-c7u" id="29Z-Bb-JsO"/>
-                        <segue destination="Y5G-xm-4zD" kind="presentation" identifier="moveToSearch" modalPresentationStyle="fullScreen" id="Hlh-j8-dWF"/>
+                        <segue destination="Y5G-xm-4zD" kind="presentation" identifier="moveToSearch" id="Hlh-j8-dWF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LBp-EI-n6w" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -881,7 +881,7 @@
         <image name="pikachu.png" width="800" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="W5h-mO-ZJh"/>
+        <segue reference="RCe-mQ-62I"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

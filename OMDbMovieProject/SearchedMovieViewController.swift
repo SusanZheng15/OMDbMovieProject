@@ -46,7 +46,7 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
         super.viewDidLoad()
         
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(SearchedMovieViewController.backButton))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "customBackButton.png"), style: .done, target: self, action: #selector(SearchedMovieViewController.backButton))
         
         NotificationCenter.default.addObserver(self, selector: #selector(SearchedMovieViewController.reachabilityChanged(_:)), name: NSNotification.Name.reachabilityChanged, object: nil)
         
@@ -87,6 +87,11 @@ class SearchedMovieViewController: UIViewController, UICollectionViewDelegate, U
     func backButton()
     {
         performSegue(withIdentifier: "backToUpcomingSegue", sender: self)
+    }
+    
+    func backButtonPressed(sender:UIButton)
+    {
+        navigationController?.popViewController(animated: true)
     }
 
 

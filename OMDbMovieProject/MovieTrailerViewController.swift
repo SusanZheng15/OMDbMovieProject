@@ -12,9 +12,7 @@ class MovieTrailerViewController: UIViewController
 {
     
     @IBOutlet weak var movieTrailerWebView: UIWebView!
-    
     @IBOutlet weak var TrailerIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var noTrailerLabel: UILabel!
     @IBOutlet weak var overviewTextView: UITextView!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -34,6 +32,9 @@ class MovieTrailerViewController: UIViewController
         
         self.releaseDateLabel.isHidden = true
         self.overviewTextView.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationItem.leftBarButtonItem =
+            UIBarButtonItem(image: UIImage.init(named: "customBackButton.png"), style: .done, target: self, action: #selector (MovieTrailerViewController.backButtonPressed))
         self.title = movieTitle
         
         checkStatus()
@@ -94,6 +95,13 @@ class MovieTrailerViewController: UIViewController
         
         
         
+    }
+    
+    
+    
+    func backButtonPressed(sender:UIButton)
+    {
+        navigationController?.popViewController(animated: true)
     }
     
     func checkStatus()

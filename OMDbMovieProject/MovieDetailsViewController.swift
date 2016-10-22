@@ -79,10 +79,18 @@ class MovieDetailsViewController: UIViewController
        
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        self.navigationItem.leftBarButtonItem =
+            UIBarButtonItem(image: UIImage.init(named: "customBackButton.png"), style: .done, target: self, action: #selector (MovieDetailsViewController.backButtonPressed))
         
         
     }
     
+    func backButtonPressed(sender:UIButton)
+    {
+        navigationController?.popViewController(animated: true)
+    }
  
     func reachabilityStatusChanged()
     {

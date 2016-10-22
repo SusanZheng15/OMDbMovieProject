@@ -2,7 +2,7 @@
 //  topMovies.swift
 //  OMDbMovieProject
 //
-//  Created by Flatiron School on 9/28/16.
+//  Created by Susan Zheng on 9/28/16.
 //  Copyright © 2016 Flatiron School. All rights reserved.
 //
 
